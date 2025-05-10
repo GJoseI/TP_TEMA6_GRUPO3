@@ -13,7 +13,7 @@ public class Medicos implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name="legajo")
-	private String legajo;
+	private int legajo;
 	@Column(name="nombre")
 	private String nombre;
 	@Column(name="apellido")
@@ -31,7 +31,7 @@ public class Medicos implements Serializable {
 	@Column(name="telefono")
 	private String telefono;
 	
-	public Medicos(String legajo, String nombre, String apellido, String sexo, String fechaNac, String direccion,
+	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String direccion,
 			String localidad, String email, String telefono) {
 		super();
 		this.legajo = legajo;
@@ -47,11 +47,11 @@ public class Medicos implements Serializable {
 	
 	public Medicos() {}
 
-	public String getLegajo() {
+	public int getLegajo() {
 		return legajo;
 	}
 
-	public void setLegajo(String legajo) {
+	public void setLegajo(int legajo) {
 		this.legajo = legajo;
 	}
 
@@ -121,9 +121,9 @@ public class Medicos implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Medicos [legajo=" + legajo + ", nombre=" + nombre + ", apellido=" + apellido + ", sexo=" + sexo
-				+ ", fechaNac=" + fechaNac + ", direccion=" + direccion + ", localidad=" + localidad + ", email="
-				+ email + ", telefono=" + telefono + "]";
+		return "Legajo= " + legajo + ", Nombre= " + nombre + ", Apellido= " + apellido + ", Sexo= " + sexo
+				+ ", FechaNac= " + fechaNac + ", Direccion= " + direccion + ", Localidad= " + localidad + ", Email= "
+				+ email + ", Telefono= " + telefono;
 	};
 	
 
