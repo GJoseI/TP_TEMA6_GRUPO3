@@ -2,9 +2,12 @@ package frgp.utn.edu.entidad;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +33,9 @@ public class Medicos implements Serializable {
 	private String email;
 	@Column(name="telefono")
 	private String telefono;
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="Especialidad_c")
+	private Especialidad especialidad;
 	
 	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String direccion,
 			String localidad, String email, String telefono) {
@@ -117,6 +123,15 @@ public class Medicos implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	
+	
+	public Especialidad getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
 	}
 
 	@Override
