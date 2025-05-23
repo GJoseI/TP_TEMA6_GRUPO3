@@ -7,15 +7,14 @@ import javax.persistence.Table;
 import javax.persistence.Id; 
 
 @Entity
-@Table(name="Especialidad")
 public class Especialidad implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id 
-	@Column(name="Id")
 	private int Id;
-	@Column(name="Id")
 	private String nombre;
+	
+	public Especialidad() {};
 	
 	public Especialidad(int id, String nombre) {
 		super();

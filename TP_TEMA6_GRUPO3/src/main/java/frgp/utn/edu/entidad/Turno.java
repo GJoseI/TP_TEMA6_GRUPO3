@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,24 +14,23 @@ import javax.persistence.ManyToOne;
 @Entity
 @Table(name="Turno")
 public class Turno implements Serializable{
-
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="Medico_Ct")/// Columna de turnos entra la relacion entre Medico y turnos
-	private Medicos Medico;
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="paciente_c")
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private int id;
+	@ManyToOne
+	@JoinColumn(name="DNI")
 	private Paciente paciente;
-	@Column(name="fecha")
+	@ManyToOne
+	@JoinColumn(name="legajo")
+	private Medicos Medico;
 	private String fecha;
-	@Column(name="hora")
 	private String hora;
-	@Column(name="observación")
 	private String observación;
-	@Column(name="estado")
 	private String estado;
 	
+	public Turno () {}
 	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String observación, String estado) {
 		super();
 		Medico = medico;
@@ -88,6 +89,12 @@ public class Turno implements Serializable{
 		this.estado = estado;
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "Turno [Medico=" + Medico + ", paciente=" + paciente + ", fecha=" + fecha + ", hora=" + hora

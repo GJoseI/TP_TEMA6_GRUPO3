@@ -5,24 +5,23 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Usuario")
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	@Column(name="Nombre_Usuario")
+	@Id
 	private String Nombre_Usuario;
-	@Column(name="Contraseña")
 	private String Contraseña;
-	@OneToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="Medico_c")
-	private Medicos Medico;
+	@OneToOne(mappedBy="usuario", fetch=FetchType.EAGER)
+	private Medicos medico;
 	
-	
+	public Usuario() {}
 	
 	public Usuario(String nombre_Usuario, String contraseña) {
 		super();
@@ -44,10 +43,10 @@ public class Usuario implements Serializable{
 		Contraseña = contraseña;
 	}
 	public Medicos getMedico() {
-		return Medico;
+		return medico;
 	}
 	public void setMedico(Medicos medico) {
-		Medico = medico;
+		this.medico = medico;
 	}
 
 

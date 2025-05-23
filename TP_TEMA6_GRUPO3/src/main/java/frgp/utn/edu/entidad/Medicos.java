@@ -8,37 +8,32 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Medicos")
+@Table(name="Medico")
 public class Medicos implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name="legajo")
 	private int legajo;
-	@Column(name="nombre")
 	private String nombre;
-	@Column(name="apellido")
 	private String apellido;
-	@Column(name="sexo")
 	private String sexo;
-	@Column(name="fechaNac")
 	private String fechaNac;
-	@Column(name="direccion")
 	private String direccion;
-	@Column(name="localidad")
 	private String localidad;
-	@Column(name="email")
 	private String email;
-	@Column(name="telefono")
 	private String telefono;
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="Especialidad_c")
+	@ManyToOne
+	@JoinColumn(name="Id")
 	private Especialidad especialidad;
+	@OneToOne
+	@JoinColumn(name="Usuario_c")
+	private Usuario usuario;
 	
 	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String direccion,
-			String localidad, String email, String telefono) {
+			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
@@ -49,8 +44,18 @@ public class Medicos implements Serializable {
 		this.localidad = localidad;
 		this.email = email;
 		this.telefono = telefono;
+		this.usuario = usuario;
+		this.especialidad = especialidad;
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Medicos() {}
 
 	public int getLegajo() {

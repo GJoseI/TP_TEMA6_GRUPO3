@@ -3,39 +3,32 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Paciente")
 public class Paciente implements Serializable{
-
 	private static final long serialVersionUID = 1L;
-
-	@Column(name="Nombre")
-	private String Nombre;
-	@Column(name="Apellido")
-	private String Apellido; 
-	@Column(name="DNI")
+	
+	@Id
 	private String DNI;
-	@Column(name="teléfono")
+	private String nombre;
+	private String apellido; 
 	private String teléfono;
-	@Column(name="dirección")
 	private String dirección;
-	@Column(name="localidad")
 	private String localidad;
-	@Column(name="provincia")
 	private String provincia;
-	@Column(name="fecha_nacimiento")
 	private String fecha_nacimiento;
-	@Column(name="correo_electrónico")
 	private String correo_electrónico;
 	
-	public Paciente(String nombre, String apellido, String dNI, String teléfono, String dirección, String localidad,
+	
+	public Paciente () {};
+	public Paciente(String nombre, String apellido, String DNI, String teléfono, String dirección, String localidad,
 			String provincia, String fecha_nacimiento, String correo_electrónico) {
 		super();
-		Nombre = nombre;
-		Apellido = apellido;
-		DNI = dNI;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.DNI = DNI;
 		this.teléfono = teléfono;
 		this.dirección = dirección;
 		this.localidad = localidad;
@@ -45,19 +38,19 @@ public class Paciente implements Serializable{
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public String getApellido() {
-		return Apellido;
+		return apellido;
 	}
 
 	public void setApellido(String apellido) {
-		Apellido = apellido;
+		this.apellido = apellido;
 	}
 
 	public String getDNI() {
@@ -118,7 +111,7 @@ public class Paciente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Paciente [Nombre=" + Nombre + ", Apellido=" + Apellido + ", DNI=" + DNI + ", teléfono=" + teléfono
+		return "Paciente [Nombre=" + nombre + ", Apellido=" + apellido + ", DNI=" + DNI + ", teléfono=" + teléfono
 				+ ", dirección=" + dirección + ", localidad=" + localidad + ", provincia=" + provincia
 				+ ", fecha_nacimiento=" + fecha_nacimiento + ", correo_electrónico=" + correo_electrónico + "]";
 	}
