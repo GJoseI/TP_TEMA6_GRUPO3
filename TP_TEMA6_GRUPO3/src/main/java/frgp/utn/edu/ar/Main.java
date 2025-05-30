@@ -1,7 +1,11 @@
 package frgp.utn.edu.ar;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Session;
+
+import dao.Confighiberneate;
 import dao.daohibernate;
 import frgp.utn.edu.entidad.Especialidad;
 import frgp.utn.edu.entidad.Medicos;
@@ -13,6 +17,31 @@ import frgp.utn.edu.entidad.Paciente;
 public class Main 
 {
     public static void main( String[] args ){
+    	Confighiberneate ch = new Confighiberneate();
+    	Session session = ch.abrirConexion();
+    	//Mostrar todos los médicos ordenados según su legajo de mayor a menor.
+    	
+    	//Mostrar todos los médicos ordenados según su legajo de menor a mayor.
+    	
+    	
+    	//Mostrar todos los turnos que posee el médico con legajo 1234 en el día 01/01/2025
+    	
+    	
+    	//Mostrar todos los legajos de los médicos
+    	List<Integer> listaLegajos =(List<Integer>) session.createQuery("SELECT m.legajo FROM Medico m").list();
+    	for (int legajo : listaLegajos) {
+    		System.out.println(legajo);
+    	}
+    	
+    	//Mostrar el médico con mayor número de legajo
+    	
+    	//A través de distintas consultas obtener la cantidad de turnos que existen en
+    	//estado presente y ausente entre las fechas 01/01/2024 y 01/03/2024. Luego
+    	//calcular porcentajes. No habrá turnos pendientes porque las fechas son
+    	//antiguas.
+    		
+    	
+    	/*
     	//Pacientes
     	Paciente paciente = new Paciente("Juan", "Pérez", "12345678A", "11-2345-6789",
                 "Calle Falsa 123", "Springfield", "Buenos Aires",
@@ -188,7 +217,7 @@ public class Main
     	//Mostrar datos bidirieccionados
     	System.out.println("Bidireccion:");
     	daohibernate.leerBidireccion();
-    	 
+    	 */
     	
     	/*
     	Medicos medico1 = new Medicos(1001, "Laura", "González", "Femenino", "1985-03-15",
