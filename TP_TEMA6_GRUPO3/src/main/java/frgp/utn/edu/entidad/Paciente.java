@@ -20,6 +20,7 @@ public class Paciente implements Serializable{
 	private String provincia;
 	private String fecha_nacimiento;
 	private String correo_electrónico;
+	private boolean estado;
 	
 	
 	public Paciente () {};
@@ -35,6 +36,7 @@ public class Paciente implements Serializable{
 		this.provincia = provincia;
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.correo_electrónico = correo_electrónico;
+		this.estado=true;
 	}
 
 	public String getNombre() {
@@ -109,6 +111,12 @@ public class Paciente implements Serializable{
 		this.correo_electrónico = correo_electrónico;
 	}
 
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 	@Override
 	public String toString() {
 		return "Paciente [Nombre=" + nombre + ", Apellido=" + apellido + ", DNI=" + DNI + ", teléfono=" + teléfono

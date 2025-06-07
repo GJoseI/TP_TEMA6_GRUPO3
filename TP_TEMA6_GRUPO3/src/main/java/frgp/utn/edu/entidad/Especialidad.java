@@ -13,6 +13,7 @@ public class Especialidad implements Serializable{
 	@Id 
 	private int Id;
 	private String nombre;
+	private boolean estado;
 	
 	public Especialidad() {};
 	
@@ -20,6 +21,7 @@ public class Especialidad implements Serializable{
 		super();
 		Id = id;
 		this.nombre = nombre;
+		this.estado= true;
 	}
 
 	public int getId() {
@@ -36,6 +38,14 @@ public class Especialidad implements Serializable{
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	@Override

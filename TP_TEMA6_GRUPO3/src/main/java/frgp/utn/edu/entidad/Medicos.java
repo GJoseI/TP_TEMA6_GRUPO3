@@ -25,6 +25,7 @@ public class Medicos implements Serializable {
 	private String localidad;
 	private String email;
 	private String telefono;
+	private boolean estado;
 	@ManyToOne
 	@JoinColumn(name="Id")
 	private Especialidad especialidad;
@@ -46,6 +47,7 @@ public class Medicos implements Serializable {
 		this.telefono = telefono;
 		this.usuario = usuario;
 		this.especialidad = especialidad;
+		this.estado=true;
 	}
 	
 	public Usuario getUsuario() {
@@ -137,6 +139,14 @@ public class Medicos implements Serializable {
 
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	@Override

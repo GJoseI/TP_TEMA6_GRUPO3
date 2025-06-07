@@ -20,6 +20,7 @@ public class Usuario implements Serializable{
 	private String Contraseña;
 	@OneToOne(mappedBy="usuario", fetch=FetchType.EAGER)
 	private Medicos medico;
+	private boolean estado;
 	
 	public Usuario() {}
 	
@@ -27,6 +28,7 @@ public class Usuario implements Serializable{
 		super();
 		Nombre_Usuario = nombre_Usuario;
 		Contraseña = contraseña;
+		this.estado=true;
 	}
 	
 	
@@ -49,6 +51,13 @@ public class Usuario implements Serializable{
 		this.medico = medico;
 	}
 
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	@Override
 	public String toString() {

@@ -1,4 +1,4 @@
-package dao;
+package daoImp;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
