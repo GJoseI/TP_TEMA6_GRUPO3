@@ -19,7 +19,60 @@ public class Main
     public static void main( String[] args ){
     	Confighiberneate ch = new Confighiberneate();
     	Session session = ch.abrirConexion();
+<<<<<<< HEAD
 
+=======
+    	//Mostrar todos los médicos ordenados según su legajo de mayor a menor.
+    	List<Object[]> lista =(List<Object[]>) session.createQuery("SELECT m.legajo, m.nombre, m.apellido FROM Medicos m ORDER BY m.legajo DESC").list();
+    	System.out.println("Legajo mayor a menor:");
+    	for (Object[] legajo : lista) {
+    		System.out.println(legajo[0]+" " + legajo[1]+" " + legajo[2]);
+    	}
+    	//Mostrar todos los médicos ordenados según su legajo de menor a mayor.
+    	List<Object[]> obj =(List<Object[]>) session.createQuery("SELECT m.legajo, m.nombre, m.apellido FROM Medicos m ORDER BY m.legajo ASC").list();
+    	System.out.println("Legajo menor a mayor:");
+    	for (Object[] doc : obj) {
+    		System.out.println(doc[0]+" " + doc[1]+" " + doc[2]);
+    	}
+    	
+    	//Mostrar todos los turnos que posee el médico con legajo 1234 en el día 01/01/2025
+    	List<Object[]> turnos = (List<Object[]>) session.createQuery("FROM Turno tur INNER JOIN tur.Medico m WHERE m.legajo = 1234 AND tur.fecha='01/01/2025'").list();
+    	System.out.println("Turnos del medico 1234 en 01/01/25:");
+    	for (Object[] turno : turnos) {
+    		Turno tur = (Turno) turno[0];
+    		Medicos med = (Medicos) turno[1];
+    			System.out.println("Leg: "+med.getLegajo()+" Fecha: "+tur.getFecha()+" Estado: "+tur.getEstado());
+    	}
+    	
+    	//Mostrar todos los legajos de los médicos
+    	List<Integer> listaLegajos =(List<Integer>) session.createQuery("SELECT m.legajo FROM Medicos m").list();
+    	System.out.println("Todos los legajos:");
+    	for (int legajo : listaLegajos) {
+    		System.out.println(legajo);
+    	}
+    	
+    	//Mostrar el médico con mayor número de legajo
+    	Integer doctor = (Integer) session.createQuery("SELECT MAX(m.legajo) FROM Medicos m").uniqueResult();
+    	System.out.println("Mayor legajo:");
+    	System.out.println(doctor.toString());
+    	
+    	//A través de distintas consultas obtener la cantidad de turnos que existen en
+    	//estado presente y ausente entre las fechas 01/01/2024 y 01/03/2024. Luego
+    	//calcular porcentajes. No habrá turnos pendientes porque las fechas son
+    	//antiguas.
+    	Long turnosAusente =(Long) session.createQuery("SELECT COUNT(t) FROM Turno t "
+    			+ "WHERE t.estado = 'ausente' AND t.fecha BETWEEN '01/01/2024' AND '01/03/2024'").uniqueResult();
+    	Long turnosPresente =(Long) session.createQuery("SELECT COUNT(t) FROM Turno t"
+    			+ " WHERE t.estado = 'presente' AND t.fecha BETWEEN '01/01/2024' AND '01/03/2024'").uniqueResult();
+    	
+    	Long total = turnosAusente + turnosPresente;
+    	
+        double porcentajePresente = (total > 0) ? (turnosPresente * 100.0) / total : 0;
+        double porcentajeAusente = (total > 0) ? (turnosAusente * 100.0) / total : 0;
+        System.out.println("Porcentaje de turnos:");
+        System.out.println("Presente: "+porcentajePresente+"%. Ausente: "+porcentajeAusente+"%");
+    	/*
+>>>>>>> b1bbe558744ca1e299d96abc651d1296799b391e
     	//Pacientes
     	Paciente paciente = new Paciente("Juan", "Pérez", "12345678A", "11-2345-6789",
                 "Calle Falsa 123", "Springfield", "Buenos Aires",
