@@ -25,11 +25,11 @@ private static Conexion conexion;
 			session.save(especialidad);
 	    
 			session.getTransaction().commit();    
-			conexion.cerrarSession();
 			Especialidad savedEspecialidad = (Especialidad) session.get(Especialidad.class, especialidad.getId());
 			if (savedEspecialidad == null) {
-	            estado = false;
-	        }
+				estado = false;
+			}
+			conexion.cerrarSession();
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
@@ -50,7 +50,7 @@ private static Conexion conexion;
 		Especialidad medicos=(Especialidad)session.get(Especialidad.class,id);
         if(medicos!=null)
         	return true;
-        
+        conexion.cerrarSession();
         return false;
 	}
 	
@@ -60,6 +60,7 @@ private static Conexion conexion;
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
+		conexion.cerrarSession();
         return especialidad;
 	}
 	
@@ -82,6 +83,7 @@ private static Conexion conexion;
 			if (savedEspecialidad == null) {
 	            estado = false;
 	        }
+			conexion.cerrarSession();
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
@@ -112,10 +114,10 @@ private static Conexion conexion;
 	        session.getTransaction().commit();
 
 	        Especialidad savedEspecialidad = (Especialidad) session.get(Especialidad.class, especialidad.getId());
-	        
 	        if (savedEspecialidad != null) {
 	            estado = false;
 	        }
+	        conexion.cerrarSession();
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -132,7 +134,8 @@ private static Conexion conexion;
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Especialidad> usuarios = session.createQuery("FROM especialidad").list();
+        List<Especialidad> usuarios = session.createQuery("FROM Especialidad").list();
+        conexion.cerrarSession();
         return usuarios;
 	}
 

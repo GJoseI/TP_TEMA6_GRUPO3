@@ -1,6 +1,7 @@
 package frgp.utn.edu.entidad;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,8 @@ public class Medicos implements Serializable {
 	private String apellido;
 	private String sexo;
 	private String fechaNac;
+	private String diasLab;
+	private String horarioLab;
 	private String direccion;
 	private String localidad;
 	private String email;
@@ -33,7 +36,7 @@ public class Medicos implements Serializable {
 	@JoinColumn(name="Usuario_c")
 	private Usuario usuario;
 	
-	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String direccion,
+	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String diasLab, String horarioLab, String direccion,
 			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad) {
 		super();
 		this.legajo = legajo;
@@ -41,6 +44,8 @@ public class Medicos implements Serializable {
 		this.apellido = apellido;
 		this.sexo = sexo;
 		this.fechaNac = fechaNac;
+		this.diasLab = diasLab;
+		this.horarioLab = horarioLab;
 		this.direccion = direccion;
 		this.localidad = localidad;
 		this.email = email;
@@ -98,6 +103,22 @@ public class Medicos implements Serializable {
 
 	public void setFechaNac(String fechaNac) {
 		this.fechaNac = fechaNac;
+	}
+
+	public String getDiasLab() {
+		return diasLab;
+	}
+
+	public void setDiasLab(String diasLab) {
+		this.diasLab = diasLab;
+	}
+
+	public String getHorarioLab() {
+		return horarioLab;
+	}
+
+	public void setHorarioLab(String horarioLab) {
+		this.horarioLab = horarioLab;
 	}
 
 	public String getDireccion() {

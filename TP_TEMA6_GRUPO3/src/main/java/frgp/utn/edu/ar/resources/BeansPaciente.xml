@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="paciente1" class="frgp.utn.edu.entidad.Paciente">
+		<property name="DNI" value="12345678A"></property>
+		<property name="nombre" value="Juan"></property>
+		<property name="apellido" value="Pérez"></property>
+		<property name="telefono" value="11-2345-6789"></property>
+		<property name="direccion" value="Calle Falsa 123"></property>
+		<property name="localidad" value="Springfield"></property>
+		<property name="provincia" value="Buenos Aires"></property>
+		<property name="fecha_nacimiento" value="12/05/1980"></property>
+		<property name="correo_electronico" value="juan.perez@email.com"></property>
+		<property name="estado" value="True"></property>
+	</bean>
+	<bean id="paciente2" class="frgp.utn.edu.entidad.Paciente">
+		<property name="DNI" value="87654321B"></property>
+		<property name="nombre" value="María"></property>
+		<property name="apellido" value="Gómez"></property>
+		<property name="telefono" value="351-987-6543"></property>
+		<property name="direccion" value="Av. Siempreviva 456"></property>
+		<property name="localidad" value="Córdoba Capital"></property>
+		<property name="provincia" value="Córdoba"></property>
+		<property name="fecha_nacimiento" value="23/09/1992"></property>
+		<property name="correo_electronico" value="maria.gomez@email.com"></property>
+		<property name="estado" value="True"></property>
+	</bean>
+	</beans>

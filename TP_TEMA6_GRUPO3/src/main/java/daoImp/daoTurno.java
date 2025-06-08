@@ -25,11 +25,11 @@ public class daoTurno implements ITurno{
 				session.save(turno);
 		    
 				session.getTransaction().commit();    
-				conexion.cerrarSession();
 				Turno savedTurno = (Turno) session.get(Turno.class, turno.getId());
 				if (savedTurno == null) {
-		            estado = false;
-		        }
+					estado = false;
+				}
+				conexion.cerrarSession();
 		        
 		    } catch (Exception e) {
 		        if (session != null) {
@@ -50,6 +50,7 @@ public class daoTurno implements ITurno{
 			Turno savedTurno = (Turno) session.get(Turno.class, id);
 	        if(savedTurno!=null)
 	        	return true;
+	        conexion.cerrarSession();
 	        
 	        return false;
 		}
@@ -60,12 +61,15 @@ public class daoTurno implements ITurno{
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			Turno savedTurno = (Turno) session.get(Turno.class, id);
+			conexion.cerrarSession();
+			
 	        return savedTurno;
 		}
 		
 		/// Modificar 
 		public boolean Update(Turno turno)
 		{
+			conexion = new Conexion();
 			boolean estado = true;
 		    Session session = null;
 
@@ -75,14 +79,15 @@ public class daoTurno implements ITurno{
 		        
 		        session.update(turno);
 
-		         session.flush();
+		        session.flush();
 
 		        session.getTransaction().commit();
 		        Turno savedTurno = (Turno) session.get(Turno.class, turno.getId());
 				if (savedTurno == null) {
 		            estado = false;
 		        }
-		        
+				conexion.cerrarSession();
+				
 		    } catch (Exception e) {
 		        if (session != null) {
 		            session.getTransaction().rollback();
@@ -111,11 +116,12 @@ public class daoTurno implements ITurno{
 
 		        session.getTransaction().commit();
 
-		        Turno savedUser = (Turno) session.get(Turno.class, turno.getId());
-		        
+		        Turno savedUser = (Turno) session.get(Turno.class, turno.getId());	        
 		        if (savedUser != null) {
 		            estado = false;
 		        }
+		        conexion.cerrarSession();
+		        
 		    } catch (Exception e) {
 		        if (session != null) {
 		            session.getTransaction().rollback();
@@ -132,7 +138,9 @@ public class daoTurno implements ITurno{
 			conexion = new Conexion();
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
-	        List<Turno> usuarios = session.createQuery("FROM turno").list();
+	        List<Turno> usuarios = session.createQuery("FROM Turno").list();
+	        conexion.cerrarSession();
+	        
 	        return usuarios;
 		}
 

@@ -19,17 +19,17 @@ private static Conexion conexion;
 	    Session session = null;
 		try 
 		{
-			session= conexion.abrirConexion();
+			session = conexion.abrirConexion();
 		
 			session.beginTransaction();
 			session.save(paciente);
 	    
 			session.getTransaction().commit();    
-			conexion.cerrarSession();
 			Paciente savedPaciente = (Paciente) session.get(Paciente.class, paciente.getDNI());
 			if (savedPaciente == null) {
-	            estado = false;
-	        }
+				estado = false;
+			}
+			conexion.cerrarSession();
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
@@ -50,6 +50,7 @@ private static Conexion conexion;
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
         if(paciente!=null)
         	return true;
+        conexion.cerrarSession();
         
         return false;
 	}
@@ -60,6 +61,8 @@ private static Conexion conexion;
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
+		conexion.cerrarSession();
+		
         return paciente;
 	}
 	
@@ -67,6 +70,7 @@ private static Conexion conexion;
 	public boolean Update(Paciente paciente)
 	{
 		boolean estado = true;
+		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -75,14 +79,15 @@ private static Conexion conexion;
 	        
 	        session.update(paciente);
 
-	         session.flush();
+	        session.flush();
 
 	        session.getTransaction().commit();
 	        Paciente savedPaciente = (Paciente) session.get(Paciente.class, paciente.getDNI());
 			if (savedPaciente == null) {
 	            estado = false;
 	        }
-	        
+			conexion.cerrarSession();
+			
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -111,11 +116,12 @@ private static Conexion conexion;
 
 	        session.getTransaction().commit();
 
-	        Paciente savedPaciente = (Paciente) session.get(Paciente.class, paciente.getDNI());
-	        
+	        Paciente savedPaciente = (Paciente) session.get(Paciente.class, paciente.getDNI());        
 	        if (savedPaciente != null) {
 	            estado = false;
 	        }
+	        conexion.cerrarSession();
+	        
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -132,7 +138,9 @@ private static Conexion conexion;
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Paciente> usuarios = session.createQuery("FROM paciente").list();
+        List<Paciente> usuarios = session.createQuery("FROM Paciente").list();
+        conexion.cerrarSession();
+        
         return usuarios;
 	}
 

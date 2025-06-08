@@ -25,11 +25,11 @@ public class daoUsuario implements IUsuario {
 			session.save(usuario);
 	    
 			session.getTransaction().commit();    
-			conexion.cerrarSession();
 			Usuario savedUser = (Usuario) session.get(Usuario.class, usuario.getNombre_Usuario());
 			if (savedUser == null) {
-	            estado = false;
-	        }
+				estado = false;
+			}
+			conexion.cerrarSession();
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
@@ -50,6 +50,7 @@ public class daoUsuario implements IUsuario {
         Usuario usuario=(Usuario)session.get(Usuario.class,nombreUsuario);
         if(usuario!=null)
         	return true;
+        conexion.cerrarSession();
         
         return false;
 	}
@@ -60,12 +61,15 @@ public class daoUsuario implements IUsuario {
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
         Usuario usuario=(Usuario)session.get(Usuario.class,nombreUsuario);
+        conexion.cerrarSession();
+        
         return usuario;
 	}
 	
 	/// Modificar 
 	public boolean Update(Usuario usuario)
 	{
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -82,7 +86,8 @@ public class daoUsuario implements IUsuario {
 			if (savedUser == null) {
 	            estado = false;
 	        }
-	        
+			conexion.cerrarSession();
+			
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -112,10 +117,11 @@ public class daoUsuario implements IUsuario {
 	        session.getTransaction().commit();
 
 	        Usuario savedUser = (Usuario) session.get(Usuario.class, usuario.getNombre_Usuario());
-	        
 	        if (savedUser != null) {
 	            estado = false;
 	        }
+	        conexion.cerrarSession();
+	        
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -132,7 +138,9 @@ public class daoUsuario implements IUsuario {
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Usuario> usuarios = session.createQuery("FROM usuario").list();
+        List<Usuario> usuarios = session.createQuery("FROM Usuario").list();
+        conexion.cerrarSession();
+        
         return usuarios;
 	}
 

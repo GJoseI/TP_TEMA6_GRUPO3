@@ -26,20 +26,22 @@ public class Turno implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="legajo")
 	private Medicos Medico;
-	private LocalDate fecha;
+	private String fecha;
 	private String hora;
 	private String observación;
-	private String estado;
+	private String estadoTurno;
+	private boolean estado;
 	
 	public Turno () {}
-	public Turno(Medicos medico, Paciente paciente, LocalDate fecha, String hora, String observación, String estado) {
+	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String observación, String estadoTurno) {
 		super();
 		Medico = medico;
 		this.paciente = paciente;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.observación = observación;
-		this.estado = estado;
+		this.estadoTurno = estadoTurno;
+		this.estado = true;
 	}
 
 	public Medicos getMedico() {
@@ -58,11 +60,11 @@ public class Turno implements Serializable{
 		this.paciente = paciente;
 	}
 
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
@@ -82,14 +84,20 @@ public class Turno implements Serializable{
 		this.observación = observación;
 	}
 
-	public String getEstado() {
+	public String getEstadoTurno() {
+		return estadoTurno;
+	}
+
+	public void setEstadoTurno(String estadoTurno) {
+		this.estadoTurno = estadoTurno;
+	}
+
+	public boolean isEstado() {
 		return estado;
 	}
-
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-
 	public int getId() {
 		return id;
 	}
@@ -99,7 +107,7 @@ public class Turno implements Serializable{
 	@Override
 	public String toString() {
 		return "Turno [Medico=" + Medico + ", paciente=" + paciente + ", fecha=" + fecha + ", hora=" + hora
-				+ ", observación=" + observación + ", estado=" + estado + "]";
+				+ ", observación=" + observación + ", estado=" + estadoTurno + "]";
 	}
 	
 	

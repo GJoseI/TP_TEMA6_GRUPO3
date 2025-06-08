@@ -14,28 +14,28 @@ public class Paciente implements Serializable{
 	private String DNI;
 	private String nombre;
 	private String apellido; 
-	private String teléfono;
+	private String telefono;
 	private String dirección;
 	private String localidad;
 	private String provincia;
 	private String fecha_nacimiento;
-	private String correo_electrónico;
+	private String correo_electronico;
 	private boolean estado;
 	
 	
 	public Paciente () {};
-	public Paciente(String nombre, String apellido, String DNI, String teléfono, String dirección, String localidad,
-			String provincia, String fecha_nacimiento, String correo_electrónico) {
+	public Paciente(String nombre, String apellido, String DNI, String telefono, String dirección, String localidad,
+			String provincia, String fecha_nacimiento, String correo_electronico) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.DNI = DNI;
-		this.teléfono = teléfono;
+		this.telefono = telefono;
 		this.dirección = dirección;
 		this.localidad = localidad;
 		this.provincia = provincia;
 		this.fecha_nacimiento = fecha_nacimiento;
-		this.correo_electrónico = correo_electrónico;
+		this.correo_electronico = correo_electronico;
 		this.estado=true;
 	}
 
@@ -63,19 +63,19 @@ public class Paciente implements Serializable{
 		DNI = dNI;
 	}
 
-	public String getTeléfono() {
-		return teléfono;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setTeléfono(String teléfono) {
-		this.teléfono = teléfono;
+	public void setTelefono(String teléfono) {
+		this.telefono = teléfono;
 	}
 
-	public String getDirección() {
+	public String getDireccion() {
 		return dirección;
 	}
 
-	public void setDirección(String dirección) {
+	public void setDireccion(String dirección) {
 		this.dirección = dirección;
 	}
 
@@ -103,12 +103,12 @@ public class Paciente implements Serializable{
 		this.fecha_nacimiento = fecha_nacimiento;
 	}
 
-	public String getCorreo_electrónico() {
-		return correo_electrónico;
+	public String getCorreo_electronico() {
+		return correo_electronico;
 	}
 
-	public void setCorreo_electrónico(String correo_electrónico) {
-		this.correo_electrónico = correo_electrónico;
+	public void setCorreo_electronico(String correo_electronico) {
+		this.correo_electronico = correo_electronico;
 	}
 
 	public boolean isEstado() {
@@ -119,9 +119,9 @@ public class Paciente implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Paciente [Nombre=" + nombre + ", Apellido=" + apellido + ", DNI=" + DNI + ", teléfono=" + teléfono
+		return "Paciente [Nombre=" + nombre + ", Apellido=" + apellido + ", DNI=" + DNI + ", teléfono=" + telefono
 				+ ", dirección=" + dirección + ", localidad=" + localidad + ", provincia=" + provincia
-				+ ", fecha_nacimiento=" + fecha_nacimiento + ", correo_electrónico=" + correo_electrónico + "]";
+				+ ", fecha_nacimiento=" + fecha_nacimiento + ", correo_electrónico=" + correo_electronico + "]";
 	}
 
 	

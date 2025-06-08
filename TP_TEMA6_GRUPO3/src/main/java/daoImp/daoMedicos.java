@@ -25,11 +25,11 @@ private static Conexion conexion;
 			session.save(medicos);
 	    
 			session.getTransaction().commit();    
-			conexion.cerrarSession();
 			Medicos savedMedicos = (Medicos) session.get(Medicos.class, medicos.getLegajo());
 			if (savedMedicos == null) {
-	            estado = false;
-	        }
+				estado = false;
+			}
+			conexion.cerrarSession();
 	        
 	    } catch (Exception e) {
 	        if (session != null) {
@@ -50,6 +50,7 @@ private static Conexion conexion;
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
         if(medicos!=null)
         	return true;
+        conexion.cerrarSession();
         
         return false;
 	}
@@ -60,12 +61,15 @@ private static Conexion conexion;
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
+		conexion.cerrarSession();
+		
         return medicos;
 	}
 	
 	/// Modificar 
 	public boolean Update(Medicos medicos)
 	{
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -82,7 +86,8 @@ private static Conexion conexion;
 			if (savedMedicos == null) {
 	            estado = false;
 	        }
-	        
+			conexion.cerrarSession();
+			
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -105,17 +110,18 @@ private static Conexion conexion;
 	        session = conexion.abrirConexion();
 	        session.beginTransaction();
 
-	        session.delete(medicos);
+	        session.update(medicos);
 	        
 	        session.flush();
 
 	        session.getTransaction().commit();
 
-	        Medicos savedMedicos = (Medicos) session.get(Medicos.class, medicos.getLegajo());
-	        
+	        Medicos savedMedicos = (Medicos) session.get(Medicos.class, medicos.getLegajo());  
 	        if (savedMedicos != null) {
 	            estado = false;
 	        }
+	        conexion.cerrarSession();
+	        
 	    } catch (Exception e) {
 	        if (session != null) {
 	            session.getTransaction().rollback();
@@ -132,7 +138,9 @@ private static Conexion conexion;
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Medicos> usuarios = session.createQuery("FROM medico").list();
+        List<Medicos> usuarios = session.createQuery("from Medicos").list();
+        conexion.cerrarSession();
+        
         return usuarios;
 	}
 

@@ -19,9 +19,6 @@ public class Main
     public static void main( String[] args ){
     	Confighiberneate ch = new Confighiberneate();
     	Session session = ch.abrirConexion();
-<<<<<<< HEAD
-
-=======
     	//Mostrar todos los médicos ordenados según su legajo de mayor a menor.
     	List<Object[]> lista =(List<Object[]>) session.createQuery("SELECT m.legajo, m.nombre, m.apellido FROM Medicos m ORDER BY m.legajo DESC").list();
     	System.out.println("Legajo mayor a menor:");
@@ -41,7 +38,7 @@ public class Main
     	for (Object[] turno : turnos) {
     		Turno tur = (Turno) turno[0];
     		Medicos med = (Medicos) turno[1];
-    			System.out.println("Leg: "+med.getLegajo()+" Fecha: "+tur.getFecha()+" Estado: "+tur.getEstado());
+    			System.out.println("Leg: "+med.getLegajo()+" Fecha: "+tur.getFecha()+" Estado: "+tur.getEstadoTurno());
     	}
     	
     	//Mostrar todos los legajos de los médicos
