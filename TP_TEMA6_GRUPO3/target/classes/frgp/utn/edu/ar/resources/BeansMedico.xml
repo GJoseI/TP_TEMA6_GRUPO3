@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="medico1" class="frgp.utn.edu.entidad.Medicos">
+		<constructor-arg index="0" type="int" value="1111"/>
+		<constructor-arg index="1" type="String" value="Jose"/>
+		<constructor-arg index="2" type="String" value="Jose"/>
+		<constructor-arg index="3" type="String" value="M"/>
+		<constructor-arg index="4" type="String" value="04-22-2003"/>
+		<constructor-arg index="5" type="String" value="Lu-Vie"/>
+		<constructor-arg index="6" type="String" value="8hs-17hs"/>
+		<constructor-arg index="7" type="String" value="Argentina 123"/>
+		<constructor-arg index="8" type="String" value="Talar"/>
+		<constructor-arg index="9" type="String" value="jose@gmail.com"/>
+		<constructor-arg index="10" type="String" value="123456789"/>
+		<constructor-arg index="11" type="Usuario" ref="usuario1"/>
+		<constructor-arg index="12" type="Especialidad" ref="especialidad1"/>
+		
+		<!--<constructor-arg index="0" type="String" value="True"/>-->
+	</bean>	
+	<bean id="medico2" class="frgp.utn.edu.entidad.Medicos">
+		<constructor-arg index="0" type="int" value="2222"/>
+		<constructor-arg index="1" type="String" value="Juan"/>
+		<constructor-arg index="2" type="String" value="Juan"/>
+		<constructor-arg index="3" type="String" value="M"/>
+		<constructor-arg index="4" type="String" value="12-03-1992"/>
+		<constructor-arg index="5" type="String" value="Lu-Vie"/>
+		<constructor-arg index="6" type="String" value="9hs-18hs"/>
+		<constructor-arg index="7" type="String" value="Peru 123"/>
+		<constructor-arg index="8" type="String" value="Olivos"/>
+		<constructor-arg index="9" type="String" value="juan@gmail.com"/>
+		<constructor-arg index="10" type="String" value="987654321"/>
+		<constructor-arg index="11" type="Usuario" ref="usuario2"/>
+		<constructor-arg index="12" type="Especialidad" ref="especialidad2"/>
+	</bean>
+</beans>
+	

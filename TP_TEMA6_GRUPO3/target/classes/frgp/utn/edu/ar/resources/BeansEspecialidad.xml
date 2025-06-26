@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="especialidad1" class="frgp.utn.edu.entidad.Especialidad">
+		<property name="Id" value="1"/>
+		<property name="nombre" value="Cardiologia"/>
+		<property name="estado" value="true"/>
+	</bean>
+	<bean id="especialidad2" class="frgp.utn.edu.entidad.Especialidad">
+		<property name="Id" value="2"/>
+		<property name="nombre" value="Dermatologia"/>
+		<property name="estado" value="true"/>
+	</bean>	
+	<bean id="especialidad3" class="frgp.utn.edu.entidad.Especialidad">
+		<property name="Id" value="3"/>
+		<property name="nombre" value="Psiquiatria"/>
+		<property name="estado" value="true"/>
+	</bean>
+	</beans>

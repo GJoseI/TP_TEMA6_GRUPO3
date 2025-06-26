@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="usuario1" class="frgp.utn.edu.entidad.Usuario">
+		<property name="Nombre_Usuario" value="jose"/>
+		<property name="Contraseña" value="josecontraseña"/>
+		<property name="estado" value="True"/>
+	</bean>
+	<bean id="usuario2" class="frgp.utn.edu.entidad.Usuario">
+		<property name="Nombre_Usuario" value="juan"/>
+		<property name="Contraseña" value="juancontraseña"/>
+		<property name="estado" value="True"/>
+	</bean>
+	</beans>
