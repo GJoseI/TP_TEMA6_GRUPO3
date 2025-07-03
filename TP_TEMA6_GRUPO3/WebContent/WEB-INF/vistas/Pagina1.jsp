@@ -78,14 +78,14 @@
     <div class="login-container">
         <img src="hospital.png" class="logo">
         <h2>Inicio de Sesión</h2>
-        <form action="procesar_login.jsp" method="post">
+        <form action="redireccionar_usuario.html" method="post">
             <div class="input-group">
                 <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" name="usuario" required>
+                <input type="text" id="usuario" name="txtusuario" required>
             </div>
             <div class="input-group">
                 <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <input type="password" id="contrasena" name="txtcontrasena" required>
             </div>
             <button type="submit" class="btn-login">Ingresar</button>
         </form>
