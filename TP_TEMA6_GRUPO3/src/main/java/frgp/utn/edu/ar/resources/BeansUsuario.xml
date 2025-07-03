@@ -7,11 +7,13 @@
 	<bean id="usuario1" class="frgp.utn.edu.entidad.Usuario">
 		<property name="Nombre_Usuario" value="jose"/>
 		<property name="Contraseña" value="josecontraseña"/>
+		<property name="admin" value="false"/>
 		<property name="estado" value="True"/>
 	</bean>
 	<bean id="usuario2" class="frgp.utn.edu.entidad.Usuario">
 		<property name="Nombre_Usuario" value="juan"/>
 		<property name="Contraseña" value="juancontraseña"/>
+		<property name="admin" value="false"/>
 		<property name="estado" value="True"/>
 	</bean>
 	</beans>

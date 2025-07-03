@@ -18,6 +18,7 @@ public class Usuario implements Serializable{
 	@Id
 	private String Nombre_Usuario;
 	private String Contraseña;
+	private boolean  admin;
 	@OneToOne(mappedBy="usuario", fetch=FetchType.EAGER)
 	private Medicos medico;
 	private boolean estado;
@@ -49,6 +50,13 @@ public class Usuario implements Serializable{
 	}
 	public void setMedico(Medicos medico) {
 		this.medico = medico;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	public boolean isEstado() {
