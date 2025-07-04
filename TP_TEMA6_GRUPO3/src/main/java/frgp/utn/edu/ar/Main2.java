@@ -87,7 +87,7 @@ public class Main2
     	daohibernate.AgregarEspecialidad(especialidad9);
     	daohibernate.AgregarEspecialidad(especialidad10);
     
-    	
+    	/*
     	//Medicos y Usuarios
     	Usuario usuario = new Usuario("Laura.G", "lauragonzalez");
     	Medicos med = new Medicos(1001, "Laura", "González", "Femenino", "1985-03-15",
@@ -177,6 +177,6 @@ public class Main2
     	daohibernate.AgregarTurno(turno8);
     	daohibernate.AgregarTurno(turno9);
     	daohibernate.AgregarTurno(turno10);
-    	
+    	*/
     }
 }
