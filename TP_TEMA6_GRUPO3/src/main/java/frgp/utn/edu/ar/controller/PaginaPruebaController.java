@@ -45,19 +45,18 @@ public class PaginaPruebaController {
 		return MV;
 	}
 	
-@RequestMapping("redireccionar_adminMedico.html")
-public ModelAndView eventoRedireccionar_adminMedico() {
-	ModelAndView MV = new ModelAndView();
-		MV.setViewName("admin_medico");
-	return MV;
-}
+	@RequestMapping("redireccionar_adminMedico.html")
+	public ModelAndView eventoRedireccionar_adminMedico() {
+		ModelAndView MV = new ModelAndView();
+			MV.setViewName("admin_medico");
+		return MV;
+	}
 
-@RequestMapping("redireccionar_adminInforme.html")
-public ModelAndView eventoRedireccionar_adminInforme() {
-	ModelAndView MV = new ModelAndView();
+	@RequestMapping("redireccionar_adminInforme.html")
+	public ModelAndView eventoRedireccionar_adminInforme() {
+		ModelAndView MV = new ModelAndView();
 
 		MV.setViewName("admin_informe");
-	return MV;
-}
-
+		return MV;
+	}
 }
