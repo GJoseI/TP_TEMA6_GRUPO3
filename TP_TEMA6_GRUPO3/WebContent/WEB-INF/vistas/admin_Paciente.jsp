@@ -20,6 +20,30 @@
     .btn-submit:hover { background-color: #218838; }
     .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-guardar-fila:hover { background-color: #218838; }
+    
+    .pagination { text-align: center; }
+	    .pagination a {
+	        color: #007bff;
+	        padding: 8px 16px;
+	        text-decoration: none;
+	        border: 1px solid #ddd;
+	        margin: 0 4px;
+	        border-radius: 4px;
+	        transition: background-color .3s;
+	    }
+	    .pagination a.active {
+	        background-color: #007bff;
+	        color: white;
+	        border: 1px solid #007bff;
+	    }
+	    .pagination a:hover:not(.active) {
+	        background-color: #ddd;
+	    }
+	    .pagination a.disabled {
+	        color: #ccc;
+	        pointer-events: none;
+	        border-color: #ccc;
+	    }
 </style>
 </head>
 <body>
@@ -56,12 +80,14 @@
              			<strong>Localidad:</strong>
              			<input type="text" name="localidad" value="La matanza"><br><br>
              			<strong>Provincia:</strong>
+             			<input type="text" name="Especilidad" value="Clinico"><br><br>
+             			<strong>Clinico:</strong>
              			<input type="text" name="provincia" value="BsAs"><br><br>
              			<strong>Fecha de Nacimiento:</strong>
              			<input type="datetime-local" name="fechaNac" value=""><br><br>
              			<strong>Correo electronico:</strong>
              			<input type="text" name="email" value="juan.perez@gmail.com">
-             		</td>
+             		</td>	
              		<td>
 						<strong>Activo</strong>
 						<input type="radio" name="estado" value="activo"><br>
@@ -74,6 +100,23 @@
              	</tr>
         	 </tbody>
        	</table>
+       	
+       	 <div class="pagination">
+     <%-- Botón "Anterior" --%>
+     <a href="?page= 1" class=" 2 ? "disabled" : """>
+         &laquo; Anterior
+     </a>
+
+     <%-- Números de página --%>
+         <a href="?page=3" class="2 "active" : ">2
+         </a>
+
+
+     <%-- Botón "Siguiente" --%>
+     <a href="?page=<3" class=""disabled" : "" %>">
+         Siguiente &raquo;
+     </a>
+ </div>
        	<button type="submit" class="btn-submit">Guardar Todo</button>
     </form>
 </div>
