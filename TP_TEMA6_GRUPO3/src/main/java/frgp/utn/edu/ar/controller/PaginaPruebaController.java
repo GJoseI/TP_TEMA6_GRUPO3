@@ -21,9 +21,9 @@ public class PaginaPruebaController {
 	public ModelAndView eventoRedireccionar_usuario() {
 		ModelAndView MV = new ModelAndView();
 
-			//MV.setViewName("admin");
+			MV.setViewName("admin");
 
-			MV.setViewName("medico");
+			//MV.setViewName("medico");
 
 		return MV;
 	}
