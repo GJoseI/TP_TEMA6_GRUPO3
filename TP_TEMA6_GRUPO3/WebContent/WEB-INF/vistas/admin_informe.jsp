@@ -20,8 +20,8 @@
     .form-group { display: flex; flex-direction: column; }
     .form-group label { margin-bottom: 5px; font-weight: bold; color: #555; }
     .form-group input[type="date"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-    .btn-generate { padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; border: none; border-radius: 4px; cursor: pointer; }
-    .btn-generate:hover { background-color: #0056b3; }
+    .btn-generate { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-generate:hover { background-color: #218838; }
 
     /* Sección del Informe */
     .report-section h3 { border-bottom: 2px solid #007bff; padding-bottom: 10px; color: #005a9c; }
@@ -59,7 +59,7 @@
 <body>
 <div class="container">
     <h1>Informe de Actividad</h1>
-
+	
     <div class="filter-section">
         <h2>Filtros del Informe</h2>
         <form action="informe.jsp" method="get" class="filter-form">
@@ -73,6 +73,7 @@
             </div>
             <button type="submit" class="btn-generate">Generar Informe</button>
         </form>
+  				
     </div>
 
     <div class="report-section">
@@ -129,58 +130,58 @@
     <table>
         <thead>
             <tr>
+            	<th>Legajo</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>pediatría</th>
                 <th>Sexo</th>
-                <th>Email</th>
                 <th>Usuario</th>
-                <th>Horas Trabajadas (mensual)</th>
+                <th>Horas Trabajadas</th>
             </tr>
         </thead>
         <tbody>
                 <tr>
+                	<td>41555</td>
                     <td>jean</td>
                     <td>esquen</td>
                     <td>clinico</td>
                     <td>masculino</td>
-                    <td>jehajdjdj@gmail.com</td>
                     <td>jp_User</td>
                     <td>24</td>
                 </tr>
                 <tr>
+                    <td>41555</td>
                     <td>jean</td>
                     <td>esquen</td>
                     <td>Cardiología </td>
                     <td>masculino</td>
-                    <td>jehajdjdj@gmail.com</td>
                     <td>jp_User</td>
                     <td>24</td>
                 </tr>
                 <tr>
+                    <td>41555</td>
                     <td>jean</td>
                     <td>esquen</td>
                     <td>Urología  </td>
                     <td>masculino</td>
-                    <td>jehajdjdj@gmail.com</td>
                     <td>jp_User</td>
                     <td>24</td>
                 </tr>
                 <tr>
+                    <td>41555</td>
                     <td>jean</td>
                     <td>esquen</td>
                     <td>Patología  </td>
                     <td>masculino</td>
-                    <td>jehajdjdj@gmail.com</td>
                     <td>jp_User</td>
                     <td>24</td>
                 </tr>
                 <tr>
+                    <td>41555</td>
                     <td>jean</td>
                     <td>esquen</td>
                     <td>Neonatología </td>
                     <td>masculino</td>
-                    <td>jehajdjdj@gmail.com</td>
                     <td>jp_User</td>
                     <td>24</td>
                 </tr>
@@ -207,6 +208,9 @@
  <br>      
  <div class="initial-message">
      <p>Por favor, seleccione un rango de fechas y haga clic en "Generar Informe" para ver los datos.</p>
+      <form method="get" >
+          <button type="submit" formaction="redireccionar_Admin.html" class="btn-generate">Vover a menu </button>
+      </form>
  </div>
 
     </div>

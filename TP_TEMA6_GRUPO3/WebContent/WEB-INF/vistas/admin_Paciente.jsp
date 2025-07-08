@@ -21,6 +21,9 @@
     .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-guardar-fila:hover { background-color: #218838; }
     
+    .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-Buscar-fila:hover { background-color: #218838; }
+    
     .pagination { text-align: center; }
 	    .pagination a {
 	        color: #007bff;
@@ -52,8 +55,12 @@
 		<div class="info">
     		<h2>Bienvenido/a</h2>
     		<p>ID Admin</p>
+    		<form method="get" >
+           		<button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Vover a menu </button>
+       		</form>
     	</div>
     </div>
+<div class="admin-pacientes-container">
     <h3>Gestionar Pacientes</h3>
         
     <form action="" method="post" class="admin-pacientes-form">
@@ -80,8 +87,6 @@
              			<strong>Localidad:</strong>
              			<input type="text" name="localidad" value="La matanza"><br><br>
              			<strong>Provincia:</strong>
-             			<input type="text" name="Especilidad" value="Clinico"><br><br>
-             			<strong>Clinico:</strong>
              			<input type="text" name="provincia" value="BsAs"><br><br>
              			<strong>Fecha de Nacimiento:</strong>
              			<input type="datetime-local" name="fechaNac" value=""><br><br>
@@ -100,8 +105,89 @@
              	</tr>
         	 </tbody>
        	</table>
-       	
-       	 <div class="pagination">
+  </form> 
+</div>   
+<br> 
+<div class="admin-pacientes-container">	
+<h3>Lista de Paciente</h3>
+<strong>DNI:</strong>
+<input type="text" name="dni" placeholder="Ingrese DNI">
+<button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
+<br>
+ <form action="" method="post" class="admin-pacientes-form">
+    <table>
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Localidad</th>
+                <th>Provincia</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Correo electronico</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+    </table>
+  </form>
+    <br>
+ <div class="pagination">
      <%-- Botón "Anterior" --%>
      <a href="?page= 1" class=" 2 ? "disabled" : """>
          &laquo; Anterior
@@ -117,8 +203,7 @@
          Siguiente &raquo;
      </a>
  </div>
-       	<button type="submit" class="btn-submit">Guardar Todo</button>
-    </form>
-</div>
+</div> 
+</div> 
 </body>
 </html>

@@ -28,6 +28,13 @@ public class PaginaPruebaController {
 		return MV;
 	}
 	
+	@RequestMapping("redireccionar_Admin.html")
+	public ModelAndView eventoRedireccionar_Admin() {
+		ModelAndView MV = new ModelAndView();
+			MV.setViewName("admin");
+		return MV;
+	}
+	
 	
 	@RequestMapping("redireccionar_adminPaciente.html")
 	public ModelAndView eventoRedireccionar_adminPaciente() {

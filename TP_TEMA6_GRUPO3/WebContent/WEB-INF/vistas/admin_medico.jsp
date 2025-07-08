@@ -7,7 +7,7 @@
 <title>admin_medico</title>
 <style>
 	 body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
-	.admin-medicos-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
+	.admin-medicos-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 2000px; margin: auto; }
 	.welcome-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
     .welcome-header .info h2 { color: #005a9c; margin: 0; font-size: 22px; }
     .welcome-header .info p { margin: 0; color: #555; }
@@ -21,7 +21,11 @@
     .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-guardar-fila:hover { background-color: #218838; }
     
-     .pagination a {
+    .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-Buscar-fila:hover { background-color: #218838; }
+    
+      .pagination { text-align: center; }
+	    .pagination a {
 	        color: #007bff;
 	        padding: 8px 16px;
 	        text-decoration: none;
@@ -51,9 +55,13 @@
 		<div class="info">
     		<h2>Bienvenido/a</h2>
     		<p>ID Admin</p>
+   		<form method="get" >
+           <button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Vover a menu </button>
+        </form>
     	</div>
     </div>
-    <h3>Gestionar Pacientes</h3>
+ <div class="admin-medicos-container">
+    <h3>Gestionar Medicos</h3>
         
     <form action="" method="post" class="admin-medicos-form">
     	<table>
@@ -112,7 +120,114 @@
              	</tr>
         	 </tbody>
        	</table>
-       	<br>
+ </form>
+   <br>
+ </div>
+ <br>
+ <div class="admin-medicos-container">
+    <div class="admin-medicos-form">
+    
+    <h3>Lista de Médicos</h3>
+ 
+
+<form action="" method="post" class="admin-medicos-form">
+
+<strong>Legajo:</strong>
+<input type="text" name="dni" placeholder="Ingrese legajo">
+<strong>Especialidad:</strong>
+<select name="especialidad">
+	<option>Cardiologia</option>
+	<option>clinica</option>
+</select>
+<button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Sexo</th>
+                <th>Direccion</th>
+                <th>Localidad</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Correo electronico</th>
+                <th>Dias de trabajo</th>
+                <th>Telefono</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+               		<td>4565655</td>
+               		<td>jean5011</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+               		<td>jean5011</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+               		<td>jean5011</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+               		<td>jean5011</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+                </tr>
+    </table>
+    </form>
+    <br>
  <div class="pagination">
      <%-- Botón "Anterior" --%>
      <a href="?page= 1" class=" 2 ? "disabled" : """>
@@ -129,10 +244,11 @@
          Siguiente &raquo;
      </a>
  </div>
- <br>
-       	
-       	<button type="submit" class="btn-submit">Guardar Todo</button>
-    </form>
+ <br>   
+
+</div> 
+    
+</div>
 </div>
 </body>
 </html>

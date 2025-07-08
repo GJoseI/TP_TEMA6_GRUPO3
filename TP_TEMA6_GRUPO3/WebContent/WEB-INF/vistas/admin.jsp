@@ -90,6 +90,9 @@
             <button type="submit" formaction="redireccionar_adminInforme.html" class="nav-button">
                 Ver Informes
             </button>
+            <button type="submit" formaction="redireccionar_pag1.html" class="nav-button">
+                Salir
+            </button>
         </form>
     </div>
 

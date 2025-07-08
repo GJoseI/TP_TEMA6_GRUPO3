@@ -21,6 +21,9 @@
     .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-guardar-fila:hover { background-color: #218838; }
     
+    .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-Buscar-fila:hover { background-color: #218838; }
+    
     .pagination { text-align: center; }
 	    .pagination a {
 	        color: #007bff;
@@ -52,9 +55,12 @@
 		<div class="info">
     		<h2>Bienvenido/a</h2>
     		<p>ID Admin</p>
+    		<form method="get" >
+           		<button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Vover a menu </button>
+       		</form>
     	</div>
  	</div>
-    <h3>Asignación de Turnos</h3>
+    <h2>Asignación de Turnos</h2>
         
     <form action="procesar_turnos.jsp" method="post" class="admin-turnos-form">
     	<table>
@@ -67,33 +73,23 @@
              <tbody>
              	<tr>
              		<td>
-             			<strong>DNI Paciente:</strong>
-             			<select name="fecha">
-             				<option>44723712</option>
-             				<option>18563781</option>
-             			</select>
-             				<br>
-             			<strong>Legajo Medico:</strong>
-             			<select name="fecha">
-             				<option>1234</option>
-             				<option>1243</option>
-             			</select>
-             		</td>
-             		<td>
-             			<strong>Fecha:</strong>
-             			<select name="fecha">
-             				<option>Hoy</option>
-             				<option>Mañana</option>
-             			</select>
-             			<br>
-             			<strong>Hora:</strong>
-             			<select name="fecha">
-             				<option>2 PM</option>
-             				<option>4 PM</option>
-             			</select><br>
+             			<strong>DNI Paciente:44867986</strong><br><br>
+             			<%--<input type="text" name="dni" value="44867986"><br><br>--%>
+             			<strong>Nombre Paciente:Maria perez</strong><br><br>
+             			<%--<input type="text" name="dni" value="Juan perez"><br><br>--%>
+             			<strong>Legajo Medico:24323</strong><br><br>
+             			<%--<input type="text" name="dni" value="24323"><br><br>--%>
+             			<strong>Nombre medico:Juan perez</strong><br><br>
+             			<%--<input type="text" name="dni" value="Juan perez"><br><br>--%>
+             		<%--</td>
+             		<td>--%>
+             			<strong>Fecha y hora:</strong>
+             			<input type="datetime-local" name="fechaNac" value=""><br><br>
              			<strong>Especialidad:</strong>
              			<select name="especialidad">
              				<option>Cardiologia</option>
+             				<option>rrvv</option>
+             				<option>ggd</option>
              			</select>
              		</td>
              		<td>
@@ -103,6 +99,128 @@
         	 </tbody>
        	</table>
        	<br>
+  	
+<h2>Lista de Paciente</h2>
+<strong>Bucar Paciente: </strong>
+<input type="text" name="dni" placeholder="Ingrese DNI">
+<button type="submit" class="btn-Buscar-fila" name="btnguardar">Filtrar</button><br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Direccion</th>
+                <th>Localidad</th>
+                <th>Provincia</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Correo electronico</th>
+                
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>15232565</td>
+                    <td>Tigre</td>
+                    <td>don torcuato</td>
+                    <td>bs as</td>
+                    <td>10/02/2002</td>
+                    <td>jeeisi@gmail</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
+                </tr>
+        </tbody>  
+    </table>
+    <br>
+ <div class="pagination">
+     <%-- Botón "Anterior" --%>
+     <a href="?page= 1" class=" 2 ? "disabled" : """>
+         &laquo; Anterior
+     </a>
+
+     <%-- Números de página --%>
+         <a href="?page=3" class="2 "active" : ">2
+         </a>
+
+
+     <%-- Botón "Siguiente" --%>
+     <a href="?page=<3" class=""disabled" : "" %>">
+         Siguiente &raquo;
+     </a>
+ </div>
+ 
+ <div class="container">
+    <h2>Lista de Médicos</h2>
+<strong>Especialidad:</strong>
+<select name="especialidad">
+	<option>Cardiologia</option>
+	<option>rrvv</option>
+	<option>ggd</option>
+</select>
+<button type="submit" class="btn-Buscar-fila" name="btnguardar">Filtrar</button><br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Sexo</th>
+                <th>Correo electronico</th>
+                <th>Dias de trabajo</th>
+                <th>Telefono</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
+                </tr>
+                <tr>
+               		<td>4565655</td>
+                    <td>jean</td>
+                    <td>esquen</td>
+                    <td>clinico</td>
+                    <td>masculino</td>
+                    <td>jeeisi@gmail</td>
+                    <td>5</td>
+                    <td>15232565</td>
+                    <td>Activo</td>
+                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
+                </tr>
+        </tbody>
+    </table>
+</div> 
+<br>
  <div class="pagination">
      <%-- Botón "Anterior" --%>
      <a href="?page= 1" class=" 2 ? "disabled" : """>
@@ -120,8 +238,7 @@
      </a>
  </div>
  <br>
-       	<button type="submit" class="btn-submit">Guardar Todas las Asignaciones</button>
-    </form>
+ </form>  
 </div>
 </body>
 </html>
