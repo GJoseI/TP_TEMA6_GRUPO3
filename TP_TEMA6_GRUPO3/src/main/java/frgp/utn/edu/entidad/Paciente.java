@@ -1,5 +1,6 @@
 package frgp.utn.edu.entidad;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,14 +19,14 @@ public class Paciente implements Serializable{
 	private String dirección;
 	private String localidad;
 	private String provincia;
-	private String fecha_nacimiento;
+	private LocalDate fecha_nacimiento;
 	private String correo_electronico;
 	private boolean estado;
 	
 	
 	public Paciente () {};
 	public Paciente(String nombre, String apellido, String DNI, String telefono, String dirección, String localidad,
-			String provincia, String fecha_nacimiento, String correo_electronico) {
+			String provincia, LocalDate fecha_nacimiento, String correo_electronico) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -95,11 +96,11 @@ public class Paciente implements Serializable{
 		this.provincia = provincia;
 	}
 
-	public String getFecha_nacimiento() {
+	public LocalDate getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
 
-	public void setFecha_nacimiento(String fecha_nacimiento) {
+	public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
 	}
 

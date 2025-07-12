@@ -25,10 +25,11 @@ public class Usuario implements Serializable{
 	
 	public Usuario() {}
 	
-	public Usuario(String nombre_Usuario, String contraseña) {
+	public Usuario(String nombre_Usuario, String contraseña,boolean  adminn) {
 		super();
 		Nombre_Usuario = nombre_Usuario;
 		Contraseña = contraseña;
+		admin=adminn;
 		this.estado=true;
 	}
 	

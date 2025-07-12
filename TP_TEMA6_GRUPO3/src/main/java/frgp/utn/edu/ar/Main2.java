@@ -19,7 +19,7 @@ public class Main2
     public static void main( String[] args ){
     	Confighiberneate ch = new Confighiberneate();
     	Session session = ch.abrirConexion();
-
+/*
     	//Pacientes
     	Paciente paciente = new Paciente("Juan", "Pérez", "12345678A", "11-2345-6789",
                 "Calle Falsa 123", "Springfield", "Buenos Aires",
