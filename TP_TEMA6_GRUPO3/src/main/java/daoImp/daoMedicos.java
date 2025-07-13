@@ -138,10 +138,10 @@ private static Conexion conexion;
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Medicos> usuarios = session.createQuery("from Medicos").list();
+        List<Medicos> medicos = session.createQuery("from Medicos").list();
         conexion.cerrarSession();
         
-        return usuarios;
+        return medicos;
 	}
 
 	//Agrego los gettes y setters para Spring Core

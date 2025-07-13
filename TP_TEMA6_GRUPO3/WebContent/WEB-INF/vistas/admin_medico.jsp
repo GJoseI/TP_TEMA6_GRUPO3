@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page 
+import="frgp.utn.edu.entidad.Medicos, java.util.List, NegocioImp.MedicosNegocio"
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -50,6 +53,9 @@
 </style>
 </head>
 <body>
+<%!
+MedicosNegocio medNeg = new MedicosNegocio();
+%>
 <div class="admin-medicos-container">
 	<div class="welcome-header">
 		<div class="info">
@@ -140,93 +146,49 @@
 	<option>clinica</option>
 </select>
 <button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Dni</th>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Especialidad</th>
-                <th>Sexo</th>
-                <th>Direccion</th>
-                <th>Localidad</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Correo electronico</th>
-                <th>Dias de trabajo</th>
-                <th>Telefono</th>
-                <th>Estado</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-               		<td>4565655</td>
-               		<td>jean5011</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-               		<td>jean5011</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-               		<td>jean5011</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-               		<td>jean5011</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-    </table>
-    </form>
+<table>
+	<thead>
+		<tr>
+			<th>Legajo</th>
+			<th>Usuario</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Especialidad</th>
+			<th>Sexo</th>
+			<th>Direccion</th>
+			<th>Localidad</th>
+			<th>Fecha de Nacimiento</th>
+			<th>Correo electronico</th>
+			<th>Dias de trabajo</th>
+			<th>Telefono</th>
+			<th>Estado</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%
+		List<Medicos> listaMed = medNeg.ReadAll();
+		for(Medicos medico : listaMed){
+		%>
+		<tr>
+			<td><%= medico.getLegajo() %></td>
+			<td><%= medico.getUsuario().toString() %></td>
+			<td><%= medico.getNombre() %></td>
+			<td><%= medico.getApellido() %></td>
+			<td><%= medico.getEspecialidad() %></td>
+			<td><%= medico.getSexo() %></td>
+			<td><%= medico.getDireccion() %></td>
+			<td><%= medico.getLocalidad() %></td>
+			<td><%= medico.getFechaNac() %></td>
+			<td><%= medico.getEmail() %></td>
+			<td><%= medico.getDiasLab() %></td>
+			<td><%= medico.getTelefono() %></td>
+			<td><%= medico.isEstado()%></td>
+			<td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
+		</tr>
+		<%} %>
+	</tbody>
+</table>
+</form>
     <br>
  <div class="pagination">
      <%-- Botón "Anterior" --%>
