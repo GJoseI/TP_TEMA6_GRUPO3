@@ -154,7 +154,7 @@ public class daoTurno implements ITurno{
 	        
 	        return usuarios;
 		}
-		/// trae todo
+		/// trae por fecha y paciente
 		public List<Turno> FiltarxFechaxPciente(String facha, String dni) {		
 			conexion = new Conexion();
 		    Session session = conexion.abrirConexion();
@@ -165,7 +165,7 @@ public class daoTurno implements ITurno{
 	        return usuarios;
 		}
 		
-		/// trae todo
+		/// trae por paciente
 		public List<Turno> FiltarPciente( String dni) {		
 			conexion = new Conexion();
 		    Session session = conexion.abrirConexion();

@@ -12,6 +12,8 @@ public interface IMedicos {
 	public boolean Update(Medicos medicos);
 	public boolean Delete(Medicos medicos);
 	public List<Medicos> ReadAll();
+	public List<Medicos> FiltarXEspecilidad(int  especialidad);
+	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad);
 	public Conexion getConexion();
 	public void setConexion(Conexion conexion);
 }
