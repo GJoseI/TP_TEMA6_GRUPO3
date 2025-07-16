@@ -3,7 +3,15 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 
-
+<%@page 
+import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,NegocioImp.MedicosNegocio, NegocioImp.UsuarioNegocio,NegocioImp.EspecialidadNegocio,frgp.utn.edu.entidad.Usuario,frgp.utn.edu.entidad.Especialidad"
+%>
+<%@page 
+import="frgp.utn.edu.entidad.Turno, NegocioImp.TurnoNegocio"
+%>
+<%@page 
+import="frgp.utn.edu.entidad.Paciente, NegocioImp.PacienteNegocio"
+%>
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +36,9 @@
         .btn-submit:hover { background-color: #218838; }
         .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
         .btn-guardar-fila:hover { background-color: #218838; }
+        
+        .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    	.btn-Buscar-fila:hover { background-color: #218838; }
         
         .pagination { text-align: center; }
     .pagination a {
@@ -56,229 +67,140 @@
     </style>
 </head>
 <body>
+<%
+TurnoNegocio negT = new TurnoNegocio();
+List<Turno> listTurnos = negT.ReadAll();
 
-    <div class="medico-container">
-        <div class="welcome-header">
-            <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
-            <div class="info">
-                <h2>Bienvenido/a, Dr./a. Perz juan</h2>
-                <p>Legajo: 0011</p>
-            </div>
+if (request.getParameter("btnguardar") != null) {
+    Turno t = new Turno();
+    t = negT.ReadOne(Integer.parseInt(request.getParameter("btnguardar")));
+    t.setObservación(request.getParameter("observacion"));
+    t.setEstadoTurno(request.getParameter("asistencia_34567890"));
+    negT.Update(t);
+}
+
+if (request.getParameter("btnFiltara") != null) {
+    if (request.getParameter("Fecha_Filtara") != null && !request.getParameter("Fecha_Filtara").isEmpty() 
+        && request.getParameter("DNI_Filtara") != null && !request.getParameter("DNI_Filtara").isEmpty()) {
+        listTurnos = negT.FiltarxFechaxPciente(request.getParameter("Fecha_Filtara"), request.getParameter("DNI_Filtara"));
+    } 
+    else if (request.getParameter("DNI_Filtara") != null && !request.getParameter("DNI_Filtara").isEmpty()) {
+        listTurnos = negT.FiltarPciente(request.getParameter("DNI_Filtara"));
+    }
+    else if (request.getParameter("Fecha_Filtara") != null && !request.getParameter("Fecha_Filtara").isEmpty()) {
+        listTurnos = negT.FiltarxFecha(request.getParameter("Fecha_Filtara"));
+    }
+}
+%>
+
+<div class="medico-container">
+    <div class="welcome-header">
+        <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
+        <div class="info">
+            <h2>Bienvenido/a, Perz Juan</h2>
+            <p>Legajo: 0011</p>
         </div>
+    </div>
 
-        <h3>Turnos del día</h3>
-        
-        <form action="procesar_turnos.jsp" method="post" class="turnos-form">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datos del Paciente</th>
-                        <th>Datos del Turno</th>
-                        <th>Acciones / Observaciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-   <%--        
-                   <tr>
-                        <td>
-                            <strong>DNI:</strong> <%= turno.getPacDni() %><br>
-                            <strong>Nombre y apellido:</strong> <%= turno.getPacNombre() %> <%= turno.getPacApellido() %><br>
-                            <strong>Teléfono:</strong> <%= turno.getPacTelefono() %><br>
-                            <strong>Dirección:</strong> <%= turno.getPacDireccion() %>, <%= turno.getPacLocalidad() %>, <%= turno.getPacProvincia() %><br>
-                            <strong>Nacimiento:</strong> <%= turno.getPacFechaNac() %><br>
-                            <strong>Email:</strong> <%= turno.getPacEmail() %>
-                        </td>
-                        <td>
-                            <strong>Fecha:</strong> <%= turno.getFecha() %><br>
-                            <strong>Hora:</strong> <%= turno.getHora() %>
-                        </td>
-                        <td>
-                            <label for="obs_<%= turno.getPacDni() %>"><strong>Observación:</strong></label>
-                            <textarea id="obs_<%= turno.getPacDni() %>" name="observacion_<%= turno.getPacDni() %>"></textarea>
-                            
-                            <div class="asistencia-group" style="margin-top: 10px;">
-                                <strong>Asistencia:</strong><br>
-                                <input type="radio" id="presente_<%= turno.getPacDni() %>" name="asistencia_<%= turno.getPacDni() %>" value="presente" required>
-                                <label for="presente_<%= turno.getPacDni() %>">Presente</label>
-                                
-                                <input type="radio" id="ausente_<%= turno.getPacDni() %>" name="asistencia_<%= turno.getPacDni() %>" value="ausente">
-                                <label for="ausente_<%= turno.getPacDni() %>">Ausente</label>
-                            </div>
-                            <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-                        </td>
-                    </tr>
-                    
-                    <tr>
+    <h2>Turnos</h2>
+
+    <form method="post" class="filtros-form">
+        <strong>DNI:</strong>
+        <input type="text" name="DNI_Filtara" value="<%= request.getParameter("DNI_Filtara") != null ? request.getParameter("DNI_Filtara") : "" %>"><br><br>
+        <strong>Fecha:</strong>
+        <input type="date" name="Fecha_Filtara" value="<%= request.getParameter("Fecha_Filtara") != null ? request.getParameter("Fecha_Filtara") : "" %>"><br><br>
+        <button type="submit" class="btn-Buscar-fila" name="btnFiltara">Filtrar</button>
+    </form>
+
+    <form action="" method="post" class="turnos-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>Datos del Paciente</th>
+                    <th>Datos del Turno</th>
+                    <th>Acciones / Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(Turno t : listTurnos) { %>
+                <tr>
+                    <td>
+                        <strong>DNI:</strong> <%= t.getPaciente().getDNI() %><br>
+                        <strong>Nombre y apellido:</strong> <%= t.getPaciente().getNombre() + " " + t.getPaciente().getApellido() %><br>
+                        <strong>Teléfono:</strong> <%= t.getPaciente().getTelefono() %><br>
+                        <strong>Dirección:</strong> <%= t.getPaciente().getDireccion() %><br>
+                        <strong>Nacimiento:</strong> <%= t.getPaciente().getFecha_nacimiento() %><br>
+                        <strong>Email:</strong> <%= t.getPaciente().getCorreo_electronico() %>
+                    </td>
+                    <td>
+                        <strong>ID:</strong> <%= t.getId() %><br>
+                        <strong>Fecha:</strong> <%= t.getFecha() %><br>
+                        <strong>Hora:</strong> <%= t.getHora() %>
+                    </td>
+                    <td>
+                        <label for="obs_<%= t.getId() %>"><strong>Observación:</strong></label>
+                        <textarea id="obs_<%= t.getId() %>" name="observacion"><%= t.getObservación() != null ? t.getObservación() : "" %></textarea>
                         
-                    --%>
-                     <tr>
-    <td>
-        <strong>DNI:</strong> 34567890<br>
-        <strong>Nombre y apellido:</strong> María López<br>
-        <strong>Teléfono:</strong> 1123456789<br>
-        <strong>Dirección:</strong> Av. Siempre Viva 742, Springfield, Buenos Aires<br>
-        <strong>Nacimiento:</strong> 1985-03-15<br>
-        <strong>Email:</strong> maria.lopez@example.com
-    </td>
-    <td>
-        <strong>Fecha:</strong> 2025-07-03<br>
-        <strong>Hora:</strong> 10:00
-    </td>
-    <td>
-        <label for="obs_34567890"><strong>Observación:</strong></label>
-        <textarea id="obs_34567890" name="observacion_34567890">Paciente con dolor de cabeza leve.</textarea>
+                        <div class="asistencia-group" style="margin-top: 10px;">
+                            <strong>Asistencia:</strong><br>
+                            <input type="radio" id="presente_<%= t.getId() %>" name="asistencia_<%= t.getId() %>" value="presente" <%= "presente".equals(t.getEstadoTurno()) ? "checked" : "" %>>
+                            <label for="presente_<%= t.getId() %>">Presente</label>
+                            
+                            <input type="radio" id="ausente_<%= t.getId() %>" name="asistencia_<%= t.getId() %>" value="ausente" <%= "ausente".equals(t.getEstadoTurno()) ? "checked" : "" %>>
+                            <label for="ausente_<%= t.getId() %>">Ausente</label>
+                        </div>
+                        <button type="submit" class="btn-guardar-fila" name="btnguardar" value="<%= t.getId() %>">Guardar</button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
         
-        <div class="asistencia-group" style="margin-top: 10px;">
-            <strong>Asistencia:</strong><br>
-            <input type="radio" id="presente_34567890" name="asistencia_34567890" value="presente" required checked>
-            <label for="presente_34567890">Presente</label>
+        <br>
+        <div class="pagination">
+            <%
+            int currentPage = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam != null && !pageParam.isEmpty()) {
+                currentPage = Integer.parseInt(pageParam);
+            }
             
-            <input type="radio" id="ausente_34567890" name="asistencia_34567890" value="ausente">
-            <label for="ausente_34567890">Ausente</label>
+            int totalPages = 5;
+            
+            if(currentPage > 1) {
+            %>
+                <a href="?page=<%= currentPage-1 %>" class="page-link">&laquo; Anterior</a>
+            <%
+            } else {
+            %>
+                <span class="page-link disabled">&laquo; Anterior</span>
+            <%
+            }
+            
+            for(int i = 1; i <= totalPages; i++) {
+                if(i == currentPage) {
+            %>
+                    <span class="page-link active"><%= i %></span>
+            <%
+                } else {
+            %>
+                    <a href="?page=<%= i %>" class="page-link"><%= i %></a>
+            <%
+                }
+            }
+            
+            if(currentPage < totalPages) {
+            %>
+                <a href="?page=<%= currentPage+1 %>" class="page-link">Siguiente &raquo;</a>
+            <%
+            } else {
+            %>
+                <span class="page-link disabled">Siguiente &raquo;</span>
+            <%
+            }
+            %>
         </div>
-        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-    </td>
-</tr>
-
-<tr>
-    <td>
-        <strong>DNI:</strong> 28765432<br>
-        <strong>Nombre y apellido:</strong> Juan Pérez<br>
-        <strong>Teléfono:</strong> 1198765432<br>
-        <strong>Dirección:</strong> Calle Falsa 123, Villa Crespo, CABA<br>
-        <strong>Nacimiento:</strong> 1978-11-22<br>
-        <strong>Email:</strong> juan.perez@example.com
-    </td>
-    <td>
-        <strong>Fecha:</strong> 2025-07-03<br>
-        <strong>Hora:</strong> 11:30
-    </td>
-    <td>
-        <label for="obs_28765432"><strong>Observación:</strong></label>
-        <textarea id="obs_28765432" name="observacion_28765432">Requiere revisión anual.</textarea>
-        
-        <div class="asistencia-group" style="margin-top: 10px;">
-            <strong>Asistencia:</strong><br>
-            <input type="radio" id="presente_28765432" name="asistencia_28765432" value="presente" required>
-            <label for="presente_28765432">Presente</label>
-            
-            <input type="radio" id="ausente_28765432" name="asistencia_28765432" value="ausente" checked>
-            <label for="ausente_28765432">Ausente</label>
-        </div>
-        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-    </td>
-</tr>
-
-<tr>
-    <td>
-        <strong>DNI:</strong> 40123456<br>
-        <strong>Nombre y apellido:</strong> Ana García<br>
-        <strong>Teléfono:</strong> 1155551234<br>
-        <strong>Dirección:</strong> Boulevard de los Sueños Rotos 45, La Plata, Buenos Aires<br>
-        <strong>Nacimiento:</strong> 1992-07-01<br>
-        <strong>Email:</strong> ana.garcia@example.com
-    </td>
-    <td>
-        <strong>Fecha:</strong> 2025-07-04<br>
-        <strong>Hora:</strong> 09:15
-    </td>
-    <td>
-        <label for="obs_40123456"><strong>Observación:</strong></label>
-        <textarea id="obs_40123456" name="observacion_40123456"></textarea>
-        
-        <div class="asistencia-group" style="margin-top: 10px;">
-            <strong>Asistencia:</strong><br>
-            <input type="radio" id="presente_40123456" name="asistencia_40123456" value="presente" required>
-            <label for="presente_40123456">Presente</label>
-            
-            <input type="radio" id="ausente_40123456" name="asistencia_40123456" value="ausente">
-            <label for="ausente_40123456">Ausente</label>
-        </div>
-        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-    </td>
-</tr>
-
-<tr>
-    <td>
-        <strong>DNI:</strong> 30987654<br>
-        <strong>Nombre y apellido:</strong> Carlos Ruiz<br>
-        <strong>Teléfono:</strong> 1167890123<br>
-        <strong>Dirección:</strong> Calle del Sol Naciente 10, Córdoba Capital, Córdoba<br>
-        <strong>Nacimiento:</strong> 1970-04-10<br>
-        <strong>Email:</strong> carlos.ruiz@example.com
-    </td>
-    <td>
-        <strong>Fecha:</strong> 2025-07-04<br>
-        <strong>Hora:</strong> 14:00
-    </td>
-    <td>
-        <label for="obs_30987654"><strong>Observación:</strong></label>
-        <textarea id="obs_30987654" name="observacion_30987654">Traer estudios previos.</textarea>
-        
-        <div class="asistencia-group" style="margin-top: 10px;">
-            <strong>Asistencia:</strong><br>
-            <input type="radio" id="presente_30987654" name="asistencia_30987654" value="presente" required checked>
-            <label for="presente_30987654">Presente</label>
-            
-            <input type="radio" id="ausente_30987654" name="asistencia_30987654" value="ausente">
-            <label for="ausente_30987654">Ausente</label>
-        </div>
-        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-    </td>
-</tr>
-
-<tr>
-    <td>
-        <strong>DNI:</strong> 38765432<br>
-        <strong>Nombre y apellido:</strong> Laura Fernández<br>
-        <strong>Teléfono:</strong> 1134567890<br>
-        <strong>Dirección:</strong> Ruta Vieja 500, Mendoza Capital, Mendoza<br>
-        <strong>Nacimiento:</strong> 1995-09-05<br>
-        <strong>Email:</strong> laura.fernandez@example.com
-    </td>
-    <td>
-        <strong>Fecha:</strong> 2025-07-05<br>
-        <strong>Hora:</strong> 08:45
-    </td>
-    <td>
-        <label for="obs_38765432"><strong>Observación:</strong></label>
-        <textarea id="obs_38765432" name="observacion_38765432"></textarea>
-        
-        <div class="asistencia-group" style="margin-top: 10px;">
-            <strong>Asistencia:</strong><br>
-            <input type="radio" id="presente_38765432" name="asistencia_38765432" value="presente" required>
-            <label for="presente_38765432">Presente</label>
-            
-            <input type="radio" id="ausente_38765432" name="asistencia_38765432" value="ausente">
-            <label for="ausente_38765432">Ausente</label>
-        </div>
-        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-    </td>
-</tr>
-                 
- </tbody>
- </table>
-      </br>
-      <div class="pagination">
-        <%-- Botón "Anterior" --%>
-        <a href="?page= 1" class=" 2 ? "disabled" : """>
-            &laquo; Anterior
-        </a>
-
-        <%-- Números de página --%>
-            <a href="?page=3" class="2 "active" : ">2
-            </a>
- 
-
-        <%-- Botón "Siguiente" --%>
-        <a href="?page=<3" class=""disabled" : "" %>">
-            Siguiente &raquo;
-        </a>
-    </div>
-            
-            <button type="submit" class="btn-submit">Guardar Todas las Observaciones y Asistencias</button>
-        </form>
-    </div>
-
+    </form>
+</div>
 </body>
 </html>

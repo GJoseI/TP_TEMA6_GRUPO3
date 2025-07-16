@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page 
+import="frgp.utn.edu.entidad.Paciente, java.util.List, java.time.LocalDate ,NegocioImp.PacienteNegocio"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,160 +53,299 @@
 </style>
 </head>
 <body>
-<div class="admin-pacientes-container">
-	<div class="welcome-header">
-		<div class="info">
-    		<h2>Bienvenido/a</h2>
-    		<p>ID Admin</p>
-    		<form method="get" >
-           		<button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Vover a menu </button>
-       		</form>
-    	</div>
-    </div>
-<div class="admin-pacientes-container">
-    <h3>Gestionar Pacientes</h3>
+<%
+PacienteNegocio negPaciente = new PacienteNegocio(); 
+List<Paciente> ListaPasiente = negPaciente.ReadAll();
+Paciente paciente = new Paciente();
+boolean cuadro = false;
+
+// Variables para control de edición
+String pacienteEnEdicion = request.getParameter("editarDni");
+boolean editando = pacienteEnEdicion != null && !pacienteEnEdicion.isEmpty();
+
+// Procesar formulario de guardar nuevo paciente
+if(request.getParameter("btnguardar") != null){
+    if(!negPaciente.Exist(request.getParameter("dni"))){
+        paciente.setDNI(request.getParameter("dni"));
+        paciente.setNombre(request.getParameter("nombre"));
+        paciente.setApellido(request.getParameter("apellido"));
+        paciente.setTelefono(request.getParameter("telefono"));
+        paciente.setDireccion(request.getParameter("direccion"));
+        paciente.setLocalidad(request.getParameter("localidad"));
+        paciente.setProvincia(request.getParameter("provincia"));
+        paciente.setFecha_nacimiento(request.getParameter("fecha_nacimiento"));
+        paciente.setCorreo_electronico(request.getParameter("email")); // Corregido: estaba usando dni en lugar de email
+        paciente.setEstado("activo".equals(request.getParameter("estado")));
         
-    <form action="" method="post" class="admin-pacientes-form">
-    	<table>
-        	<thead>
-            	<tr>
-                	<th>Datos</th>
-                    <th>Estado</th>
-                </tr>
-             </thead>
-             <tbody>
-             	<tr>
-             		<td>
-             			<strong>DNI:</strong>
-             			<input type="text" name="dni" value="44867986"><br><br>
-             			<strong>Nombre:</strong>
-             			<input type="text" name="nombre" value="Juan"><br><br>
-             			<strong>Apellido:</strong>
-             			<input type="text" name="apellido" value="Perez"><br><br>
-             			<strong>Telefono:</strong>
-             			<input type="text" name="telefono" value="112471242"><br><br>
-             			<strong>Direccion:</strong>
-             			<input type="text" name="direccion" value="Calle 1"><br><br>
-             			<strong>Localidad:</strong>
-             			<input type="text" name="localidad" value="La matanza"><br><br>
-             			<strong>Provincia:</strong>
-             			<input type="text" name="provincia" value="BsAs"><br><br>
-             			<strong>Fecha de Nacimiento:</strong>
-             			<input type="datetime-local" name="fechaNac" value=""><br><br>
-             			<strong>Correo electronico:</strong>
-             			<input type="text" name="email" value="juan.perez@gmail.com">
-             		</td>	
-             		<td>
-						<strong>Activo</strong>
-						<input type="radio" name="estado" value="activo"><br>
-						<strong>Inactivo</strong>
-						<input type="radio" name="estado" value="inactivo">
-             		</td>
-             		<td>
-             		<button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-             		</td>
-             	</tr>
-        	 </tbody>
-       	</table>
-  </form> 
-</div>   
-<br> 
-<div class="admin-pacientes-container">	
-<h3>Lista de Paciente</h3>
-<strong>DNI:</strong>
-<input type="text" name="dni" placeholder="Ingrese DNI">
-<button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
-<br>
- <form action="" method="post" class="admin-pacientes-form">
-    <table>
-        <thead>
-            <tr>
-                <th>Dni</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
-                <th>Localidad</th>
-                <th>Provincia</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Correo electronico</th>
-                <th>Estado</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Modificar</button></td>
-                </tr>
-    </table>
-  </form>
-    <br>
- <div class="pagination">
-     <%-- Botón "Anterior" --%>
-     <a href="?page= 1" class=" 2 ? "disabled" : """>
-         &laquo; Anterior
-     </a>
+        negPaciente.AgregarPaciente(paciente);
+        ListaPasiente = negPaciente.ReadAll(); // Actualizar lista
+    }
+}
 
-     <%-- Números de página --%>
-         <a href="?page=3" class="2 "active" : ">2
-         </a>
+// Procesar guardado de edición
+if(request.getParameter("btnGuardarEdicion") != null) {
+    Paciente p = new Paciente();
+    p.setDNI(request.getParameter("editarDni"));
+    p.setNombre(request.getParameter("editarNombre"));
+    p.setApellido(request.getParameter("editarApellido"));
+    p.setTelefono(request.getParameter("editarTelefono"));
+    p.setDireccion(request.getParameter("editarDireccion"));
+    p.setLocalidad(request.getParameter("editarLocalidad"));
+    p.setProvincia(request.getParameter("editarProvincia"));
+    
+    try {
+        p.setFecha_nacimiento(request.getParameter("editarFechaNac"));
+    } catch(Exception e) {
+        p.setFecha_nacimiento(LocalDate.now().toString());
+    }
+    
+    p.setCorreo_electronico(request.getParameter("editarEmail"));
+    p.setEstado("activo".equals(request.getParameter("editarEstado")));
+    
+    negPaciente.Update(p);
+    ListaPasiente = negPaciente.ReadAll(); // Recargar lista
+    editando = false;
+}
 
+// Procesar eliminación
+if(request.getParameter("btnBaja") != null) {
+	Paciente pp = negPaciente.ReadOne(request.getParameter("btnBaja"));
+    negPaciente.Delete(pp);
+    ListaPasiente = negPaciente.ReadAll(); // Recargar lista
+}
+%>
 
-     <%-- Botón "Siguiente" --%>
-     <a href="?page=<3" class=""disabled" : "" %>">
-         Siguiente &raquo;
-     </a>
- </div>
-</div> 
+<div class="admin-pacientes-container">
+    <div class="welcome-header">
+        <div class="info">
+            <h2>Bienvenido/a</h2>
+            <p>ID Admin</p>
+            <form method="get">
+                <button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Volver a menú</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="admin-pacientes-container">
+        <h3>Gestionar Pacientes</h3>
+        
+        <form action="" method="post" class="admin-pacientes-form">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Datos</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>DNI:</strong>
+                            <input type="text" name="dni" value="" required><br><br>
+                            <strong>Nombre:</strong>
+                            <input type="text" name="nombre" value="" required><br><br>
+                            <strong>Apellido:</strong>
+                            <input type="text" name="apellido" value="" required><br><br>
+                            <strong>Teléfono:</strong>
+                            <input type="text" name="telefono" value=""><br><br>
+                            <strong>Dirección:</strong>
+                            <input type="text" name="direccion" value=""><br><br>
+                            <strong>Localidad:</strong>
+                            <input type="text" name="localidad" value=""><br><br>
+                            <strong>Provincia:</strong>
+                            <input type="text" name="provincia" value=""><br><br>
+                            <strong>Fecha de Nacimiento:</strong>
+                            <input type="date" name="fecha_nacimiento" value="" required><br><br>
+                            <strong>Correo electrónico:</strong>
+                            <input type="email" name="email" value="" required>
+                        </td>    
+                        <td>
+                            <strong>Activo</strong>
+                            <input type="radio" name="estado" value="activo" checked><br>
+                            <strong>Inactivo</strong>
+                            <input type="radio" name="estado" value="inactivo">
+                        </td>
+                        <td>
+                            <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form> 
+    </div>   
+    
+    <br> 
+    
+    <div class="admin-pacientes-container">    
+        <h3>Lista de Pacientes</h3>
+        <form method="post">
+            <strong>DNI:</strong>
+            <input type="text" name="dniBuscar" placeholder="Ingrese DNI">
+            <button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
+        </form>
+        <br>
+        
+        <form action="" method="post" class="admin-pacientes-form">
+            <table>
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Localidad</th>
+                        <th>Provincia</th>
+                        <th>Fecha Nac.</th>
+                        <th>Email</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%
+                    if(request.getParameter("btnBuscar") != null) {
+                        String DniParam = request.getParameter("dniBuscar");
+                        if(DniParam != null && !DniParam.isEmpty()) {
+                            cuadro = true;
+                            Paciente p = negPaciente.ReadOne(DniParam);
+                            if(p != null) {
+                    %>
+                    <tr>
+                        <% if(editando && p.getDNI().equals(pacienteEnEdicion)) { %>
+                            <td><%=p.getDNI()%></td>
+                            <td><input type="text" name="editarNombre" value="<%=p.getNombre()%>" required></td>
+                            <td><input type="text" name="editarApellido" value="<%=p.getApellido()%>" required></td>
+                            <td><input type="text" name="editarTelefono" value="<%=p.getTelefono()%>"></td>
+                            <td><input type="text" name="editarDireccion" value="<%=p.getDireccion()%>"></td>
+                            <td><input type="text" name="editarLocalidad" value="<%=p.getLocalidad()%>"></td>
+                            <td><input type="text" name="editarProvincia" value="<%=p.getProvincia()%>"></td>
+                            <td><input type="date" name="editarFechaNac" value="<%=p.getFecha_nacimiento()%>" required></td>
+                            <td><input type="email" name="editarEmail" value="<%=p.getCorreo_electronico()%>" required></td>
+                            <td>
+                                <select name="editarEstado">
+                                    <option value="activo" <%=p.isEstado() ? "selected" : ""%>>Activo</option>
+                                    <option value="inactivo" <%=!p.isEstado() ? "selected" : ""%>>Inactivo</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="hidden" name="editarDni" value="<%=p.getDNI()%>">
+                                <button type="submit" class="btn-guardar-fila" name="btnGuardarEdicion">Guardar</button>
+                                <button type="submit" class="btn-cancelar">Cancelar</button>
+                            </td>
+                        <% } else { %>
+                            <td><%=p.getDNI()%></td>
+                            <td><%=p.getNombre()%></td>
+                            <td><%=p.getApellido()%></td>
+                            <td><%=p.getTelefono()%></td>
+                            <td><%=p.getDireccion()%></td>
+                            <td><%=p.getLocalidad()%></td>
+                            <td><%=p.getProvincia()%></td>
+                            <td><%=p.getFecha_nacimiento()%></td>
+                            <td><%=p.getCorreo_electronico()%></td>
+                            <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
+                            <td>
+                                <button type="submit" class="btn-guardar-fila" name="btnBaja" value="<%=p.getDNI()%>">Eliminar</button>
+                                <button type="submit" class="btn-guardar-fila" name="editarDni" value="<%=p.getDNI()%>">Modificar</button>
+                            </td>
+                        <% } %>
+                    </tr>
+                    <%
+                            }
+                        }
+                    }
+                    
+                    if(!cuadro) {
+                        for (Paciente p : ListaPasiente) { 
+                    %>
+                    <tr>
+                        <% if(editando && p.getDNI().equals(pacienteEnEdicion)) { %>
+                            <td><%=p.getDNI()%></td>
+                            <td><input type="text" name="editarNombre" value="<%=p.getNombre()%>" required></td>
+                            <td><input type="text" name="editarApellido" value="<%=p.getApellido()%>" required></td>
+                            <td><input type="text" name="editarTelefono" value="<%=p.getTelefono()%>"></td>
+                            <td><input type="text" name="editarDireccion" value="<%=p.getDireccion()%>"></td>
+                            <td><input type="text" name="editarLocalidad" value="<%=p.getLocalidad()%>"></td>
+                            <td><input type="text" name="editarProvincia" value="<%=p.getProvincia()%>"></td>
+                            <td><input type="date" name="editarFechaNac" value="<%=p.getFecha_nacimiento()%>" required></td>
+                            <td><input type="email" name="editarEmail" value="<%=p.getCorreo_electronico()%>" required></td>
+                            <td>
+                                <select name="editarEstado">
+                                    <option value="activo" <%=p.isEstado() ? "selected" : ""%>>Activo</option>
+                                    <option value="inactivo" <%=!p.isEstado() ? "selected" : ""%>>Inactivo</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="hidden" name="editarDni" value="<%=p.getDNI()%>">
+                                <button type="submit" class="btn-guardar-fila" name="btnGuardarEdicion">Guardar</button>
+                                <button type="submit" class="btn-cancelar">Cancelar</button>
+                            </td>
+                        <% } else { %>
+                            <td><%=p.getDNI()%></td>
+                            <td><%=p.getNombre()%></td>
+                            <td><%=p.getApellido()%></td>
+                            <td><%=p.getTelefono()%></td>
+                            <td><%=p.getDireccion()%></td>
+                            <td><%=p.getLocalidad()%></td>
+                            <td><%=p.getProvincia()%></td>
+                            <td><%=p.getFecha_nacimiento()%></td>
+                            <td><%=p.getCorreo_electronico()%></td>
+                            <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
+                            <td>
+                                <button type="submit" class="btn-guardar-fila" name="btnBaja" value="<%=p.getDNI()%>">Eliminar</button>
+                                <button type="submit" class="btn-guardar-fila" name="editarDni" value="<%=p.getDNI()%>">Modificar</button>
+                            </td>
+                        <% } %>
+                    </tr>
+                    <% 
+                        } 
+                    } 
+                    %>
+                </tbody>
+            </table>
+        </form>
+        
+        <br>
+        
+        <div class="pagination">
+            <%
+            int currentPage = 1;
+            int totalPages = 5;
+            
+            if(currentPage > 1) {
+            %>
+                <a href="?page=<%= currentPage-1 %>" class="page-link">&laquo; Anterior</a>
+            <%
+            } else {
+            %>
+                <span class="page-link disabled">&laquo; Anterior</span>
+            <%
+            }
+            
+            for(int i = 1; i <= totalPages; i++) {
+                if(i == currentPage) {
+            %>
+                    <span class="page-link active"><%= i %></span>
+            <%
+                } else {
+            %>
+                    <a href="?page=<%= i %>" class="page-link"><%= i %></a>
+            <%
+                }
+            }
+            
+            if(currentPage < totalPages) {
+            %>
+                <a href="?page=<%= currentPage+1 %>" class="page-link">Siguiente &raquo;</a>
+            <%
+            } else {
+            %>
+                <span class="page-link disabled">Siguiente &raquo;</span>
+            <%
+            }
+            %>
+        </div>
+    </div> 
 </div> 
 </body>
 </html>

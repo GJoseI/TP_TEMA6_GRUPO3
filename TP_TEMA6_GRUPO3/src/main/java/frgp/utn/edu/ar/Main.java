@@ -3,10 +3,6 @@ package frgp.utn.edu.ar;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-
 import org.hibernate.Session;
 
 import daoImp.Confighiberneate;
@@ -74,47 +70,47 @@ public class Main
         System.out.println("Presente: "+porcentajePresente+"%. Ausente: "+porcentajeAusente+"%");
 */
     	//Pacientes
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         
         Paciente paciente = new Paciente("Juan", "Pérez", "12345678A", "11-2345-6789",
                 "Calle Falsa 123", "Springfield", "Buenos Aires",
-                LocalDate.parse("12/05/1980", formatter), "juan.perez@email.com");
+                "1980-05-12", "juan.perez@email.com");
         
         Paciente paciente2 = new Paciente("María", "Gómez", "87654321B", "351-987-6543",
                 "Av. Siempreviva 456", "Córdoba Capital", "Córdoba",
-                LocalDate.parse("23/09/1992", formatter), "maria.gomez@email.com");
+                "1992-09-23", "maria.gomez@email.com");
         
         Paciente paciente3 = new Paciente("Carlos", "López", "45678912C", "221-555-1234",
                 "Paseo Colón 789", "La Plata", "Buenos Aires",
-                LocalDate.parse("05/11/1975", formatter), "carlos.lopez@email.com");
+                "1975-11-05", "carlos.lopez@email.com");
         
         Paciente paciente4 = new Paciente("Ana", "Martínez", "78912345D", "261-777-8888",
                 "San Martín 101", "Mendoza", "Mendoza",
-                LocalDate.parse("30/07/1988", formatter), "ana.martinez@email.com");
+                "1988-07-30", "ana.martinez@email.com");
         
         Paciente paciente5 = new Paciente("Luisa", "Fernández", "32165498E", "341-222-3333",
                 "Belgrano 202", "Rosario", "Santa Fe",
-                LocalDate.parse("14/02/1995", formatter), "luisa.fernandez@email.com");
+                "1995-02-14", "luisa.fernandez@email.com");
         
         Paciente paciente6 = new Paciente("Pedro", "Rodríguez", "11223344F", "381-444-5555",
                 "Av. Independencia 303", "San Miguel de Tucumán", "Tucumán",
-                LocalDate.parse("08/12/1983", formatter), "pedro.rodriguez@email.com");
+                "1983-12-08", "pedro.rodriguez@email.com");
         
         Paciente paciente7 = new Paciente("Sofía", "Díaz", "55667788G", "299-666-7777",
                 "Mitre 404", "Neuquén", "Neuquén",
-                LocalDate.parse("19/04/1990", formatter), "sofia.diaz@email.com");
+                "1990-04-19", "sofia.diaz@email.com");
         
         Paciente paciente8 = new Paciente("Luis", "Torres", "99887766H", "388-999-0000",
                 "Av. España 505", "San Salvador de Jujuy", "Jujuy",
-                LocalDate.parse("25/10/1978", formatter), "luis.torres@email.com");
+                "1978-10-25", "luis.torres@email.com");
         
         Paciente paciente9 = new Paciente("Elena", "Ruiz", "44332211I", "280-111-2222",
                 "Rivadavia 606", "Bahía Blanca", "Buenos Aires",
-                LocalDate.parse("03/01/1987", formatter), "elena.ruiz@email.com");
+                "1987-01-03", "elena.ruiz@email.com");
         
         Paciente paciente10 = new Paciente("Miguel", "Sánchez", "77889900J", "342-333-4444",
                 "Urquiza 707", "Santa Fe", "Santa Fe",
-                LocalDate.parse("17/08/1972", formatter), "miguel.sanchez@email.com");;
+                "1972-08-17",  "miguel.sanchez@email.com");;
     	//Agregar pacientes
     	daohibernate.AgregarPaciente(paciente);
     	daohibernate.AgregarPaciente(paciente2);
@@ -158,45 +154,45 @@ public class Main
     	Usuario usuario02 = new Usuario("Jp5011", "Doki50111",true);
     	
     	Usuario usuario = new Usuario("Carlos.G", "Gómez123",false);
-    	Medicos med = new Medicos(1001, "Carlos", "Gómez", "Masculino",LocalDate.of(1975, Month.APRIL, 12),"Lunes a Viernes", "07:00 a 15:00", "Calle Principal 456",
+    	Medicos med = new Medicos(1001, "Carlos", "Gómez", "Masculino","1975-05-12","Lunes a Viernes", "07:00 a 15:00", "Calle Principal 456",
     			"Buenos Aires","c.gomez@hospital.com","11-2345-6789",usuario,especialidad );
     	
     	Usuario usuario2 = new Usuario("Rodríguez.m","AnaRodríguez",false);
-    	Medicos med2 =new Medicos(1002,"Ana","Rodríguez","Femenino", LocalDate.of(1982, Month.AUGUST, 23), "Martes, Jueves, Sábado",
+    	Medicos med2 =new Medicos(1002,"Ana","Rodríguez","Femenino","1982-08-23", "Martes, Jueves, Sábado",
     			"13:00 a 20:00",
     			"Av. Libertador 789","Córdoba","a.rodriguez@hospital.com", "351-9876543",usuario2,especialidad9);
     	
     	Usuario usuario3 = new Usuario("ana.l", "analopez",false);
-    	Medicos med3 = new Medicos( 1003,"Luis","Fernández","Masculino", LocalDate.of(1968, Month.NOVEMBER, 5), "Lunes, Miércoles, Viernes"
+    	Medicos med3 = new Medicos( 1003,"Luis","Fernández","Masculino","1968-11-05", "Lunes, Miércoles, Viernes"
     			     ,"08:30 a 16:30",
                 "Calle Secundaria 321", "Rosario","l.fernandez@hospital.com", "341-4567890",usuario3,especialidad3);
     	
     	Usuario usuario4 = new Usuario("María.r","Lópezz",false);
-    	Medicos med4 = new Medicos (1004, "María","López","Femenino",LocalDate.of(1985, Month.JANUARY, 30),"Lunes a Viernes", "09:00 a 17:00", "Av. Siempreviva 123", 
+    	Medicos med4 = new Medicos (1004, "María","López","Femenino","1985-06-30","Lunes a Viernes", "09:00 a 17:00", "Av. Siempreviva 123", 
     			"Mendoza","m.lopez@hospital.com","261-3456789", usuario4 , especialidad4);
     	
     	Usuario usuario5 = new Usuario("sofia.f", "sofiafernandez",false);
-    	Medicos med5 = new Medicos(1005,"Juan", "Pérez","Masculino",LocalDate.of(1980, Month.MAY, 15),"Lunes a Sábado","08:00 a 18:00","Calle Falsa 123",
+    	Medicos med5 = new Medicos(1005,"Juan", "Pérez","Masculino","1980-05-15","Lunes a Sábado","08:00 a 18:00","Calle Falsa 123",
                 "Santa Fe","j.perez@clinica.com","342-5556677", usuario5, especialidad5);
     	
     	Usuario usuario6 = new Usuario("diego.p", "diegoperez",false);
-    	Medicos med6 = new Medicos(1006, "Diego", "Pérez", "Masculino", LocalDate.of(1978, Month.SEPTEMBER, 8),"Lunes, Miércoles, Viernes",
+    	Medicos med6 = new Medicos(1006, "Diego", "Pérez", "Masculino", "1978-09-08","Lunes, Miércoles, Viernes",
                 "08:00 a 14:00","Av. Corrientes 2345", "Mar del Plata", "diego.perez@email.com", "223-890-1234", usuario6, especialidad6);
     	
     	Usuario usuario7 = new Usuario("valeria.s", "valeriasanchez",false);
-    	Medicos med7 = new Medicos(1007, "Valeria", "Sánchez", "Femenino", LocalDate.of(1965, Month.DECEMBER, 3),"Lunes, Miércoles, Viernes",
+    	Medicos med7 = new Medicos(1007, "Valeria", "Sánchez", "Femenino", "1965-12-3","Lunes, Miércoles, Viernes",
                 "08:00 a 14:00","Calle Sarmiento 678", "Salta", "valeria.sanchez@email.com", "387-901-2345", usuario7, especialidad7);
     	
     	Usuario usuario8 = new Usuario("ricardo.g", "rocardogomez",false);
-    	Medicos med8 = new Medicos(1008, "Ricardo", "Gómez", "Masculino",LocalDate.of(1987, Month.MARCH, 19),"Lunes a Sábado",
+    	Medicos med8 = new Medicos(1008, "Ricardo", "Gómez", "Masculino","1987-03-19","Lunes a Sábado",
                 "09:00 a 13:00", "Av. Independencia 3456", "Tucumán", "ricardo.gomez@email.com", "381-012-3456", usuario8, especialidad8);
     	
     	Usuario usuario9 = new Usuario("patricia.d", "patriciadiaz",false);
-    	Medicos med9 = new Medicos(1009, "Patricia", "Díaz", "Femenino",LocalDate.of(1972, Month.JULY, 25),"Lunes a Viernes", "07:30 a 12:30 y 16:00 a 19:00","Calle Mitre 901", 
+    	Medicos med9 = new Medicos(1009, "Patricia", "Díaz", "Femenino","1972-07-25","Lunes a Viernes", "07:30 a 12:30 y 16:00 a 19:00","Calle Mitre 901", 
                 "Santa Fe", "patricia.diaz@email.com", "342-123-4567", usuario9, especialidad9);
     	
     	Usuario usuario10 = new Usuario("alejandro.t", "alejandrotorres",false);
-    	Medicos med10 = new Medicos(1010, "Alejandro", "Torres", "Masculino",  LocalDate.of(1983, Month.OCTOBER, 11), "Lunes a Viernes","10:00 a 18:00",
+    	Medicos med10 = new Medicos(1010, "Alejandro", "Torres", "Masculino",  "1963-10-11", "Lunes a Viernes","10:00 a 18:00",
                 "Av. España 123", "San Juan", "alejandro.torres@email.com", "264-234-5678", usuario10, especialidad10);
     	
     	//Agregar usuarios
@@ -228,16 +224,16 @@ public class Main
     	daohibernate.AgregarMedico(med10);
     	
     	//Turnos
-    	Turno turno = new Turno(med, paciente, LocalDate.parse("15/06/2024", formatter), "09:00", "Consulta cardiológica por dolor torácico", "presente");
-        Turno turno2 = new Turno(med2, paciente2, LocalDate.parse("16/06/2024", formatter), "10:30", "Examen dermatológico por erupción cutánea", "pendiente");
-        Turno turno3 = new Turno(med3, paciente3, LocalDate.parse("17/06/2024", formatter), "11:15", "Control pediátrico de niño sano", "ausente");
-        Turno turno4 = new Turno(med4, paciente4, LocalDate.parse("18/06/2024", formatter), "14:00", "Chequeo ginecológico anual", "presente");
-        Turno turno5 = new Turno(med5, paciente5, LocalDate.parse("19/06/2024", formatter), "16:45", "Revisión ortopédica por dolor lumbar", "pendiente");
-        Turno turno6 = new Turno(med6, paciente6, LocalDate.parse("20/06/2024", formatter), "08:30", "Evaluación neurológica por migrañas", "ausente");
-        Turno turno7 = new Turno(med7, paciente7, LocalDate.parse("21/06/2024", formatter), "13:20", "Examen oftalmológico de rutina", "presente");
-        Turno turno8 = new Turno(med8, paciente8, LocalDate.parse("21/06/2024", formatter), "13:20", "Examen oftalmológico de rutina", "presente");
-        Turno turno9 = new Turno(med9, paciente9, LocalDate.parse("23/06/2024", formatter), "15:10", "Consulta psiquiátrica para evaluación", "ausente");
-        Turno turno10 = new Turno(med10, paciente10, LocalDate.parse("24/06/2024", formatter), "09:45", "Rehabilitación traumatológica post-fractura", "presente");
+    	Turno turno = new Turno(med, paciente, "2024-06-15", "09:00", "Consulta cardiológica por dolor torácico", "presente");
+        Turno turno2 = new Turno(med2, paciente2, "2024-06-16", "10:30", "Examen dermatológico por erupción cutánea", "pendiente");
+        Turno turno3 = new Turno(med3, paciente3, "17-06-2024", "11:15", "Control pediátrico de niño sano", "ausente");
+        Turno turno4 = new Turno(med4, paciente4, "2024-06-18", "14:00", "Chequeo ginecológico anual", "presente");
+        Turno turno5 = new Turno(med5, paciente5, "2024-06-19", "16:45", "Revisión ortopédica por dolor lumbar", "pendiente");
+        Turno turno6 = new Turno(med6, paciente6, "2024-06-17", "08:30", "Evaluación neurológica por migrañas", "ausente");
+        Turno turno7 = new Turno(med7, paciente7, "2024-06-15" , "13:20", "Examen oftalmológico de rutina", "presente");
+        Turno turno8 = new Turno(med8, paciente8, "2024-06-14", "13:20", "Examen oftalmológico de rutina", "presente");
+        Turno turno9 = new Turno(med9, paciente9, "2024-06-14", "15:10", "Consulta psiquiátrica para evaluación", "ausente");
+        Turno turno10 = new Turno(med10, paciente10, "2024-06-16", "09:45", "Rehabilitación traumatológica post-fractura", "presente");
         
     	//Agregar turnos
     	daohibernate.AgregarTurno(turno);
@@ -253,7 +249,7 @@ public class Main
     	
     	
     	//Modificar turno
-    	Turno turnoMod = new Turno(med5, paciente5, LocalDate("19/06/2024"), "16:45", "Revisión ortopédica por dolor lumbar", "ausente");
+    	Turno turnoMod = new Turno(med5, paciente5, "2024-06-19", "16:45", "Revisión ortopédica por dolor lumbar", "ausente");
     	turnoMod.setId(5);
     	daohibernate.Update(turnoMod);
     	//Borrar turno
@@ -368,9 +364,4 @@ public class Main
        med.setLocalidad("Olivos");
        session.save(med);*/
     }
-
-	private static LocalDate LocalDate(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

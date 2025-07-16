@@ -36,6 +36,21 @@ public class TurnoNegocio {
 		return t.ReadAll();
 	}
 
+	public List<Turno> FiltarxFecha(String facha){
+		daoTurno t = new daoTurno();
+		return t.FiltarxFecha(facha);
+	}
+	
+	public List<Turno> FiltarxFechaxPciente(String facha, String dni){
+		daoTurno t = new daoTurno();
+		return t.FiltarxFechaxPciente( facha,  dni);
+	}
+	
+	public List<Turno> FiltarPciente(String dni){
+		daoTurno t = new daoTurno();
+		return t.FiltarPciente( dni);
+	}
+	
 	public Conexion getConexion() {
 		daoTurno t = new daoTurno();
 		return t.getConexion();

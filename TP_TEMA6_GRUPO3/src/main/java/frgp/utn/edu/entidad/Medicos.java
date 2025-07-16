@@ -2,6 +2,7 @@ package frgp.utn.edu.entidad;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,12 +17,14 @@ import javax.persistence.Table;
 @Table(name="Medico")
 public class Medicos implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	
 	@Id
 	private int legajo;
 	private String nombre;
 	private String apellido;
 	private String sexo;
-	private LocalDate fechaNac;
+	private String fechaNac;
 	private String diasLab;
 	private String horarioLab;
 	private String direccion;
@@ -30,13 +33,13 @@ public class Medicos implements Serializable {
 	private String telefono;
 	private boolean estado;
 	@ManyToOne
-	@JoinColumn(name="Id")
+	@JoinColumn(name="Especialidad_id")
 	private Especialidad especialidad;
 	@OneToOne
 	@JoinColumn(name="Usuario_c")
 	private Usuario usuario;
 	
-	public Medicos(int legajo, String nombre, String apellido, String sexo, LocalDate fechaNac, String diasLab, String horarioLab, String direccion,
+	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String diasLab, String horarioLab, String direccion,
 			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad) {
 		super();
 		this.legajo = legajo;
@@ -53,6 +56,26 @@ public class Medicos implements Serializable {
 		this.usuario = usuario;
 		this.especialidad = especialidad;
 		this.estado=true;
+	}
+	
+	private static final AtomicInteger contador = new AtomicInteger(0);
+	public Medicos(String nombre, String apellido, String sexo, String fechaNac, String diasLab, String horarioLab, String direccion,
+			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad, boolean estado) {
+		super();
+		this.legajo = contador.incrementAndGet();;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.sexo = sexo;
+		this.fechaNac = fechaNac;
+		this.diasLab = diasLab;
+		this.horarioLab = horarioLab;
+		this.direccion = direccion;
+		this.localidad = localidad;
+		this.email = email;
+		this.telefono = telefono;
+		this.usuario = usuario;
+		this.especialidad = especialidad;
+		this.estado=estado;
 	}
 	
 	public Usuario getUsuario() {
@@ -97,11 +120,11 @@ public class Medicos implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public LocalDate getFechaNac() {
+	public String getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(LocalDate fechaNac) {
+	public void setFechaNac(String fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 

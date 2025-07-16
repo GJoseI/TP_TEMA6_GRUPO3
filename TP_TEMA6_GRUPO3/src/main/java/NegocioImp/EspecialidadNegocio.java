@@ -24,6 +24,12 @@ public class EspecialidadNegocio implements IEspecialidadNegocio{
 		daoEspecialidad Especialidad = new daoEspecialidad();
 		return Especialidad.ReadOne(id);
 	}
+	
+	public Especialidad nombre(String n) {
+		daoEspecialidad Especialidad = new daoEspecialidad();
+		return Especialidad.nombre(n);
+	}
+	
 	public boolean Update(Especialidad especialidad) {
 		daoEspecialidad Especialidad = new daoEspecialidad();
 		return Especialidad.Update(especialidad);

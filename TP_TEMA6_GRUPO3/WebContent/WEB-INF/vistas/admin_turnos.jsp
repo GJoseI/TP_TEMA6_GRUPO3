@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page 
+import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,NegocioImp.MedicosNegocio, NegocioImp.UsuarioNegocio,NegocioImp.EspecialidadNegocio,frgp.utn.edu.entidad.Usuario,frgp.utn.edu.entidad.Especialidad"
+%>
+<%@page 
+import="frgp.utn.edu.entidad.Turno, NegocioImp.TurnoNegocio"
+%>
+<%@page 
+import="frgp.utn.edu.entidad.Paciente, NegocioImp.PacienteNegocio"
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,198 +56,140 @@
 	        pointer-events: none;
 	        border-color: #ccc;
 	    }
+	    
+	    .alert {
+		    padding: 10px;
+		    margin: 10px 0;
+		    border-radius: 4px;
+		}
+
+		.alert-error {
+		    background-color: #ffdddd;
+		    border-left: 5px solid #f44336;
+		    color: #d8000c;
+		}
+		
+		.alert-success {
+		    background-color: #ddffdd;
+		    border-left: 5px solid #4CAF50;
+		    color: #4F8A10;
+		}
 </style>
 </head>
 <body>
-<div class="admin-container">
-	<div class="welcome-header">
-		<div class="info">
-    		<h2>Bienvenido/a</h2>
-    		<p>ID Admin</p>
-    		<form method="get" >
-           		<button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Vover a menu </button>
-       		</form>
-    	</div>
- 	</div>
-    <h2>Asignación de Turnos</h2>
+<%
+TurnoNegocio negTurno = new TurnoNegocio();
+MedicosNegocio negMedico = new MedicosNegocio();
+EspecialidadNegocio epn = new EspecialidadNegocio();
+PacienteNegocio negP = new PacienteNegocio();
+
+List<Especialidad> especialidades = epn.ReadAll();
+String mensajeError = null;
+String mensajeExito = null;
+
+if(request.getParameter("btnguardar")!=null) {
+    try {
+        String dni = request.getParameter("dni");
+        int legajo = Integer.parseInt(request.getParameter("Legajo"));
+        int idEspecialidad = Integer.parseInt(request.getParameter("especialidad"));
+        LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
+        String hora = request.getParameter("hora");
         
-    <form action="procesar_turnos.jsp" method="post" class="admin-turnos-form">
-    	<table>
-        	<thead>
-            	<tr>
-                	<th>Asignacion</th>
+        // Validaciones
+        if(negMedico.Exist(legajo)==false) {
+            mensajeError = "No existe médico con ese número de legajo";
+        } 
+        else if(negMedico.FiltarXEspecilidadYLegajo(legajo, idEspecialidad)==null) {
+            mensajeError = "El médico no ejerce esa especialidad";
+        }
+        else if(negP.Exist(dni)==false) {
+            mensajeError = "No existe paciente con ese número de DNI";
+        }
+        else {
+            Turno t = new Turno();
+            t.setPaciente(negP.ReadOne(dni));
+            t.setMedico(negMedico.ReadOne(legajo));
+            t.setEstado(true);
+            t.setFecha(request.getParameter("fecha"));
+            t.setHora(hora);
+            
+            if(negTurno.AgregarTurno(t)) {
+                mensajeExito = "Turno asignado correctamente";
+            } else {
+                mensajeError = "Error al guardar el turno";
+            }
+        }
+    }catch(NumberFormatException e) {
+        mensajeError = "Formato numérico inválido";
+    }/*catch(DateTimeParseException e) {
+        mensajeError = "Formato de fecha/hora inválido";
+    }*/
+    catch(Exception e) {
+        mensajeError = "Error inesperado: " + e.getMessage();
+    } 
+}
+%>
+
+<div class="admin-container">
+    <div class="welcome-header">
+        <div class="info">
+            <h2>Bienvenido/a</h2>
+            <p>ID Admin</p>
+            <form method="get">
+                <button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Volver a menú</button>
+            </form>
+        </div>
+    </div>
+    
+    <h2>Asignación de Turnos</h2>
+    
+    <% if(mensajeError != null) { %>
+        <div class="alert alert-error">
+            <%= mensajeError %>
+        </div>
+    <% } %>
+    
+    <% if(mensajeExito != null) { %>
+        <div class="alert alert-success">
+            <%= mensajeExito %>
+        </div>
+    <% } %>
+    
+    <form method="post" class="admin-turnos-form">
+        <table>
+            <thead>
+                <tr>
+                    <th>Asignacion</th>
                     <th>Datos del Turno</th>
                 </tr>
-             </thead>
-             <tbody>
-             	<tr>
-             		<td>
-             			<strong>DNI Paciente:44867986</strong><br><br>
-             			<%--<input type="text" name="dni" value="44867986"><br><br>--%>
-             			<strong>Nombre Paciente:Maria perez</strong><br><br>
-             			<%--<input type="text" name="dni" value="Juan perez"><br><br>--%>
-             			<strong>Legajo Medico:24323</strong><br><br>
-             			<%--<input type="text" name="dni" value="24323"><br><br>--%>
-             			<strong>Nombre medico:Juan perez</strong><br><br>
-             			<%--<input type="text" name="dni" value="Juan perez"><br><br>--%>
-             		<%--</td>
-             		<td>--%>
-             			<strong>Fecha y hora:</strong>
-             			<input type="datetime-local" name="fechaNac" value=""><br><br>
-             			<strong>Especialidad:</strong>
-             			<select name="especialidad">
-             				<option>Cardiologia</option>
-             				<option>rrvv</option>
-             				<option>ggd</option>
-             			</select>
-             		</td>
-             		<td>
-             		<button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
-             		</td>
-             	</tr>
-        	 </tbody>
-       	</table>
-       	<br>
-  	
-<h2>Lista de Paciente</h2>
-<strong>Bucar Paciente: </strong>
-<input type="text" name="dni" placeholder="Ingrese DNI">
-<button type="submit" class="btn-Buscar-fila" name="btnguardar">Filtrar</button><br><br>
-    <table>
-        <thead>
-            <tr>
-                <th>Dni</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
-                <th>Localidad</th>
-                <th>Provincia</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Correo electronico</th>
-                
-                <th>Estado</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
                 <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
+                    <td>
+                        <strong>DNI Paciente:</strong><br><br>
+                        <input type="text" name="dni" value="<%= request.getParameter("dni") != null ? request.getParameter("dni") : "" %>" required><br><br>
+                        <strong>Legajo Medico:</strong><br><br>
+                        <input type="number" name="Legajo" value="<%= request.getParameter("Legajo") != null ? request.getParameter("Legajo") : "" %>" required><br><br>
+                        <strong>Fecha:</strong>
+                        <input type="date" name="fecha" value="<%= request.getParameter("fecha") != null ? request.getParameter("fecha") : "" %>" required><br><br>
+                        <strong>Hora:</strong>
+                        <input type="time" name="hora" value="<%= request.getParameter("hora") != null ? request.getParameter("hora") : "" %>" required><br><br>
+                        <strong>Especialidad:</strong>
+                        <select name="especialidad" required>
+                            <% for(Especialidad es : especialidades) { %>
+                                <option value="<%= es.getId() %>" <%= request.getParameter("especialidad") != null && request.getParameter("especialidad").equals(String.valueOf(es.getId())) ? "selected" : "" %>>
+                                    <%= es.getNombre() %>
+                                </option>
+                            <% } %>
+                        </select><br><br>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
+                    </td>
                 </tr>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>15232565</td>
-                    <td>Tigre</td>
-                    <td>don torcuato</td>
-                    <td>bs as</td>
-                    <td>10/02/2002</td>
-                    <td>jeeisi@gmail</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
-                </tr>
-        </tbody>  
-    </table>
-    <br>
- <div class="pagination">
-     <%-- Botón "Anterior" --%>
-     <a href="?page= 1" class=" 2 ? "disabled" : """>
-         &laquo; Anterior
-     </a>
-
-     <%-- Números de página --%>
-         <a href="?page=3" class="2 "active" : ">2
-         </a>
-
-
-     <%-- Botón "Siguiente" --%>
-     <a href="?page=<3" class=""disabled" : "" %>">
-         Siguiente &raquo;
-     </a>
- </div>
- 
- <div class="container">
-    <h2>Lista de Médicos</h2>
-<strong>Especialidad:</strong>
-<select name="especialidad">
-	<option>Cardiologia</option>
-	<option>rrvv</option>
-	<option>ggd</option>
-</select>
-<button type="submit" class="btn-Buscar-fila" name="btnguardar">Filtrar</button><br><br>
-    <table>
-        <thead>
-            <tr>
-                <th>Dni</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Especialidad</th>
-                <th>Sexo</th>
-                <th>Correo electronico</th>
-                <th>Dias de trabajo</th>
-                <th>Telefono</th>
-                <th>Estado</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
-                </tr>
-                <tr>
-               		<td>4565655</td>
-                    <td>jean</td>
-                    <td>esquen</td>
-                    <td>clinico</td>
-                    <td>masculino</td>
-                    <td>jeeisi@gmail</td>
-                    <td>5</td>
-                    <td>15232565</td>
-                    <td>Activo</td>
-                    <td><button type="submit" class="btn-guardar-fila" name="btnModificar">Selecionar</button></td>
-                </tr>
-        </tbody>
-    </table>
-</div> 
-<br>
- <div class="pagination">
-     <%-- Botón "Anterior" --%>
-     <a href="?page= 1" class=" 2 ? "disabled" : """>
-         &laquo; Anterior
-     </a>
-
-     <%-- Números de página --%>
-         <a href="?page=3" class="2 "active" : ">2
-         </a>
-
-
-     <%-- Botón "Siguiente" --%>
-     <a href="?page=<3" class=""disabled" : "" %>">
-         Siguiente &raquo;
-     </a>
- </div>
- <br>
- </form>  
+            </tbody>
+        </table>
+        <br>
+    </form>  
 </div>
-</body>
 </html>

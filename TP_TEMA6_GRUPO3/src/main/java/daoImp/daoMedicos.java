@@ -6,6 +6,7 @@ import org.hibernate.Session;
 
 import dao.IMedicos;
 import daoImp.Conexion;
+import frgp.utn.edu.entidad.Especialidad;
 import frgp.utn.edu.entidad.Medicos;
 
 public class daoMedicos implements IMedicos{
@@ -55,7 +56,7 @@ private static Conexion conexion;
         return false;
 	}
 	
-	/// Devuelve por Nombre de usuario
+	/// Devuelve por Nombre de id
 	public Medicos ReadOne(int legajo)
 	{
 		Session session= conexion.abrirConexion();
@@ -65,6 +66,32 @@ private static Conexion conexion;
 		
         return medicos;
 	}
+	
+	
+	/// Devuelve por Nombre de usuario y especialidad
+	public List<Medicos> FiltarXEspecilidad(int  especialidad)
+	{
+		conexion = new Conexion();
+	    Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = " + especialidad +" ; ").list();
+        conexion.cerrarSession();
+        
+        return medicos;
+	}
+			
+	/// Devuelve por Nombre de usuario y especialidad
+	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad)
+	{
+		conexion = new Conexion();
+	    Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = "+ especialidad + " and m.legajo = "+ legajo + " ;").list();
+        conexion.cerrarSession();
+        
+        return medicos;
+	}
+				
 	
 	/// Modificar 
 	public boolean Update(Medicos medicos)
@@ -143,7 +170,8 @@ private static Conexion conexion;
         
         return medicos;
 	}
-
+	
+	
 	//Agrego los gettes y setters para Spring Core
 	
 	public Conexion getConexion() {
@@ -153,4 +181,7 @@ private static Conexion conexion;
 	public void setConexion(Conexion conexion) {
 		this.conexion = conexion;
 	}
+	
+	
+	
 }

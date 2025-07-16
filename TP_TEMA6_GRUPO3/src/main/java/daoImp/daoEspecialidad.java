@@ -2,6 +2,7 @@ package daoImp;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import dao.IEspecialidad;
@@ -137,6 +138,15 @@ private static Conexion conexion;
         List<Especialidad> usuarios = session.createQuery("FROM Especialidad").list();
         conexion.cerrarSession();
         return usuarios;
+	}
+	
+	public Especialidad nombre(String n) {		
+		conexion = new Conexion();
+	    Session session = conexion.abrirConexion();
+        session.beginTransaction();
+        Query usuarios = session.createQuery("SELECT * FROM especialidad  WHERE nombre = "+ n +" LIMIT 1;");
+        conexion.cerrarSession();
+        return (Especialidad) usuarios;
 	}
 
 	//Agrego los gettes y setters para Spring Core

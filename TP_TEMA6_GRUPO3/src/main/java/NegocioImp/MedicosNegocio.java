@@ -44,4 +44,16 @@ public class MedicosNegocio implements IMedicosNegocio {
 		daoMedicos med = new daoMedicos();
 		med.setConexion(conexion);
 	}
+	
+	public List<Medicos> FiltarXEspecilidad(int especialidad){
+		daoMedicos med = new daoMedicos();
+		return med.FiltarXEspecilidad(especialidad);
+	
+	}
+	
+	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int especialidad){
+		daoMedicos med = new daoMedicos();
+		return med.FiltarXEspecilidadYLegajo(legajo, especialidad);
+	}
+
 }

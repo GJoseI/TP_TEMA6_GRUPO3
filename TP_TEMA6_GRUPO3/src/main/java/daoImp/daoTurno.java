@@ -143,6 +143,40 @@ public class daoTurno implements ITurno{
 	        
 	        return usuarios;
 		}
+		
+		/// trae todo por fecha
+		public List<Turno> FiltarxFecha(String facha) {		
+			conexion = new Conexion();
+		    Session session = conexion.abrirConexion();
+	        session.beginTransaction();
+	        List<Turno> usuarios = session.createQuery("SELECT * FROM turno  WHERE fecha = "+ facha +";").list();
+	        conexion.cerrarSession();
+	        
+	        return usuarios;
+		}
+		/// trae todo
+		public List<Turno> FiltarxFechaxPciente(String facha, String dni) {		
+			conexion = new Conexion();
+		    Session session = conexion.abrirConexion();
+	        session.beginTransaction();
+	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on p.DNI = t.DNI WHERE t.fecha = "+ facha +" and p.DNI = "+dni+";").list();
+	        conexion.cerrarSession();
+	        
+	        return usuarios;
+		}
+		
+		/// trae todo
+		public List<Turno> FiltarPciente( String dni) {		
+			conexion = new Conexion();
+		    Session session = conexion.abrirConexion();
+	        session.beginTransaction();
+	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on   p.DNI = t.DNI where p.DNI = "+dni+";").list();
+	        conexion.cerrarSession();
+	        
+	        return usuarios;
+		}
+
+		
 
 		//Agrego los gettes y setters para Spring Core
 		

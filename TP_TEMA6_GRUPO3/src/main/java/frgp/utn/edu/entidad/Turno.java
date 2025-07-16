@@ -26,14 +26,14 @@ public class Turno implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="legajo")
 	private Medicos Medico;
-	private LocalDate fecha;
+	private String fecha;
 	private String hora;
 	private String observación;
 	private String estadoTurno;
 	private boolean estado;
 	
 	public Turno () {}
-	public Turno(Medicos medico, Paciente paciente, LocalDate fecha, String hora, String observación, String estadoTurno) {
+	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String observación, String estadoTurno) {
 		super();
 		Medico = medico;
 		this.paciente = paciente;
@@ -44,7 +44,7 @@ public class Turno implements Serializable{
 		this.estado = true;
 	}
 	
-	public Turno(Medicos medico, Paciente paciente, LocalDate fecha, String hora, String estadoTurno) {
+	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String estadoTurno) {
 		super();
 		Medico = medico;
 		this.paciente = paciente;
@@ -71,11 +71,11 @@ public class Turno implements Serializable{
 		this.paciente = paciente;
 	}
 
-	public LocalDate getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

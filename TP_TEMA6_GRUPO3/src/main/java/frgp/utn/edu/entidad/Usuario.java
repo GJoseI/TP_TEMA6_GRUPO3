@@ -33,6 +33,15 @@ public class Usuario implements Serializable{
 		this.estado=true;
 	}
 	
+	public Usuario(String nombre_Usuario, String contraseña) {
+		super();
+		Nombre_Usuario = nombre_Usuario;
+		Contraseña = contraseña;
+		admin=false;
+		this.estado=true;
+	}
+	
+	
 	
 	public String getNombre_Usuario() {
 		return Nombre_Usuario;
