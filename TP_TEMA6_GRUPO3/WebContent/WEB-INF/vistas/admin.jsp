@@ -72,7 +72,7 @@
     <div class="admin-container">
         <div class="welcome-header">
             <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
-            <h2>Bienvenido juan</h2>
+            <h2>Bienvenido ${usuarioLogueado.nombre_Usuario}</h2>
         </div>
 
         <p style="color: #555;">Seleccione una opción:</p>

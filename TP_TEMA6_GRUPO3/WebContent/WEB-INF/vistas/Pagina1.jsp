@@ -81,11 +81,11 @@
         <form action="redireccionar_usuario.html" method="post">
             <div class="input-group">
                 <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" name="txtusuario" required>
+                <input type="text" id="usuario" name="usuario" required>
             </div>
             <div class="input-group">
                 <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" name="txtcontrasena" required>
+                <input type="password" id="contrasena" name="contrasena" required>
             </div>
             <button type="submit" class="btn-login">Ingresar</button>
         </form>

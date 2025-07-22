@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page 
-import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,NegocioImp.MedicosNegocio, NegocioImp.UsuarioNegocio,NegocioImp.EspecialidadNegocio,frgp.utn.edu.entidad.Usuario,frgp.utn.edu.entidad.Especialidad"
+import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat, java.text.ParseException, java.util.Date, java.time.LocalDate ,NegocioImp.MedicosNegocio, NegocioImp.UsuarioNegocio,NegocioImp.EspecialidadNegocio,frgp.utn.edu.entidad.Usuario,frgp.utn.edu.entidad.Especialidad"
 %>
 <html>
 <head>
@@ -92,7 +92,16 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,Negoc
                     m.setDireccion(request.getParameter("direccion"));
                     m.setSexo(request.getParameter("Sexo"));
                     m.setLocalidad(request.getParameter("localidad"));
-                    m.setFechaNac(request.getParameter("fechaNac")); 
+                    try {
+                        String fechaNacStr = request.getParameter("fechaNac");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaNac = sdf.parse(fechaNacStr);
+                        m.setFechaNac(fechaNac);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        // Podés redirigir a una página de error, o setear una fecha por defecto
+                    }
+                    //m.setFechaNac(request.getParameter("fechaNac"));
                     m.setEmail(request.getParameter("email"));
                     m.setDiasLab(request.getParameter("Dias"));
                     m.setHorarioLab(request.getParameter("horarios"));
@@ -126,7 +135,15 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,Negoc
                 medico_m.setDireccion(request.getParameter("direccion"));
                 medico_m.setSexo(request.getParameter("Sexo"));
                 medico_m.setLocalidad(request.getParameter("localidad"));
-                medico_m.setFechaNac(request.getParameter("fechaNac")); 
+                try {
+                    String fechaNacStr = request.getParameter("fechaNac");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaNac = sdf.parse(fechaNacStr);
+                    medico_m.setFechaNac(fechaNac);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                //medico_m.setFechaNac(request.getParameter("fechaNac")); 
                 medico_m.setEmail(request.getParameter("email"));
                 medico_m.setDiasLab(request.getParameter("Dias"));
                 medico_m.setHorarioLab(request.getParameter("horarios"));

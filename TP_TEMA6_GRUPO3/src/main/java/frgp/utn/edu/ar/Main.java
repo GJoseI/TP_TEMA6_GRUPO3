@@ -149,7 +149,7 @@ public class Main
     
     	
     	//Medicos y Usuarios
-    	
+    /*	
     	Usuario usuario01 = new Usuario("admin", "1234",true);
     	Usuario usuario02 = new Usuario("Jp5011", "Doki50111",true);
     	

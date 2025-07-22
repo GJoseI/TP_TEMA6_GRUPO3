@@ -5,15 +5,24 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="usuario1" class="frgp.utn.edu.entidad.Usuario">
-		<property name="Nombre_Usuario" value="jose"/>
-		<property name="Contraseña" value="josecontraseña"/>
-		<property name="admin" value="false"/>
+		<property name="Nombre_Usuario" value="admin"/>
+		<property name="Contraseña" value="admincontrasena"/>
+		<property name="admin" value="true"/>
 		<property name="estado" value="True"/>
 	</bean>
+	
 	<bean id="usuario2" class="frgp.utn.edu.entidad.Usuario">
-		<property name="Nombre_Usuario" value="juan"/>
-		<property name="Contraseña" value="juancontraseña"/>
+		<property name="Nombre_Usuario" value="jose"/>
+		<property name="Contraseña" value="josecontrasena"/>
 		<property name="admin" value="false"/>
 		<property name="estado" value="True"/>
 	</bean>
+	
+	<bean id="usuario3" class="frgp.utn.edu.entidad.Usuario">
+		<property name="Nombre_Usuario" value="juan"/>
+		<property name="Contraseña" value="juancontrasena"/>
+		<property name="admin" value="false"/>
+		<property name="estado" value="True"/>
+	</bean>
+	
 	</beans>

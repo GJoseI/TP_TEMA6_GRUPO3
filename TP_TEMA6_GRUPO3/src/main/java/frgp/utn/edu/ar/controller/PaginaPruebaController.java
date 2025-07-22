@@ -1,13 +1,21 @@
 package frgp.utn.edu.ar.controller;
 
 import java.io.Console;
+import java.util.List;
+
+import javax.servlet.http.HttpServlet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import NegocioImp.UsuarioNegocio;
+import frgp.utn.edu.entidad.Usuario;
+
 @Controller
-public class PaginaPruebaController {
+public class PaginaPruebaController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	@RequestMapping("redireccionar_pag1.html")
 	public ModelAndView eventoRedireccionar() {
@@ -18,13 +26,24 @@ public class PaginaPruebaController {
 	
 	
 	@RequestMapping("redireccionar_usuario.html")
-	public ModelAndView eventoRedireccionar_usuario() {
+	public ModelAndView eventoRedireccionar_usuario(@RequestParam("usuario") String usuario, @RequestParam("contrasena") String contrasena) {
 		ModelAndView MV = new ModelAndView();
-
-			//MV.setViewName("admin");
-
-			MV.setViewName("medico");
-
+		UsuarioNegocio uNeg = new UsuarioNegocio();
+		List<Usuario> usuarios = uNeg.ReadAll();
+		for(Usuario user : usuarios) {
+			if(usuario.equals(user.getNombre_Usuario()) && contrasena.equals(user.getContraseña())) {
+				MV.addObject("usuarioLogueado", user);
+				if(user.isAdmin()) {
+					MV.setViewName("admin");
+				}
+				else {
+					MV.setViewName("medico");
+				}
+				return MV;
+			}
+		}
+		MV.setViewName("Pagina1");
+	    MV.addObject("error", "Usuario o contraseña incorrectos.");
 		return MV;
 	}
 	

@@ -2,6 +2,7 @@ package frgp.utn.edu.entidad;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class Medicos implements Serializable {
 	private String nombre;
 	private String apellido;
 	private String sexo;
-	private String fechaNac;
+	private Date fechaNac;
 	private String diasLab;
 	private String horarioLab;
 	private String direccion;
@@ -39,7 +40,7 @@ public class Medicos implements Serializable {
 	@JoinColumn(name="Usuario_c")
 	private Usuario usuario;
 	
-	public Medicos(int legajo, String nombre, String apellido, String sexo, String fechaNac, String diasLab, String horarioLab, String direccion,
+	public Medicos(int legajo, String nombre, String apellido, String sexo, Date fechaNac, String diasLab, String horarioLab, String direccion,
 			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad) {
 		super();
 		this.legajo = legajo;
@@ -58,8 +59,8 @@ public class Medicos implements Serializable {
 		this.estado=true;
 	}
 	
-	private static final AtomicInteger contador = new AtomicInteger(0);
-	public Medicos(String nombre, String apellido, String sexo, String fechaNac, String diasLab, String horarioLab, String direccion,
+	/*private static final AtomicInteger contador = new AtomicInteger(0);
+	public Medicos(String nombre, String apellido, String sexo, Date fechaNac, String diasLab, String horarioLab, String direccion,
 			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad, boolean estado) {
 		super();
 		this.legajo = contador.incrementAndGet();;
@@ -76,7 +77,7 @@ public class Medicos implements Serializable {
 		this.usuario = usuario;
 		this.especialidad = especialidad;
 		this.estado=estado;
-	}
+	}*/
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -120,11 +121,11 @@ public class Medicos implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public String getFechaNac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(String fechaNac) {
+	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 
