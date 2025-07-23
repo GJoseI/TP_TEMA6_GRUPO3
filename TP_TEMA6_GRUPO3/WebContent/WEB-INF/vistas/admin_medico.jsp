@@ -71,108 +71,8 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
         MedicosNegocio medNeg = new MedicosNegocio();
         Medicos medico_m = null;
         Usuario user = null;
-        
-        if (request.getParameter("btnguardar") != null) {
-            try {
-                int legajo = Integer.parseInt(request.getParameter("legajo"));
-                
-                if(!medNeg.Exist(legajo)) {
-                    user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
-                    
-                    UsuarioNegocio negUser = new UsuarioNegocio();
-                    negUser.AgregarUsuario(user);
-                    
-                    Medicos m = new Medicos();
-                    m.setUsuario(user);
-                    m.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
-                    
-                    m.setLegajo(legajo);
-                    m.setNombre(request.getParameter("nombre")); 
-                    m.setApellido(request.getParameter("apellido"));
-                    m.setDireccion(request.getParameter("direccion"));
-                    m.setSexo(request.getParameter("Sexo"));
-                    m.setLocalidad(request.getParameter("localidad"));
-                    try {
-                        String fechaNacStr = request.getParameter("fechaNac");
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        Date fechaNac = sdf.parse(fechaNacStr);
-                        m.setFechaNac(fechaNac);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                        // Podés redirigir a una página de error, o setear una fecha por defecto
-                    }
-                    //m.setFechaNac(request.getParameter("fechaNac"));
-                    m.setEmail(request.getParameter("email"));
-                    m.setDiasLab(request.getParameter("Dias"));
-                    m.setHorarioLab(request.getParameter("horarios"));
-                    m.setTelefono(request.getParameter("telefono"));
-                    m.setEstado("activo".equals(request.getParameter("estado")));
-                    
-                    if(medNeg.AgregarMedicos(m)) {
-                        request.setAttribute("mensajeExito", "Médico registrado correctamente");
-                    } else {
-                        request.setAttribute("mensajeError", "Error al registrar el médico");
-                    }
-                } else {
-                    request.setAttribute("mensajeError", "El legajo ya existe");
-                }
-            } catch (NumberFormatException e) {
-                request.setAttribute("mensajeError", "Legajo inválido");
-            } catch (Exception e) {
-                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
-            }
-        }
-        
-        if (request.getParameter("btnModificar") != null) {
-            medico_m = medNeg.ReadOne(Integer.parseInt(request.getParameter("btnModificar")));
-        }
-        
-        if (request.getParameter("btnguardar_Modificar") != null && medico_m != null) {
-            try {
-                medico_m.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
-                medico_m.setNombre(request.getParameter("nombre")); 
-                medico_m.setApellido(request.getParameter("apellido"));
-                medico_m.setDireccion(request.getParameter("direccion"));
-                medico_m.setSexo(request.getParameter("Sexo"));
-                medico_m.setLocalidad(request.getParameter("localidad"));
-                try {
-                    String fechaNacStr = request.getParameter("fechaNac");
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date fechaNac = sdf.parse(fechaNacStr);
-                    medico_m.setFechaNac(fechaNac);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                //medico_m.setFechaNac(request.getParameter("fechaNac")); 
-                medico_m.setEmail(request.getParameter("email"));
-                medico_m.setDiasLab(request.getParameter("Dias"));
-                medico_m.setHorarioLab(request.getParameter("horarios"));
-                medico_m.setTelefono(request.getParameter("telefono"));
-                medico_m.setEstado("activo".equals(request.getParameter("estado")));
-                
-                if(medNeg.Update(medico_m)) {
-                    request.setAttribute("mensajeExito", "Médico modificado correctamente");
-                } else {
-                    request.setAttribute("mensajeError", "Error al modificar el médico");
-                }
-            } catch (Exception e) {
-                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
-            }
-        }
-        
-        if (request.getParameter("btnbaja") != null) {
-            try {
-                Medicos medico = medNeg.ReadOne(Integer.parseInt(request.getParameter("btnbaja")));
-                if(medNeg.Delete(medico)) {
-                    request.setAttribute("mensajeExito", "Médico dado de baja correctamente");
-                } else {
-                    request.setAttribute("mensajeError", "Error al dar de baja al médico");
-                }
-            } catch (Exception e) {
-                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
-            }
-        }
         %>
+        
         
         <% if(request.getAttribute("mensajeError") != null) { %>
             <div class="error"><%= request.getAttribute("mensajeError") %></div>
@@ -184,7 +84,7 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
         <div class="admin-medicos-container">
             <h3>Gestionar Médicos</h3>
             
-            <form action="" method="post" class="admin-medicos-form">
+            <form action="alta_medico.html" method="post" class="admin-medicos-form">
                 <table>
                     <thead>
                         <tr>
@@ -195,60 +95,6 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                         </tr>
                     </thead>
                     <tbody>
-                        <% if(medico_m != null) { %>
-                        <tr>
-                            <td>
-                                <strong>Legajo: <%= medico_m.getLegajo() %></strong><br><br>
-                                <strong>Nombre:</strong>
-                                <input type="text" name="nombre" value="<%= medico_m.getNombre() %>" required><br><br>
-                                <strong>Apellido:</strong>
-                                <input type="text" name="apellido" value="<%= medico_m.getApellido() %>" required><br><br>
-                                <strong>Sexo:</strong>
-                                <select name="Sexo" required>
-                                    <option value="Masculino" <%= "Masculino".equals(medico_m.getSexo()) ? "selected" : "" %>>Masculino</option>
-                                    <option value="Femenino" <%= "Femenino".equals(medico_m.getSexo()) ? "selected" : "" %>>Femenino</option>
-                                    <option value="Otro" <%= "Otro".equals(medico_m.getSexo()) ? "selected" : "" %>>Otro</option>
-                                </select><br><br>
-                                <strong>Dirección:</strong>
-                                <input type="text" name="direccion" value="<%= medico_m.getDireccion() %>" required><br><br>
-                                <strong>Localidad:</strong>
-                                <input type="text" name="localidad" value="<%= medico_m.getLocalidad() %>" required><br><br>
-                                <strong>Fecha de Nacimiento:</strong>
-                                <input type="date" name="fechaNac" value="<%= medico_m.getFechaNac() %>" required><br><br>
-                                <strong>Correo electrónico:</strong>
-                                <input type="email" name="email" value="<%= medico_m.getEmail() %>" required><br><br>
-                                <strong>Días de trabajo:</strong>
-                                <input type="text" name="Dias" value="<%= medico_m.getDiasLab() %>" required><br><br>
-                                <strong>Horarios de trabajo:</strong>
-                                <input type="text" name="horarios" value="<%= medico_m.getHorarioLab() %>" required><br><br>
-                                <strong>Teléfono:</strong>
-                                <input type="tel" name="telefono" value="<%= medico_m.getTelefono() %>" required>
-                            </td>
-                            <td>
-                                <strong>Usuario:</strong>
-                                <input type="text" name="user" value="<%= medico_m.getUsuario().getNombre_Usuario() %>" required><br><br>
-                                <strong>Contraseña:</strong>
-                                <input type="password" name="password" value="<%= medico_m.getUsuario().getContraseña() %>" required><br><br>
-                                <strong>Especialidad:</strong>
-                                <select name="especialidad" required>
-                                    <% for(Especialidad es : especialidades) { %>
-                                        <option value="<%= es.getId() %>" <%= es.getId() == medico_m.getEspecialidad().getId() ? "selected" : "" %>>
-                                            <%= es.getNombre() %>
-                                        </option>
-                                    <% } %>
-                                </select><br><br>
-                            </td>
-                            <td>
-                                <strong>Activo</strong>
-                                <input type="radio" name="estado" value="activo" <%= medico_m.isEstado() ? "checked" : "" %> required><br><br>
-                                <strong>Inactivo</strong>
-                                <input type="radio" name="estado" value="inactivo" <%= !medico_m.isEstado() ? "checked" : "" %>>
-                            </td>
-                            <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnguardar_Modificar">Guardar</button>
-                            </td>
-                        </tr>
-                        <% } else { %>
                         <tr>
                             <td>
                                 <strong>Legajo:</strong>
@@ -300,7 +146,6 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                                 <button type="submit" class="btn-guardar-fila" name="btnguardar">Guardar</button>
                             </td>
                         </tr>
-                        <% } %>
                     </tbody>
                 </table>
             </form>
@@ -309,7 +154,7 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
         <div class="admin-medicos-container">
             <h3>Lista de Médicos</h3>
             
-            <form action="" method="post" class="admin-medicos-form">
+            <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
                 <strong>Legajo:</strong>
                 <input type="text" name="Legajo" placeholder="Ingrese legajo">
                 <strong>Especialidad:</strong>
@@ -407,7 +252,6 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                                     <td><%= medico.getTelefono() %></td>
                                     <td><%= medico.isEstado() ? "Activo" : "Inactivo" %></td>
                                     <td>
-                                        <button type="submit" class="btn-guardar-fila" name="btnbaja" value="<%= medico.getLegajo() %>">Baja</button>
                                         <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%= medico.getLegajo() %>">Modificar</button>
                                     </td>
                                 </tr>

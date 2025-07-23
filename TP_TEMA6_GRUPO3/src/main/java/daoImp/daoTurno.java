@@ -45,6 +45,7 @@ public class daoTurno implements ITurno{
 		/// Si existe
 		public boolean Exist(int id)
 		{
+			conexion = new Conexion();
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			Turno savedTurno = (Turno) session.get(Turno.class, id);
@@ -58,6 +59,7 @@ public class daoTurno implements ITurno{
 		/// Devuelve por Nombre de usuario
 		public Turno ReadOne(int id)
 		{
+			conexion = new Conexion();
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			Turno savedTurno = (Turno) session.get(Turno.class, id);
@@ -150,6 +152,9 @@ public class daoTurno implements ITurno{
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
 	        List<Turno> usuarios = session.createQuery("SELECT * FROM turno  WHERE fecha = "+ facha +";").list();
+	        session.flush();
+
+	        session.getTransaction().commit();
 	        conexion.cerrarSession();
 	        
 	        return usuarios;
@@ -160,6 +165,9 @@ public class daoTurno implements ITurno{
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
 	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on p.DNI = t.DNI WHERE t.fecha = "+ facha +" and p.DNI = "+dni+";").list();
+	        session.flush();
+
+	        session.getTransaction().commit();
 	        conexion.cerrarSession();
 	        
 	        return usuarios;
@@ -171,6 +179,9 @@ public class daoTurno implements ITurno{
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
 	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on   p.DNI = t.DNI where p.DNI = "+dni+";").list();
+	        session.flush();
+
+	        session.getTransaction().commit();
 	        conexion.cerrarSession();
 	        
 	        return usuarios;

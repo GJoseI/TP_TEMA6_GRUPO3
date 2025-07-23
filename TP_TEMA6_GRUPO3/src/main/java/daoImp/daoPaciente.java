@@ -43,8 +43,8 @@ private static Conexion conexion;
 	}
 	
 	/// Si existe
-	public boolean Exist(String dni)
-	{
+	public boolean Exist(String dni){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -56,8 +56,8 @@ private static Conexion conexion;
 	}
 	
 	/// Devuelve por Nombre de usuario
-	public Paciente ReadOne(String dni)
-	{
+	public Paciente ReadOne(String dni){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -67,8 +67,7 @@ private static Conexion conexion;
 	}
 	
 	/// Modificar 
-	public boolean Update(Paciente paciente)
-	{
+	public boolean Update(Paciente paciente){
 		boolean estado = true;
 		conexion = new Conexion();
 	    Session session = null;
@@ -100,8 +99,7 @@ private static Conexion conexion;
 	}
 	
 	/// Borrar
-	public boolean Delete(Paciente paciente) 
-	{	
+	public boolean Delete(Paciente paciente) {	
 		boolean estado = true;
 		conexion = new Conexion();
 	    Session session = null;

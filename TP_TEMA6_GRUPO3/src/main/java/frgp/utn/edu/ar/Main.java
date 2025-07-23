@@ -68,7 +68,7 @@ public class Main
         double porcentajeAusente = (total > 0) ? (turnosAusente * 100.0) / total : 0;
         System.out.println("Porcentaje de turnos:");
         System.out.println("Presente: "+porcentajePresente+"%. Ausente: "+porcentajeAusente+"%");
-*/
+
     	//Pacientes
 
         
@@ -147,7 +147,7 @@ public class Main
     	daohibernate.AgregarEspecialidad(especialidad9);
     	daohibernate.AgregarEspecialidad(especialidad10);
     
-    	
+    	*/
     	//Medicos y Usuarios
     /*	
     	Usuario usuario01 = new Usuario("admin", "1234",true);

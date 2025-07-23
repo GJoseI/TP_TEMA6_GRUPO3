@@ -46,6 +46,7 @@ private static Conexion conexion;
 	/// Si existe
 	public boolean Exist(int id)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad medicos=(Especialidad)session.get(Especialidad.class,id);
@@ -58,6 +59,7 @@ private static Conexion conexion;
 	/// Devuelve por Nombre de usuario
 	public Especialidad ReadOne(int id)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
@@ -70,6 +72,7 @@ private static Conexion conexion;
 	{
 		boolean estado = true;
 	    Session session = null;
+	    conexion = new Conexion();
 
 	    try {
 	        session = conexion.abrirConexion();

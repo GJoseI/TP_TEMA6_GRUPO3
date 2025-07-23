@@ -4,6 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
+	
 	<bean id="paciente1" class="frgp.utn.edu.entidad.Paciente">
 		<property name="DNI" value="12345678A"></property>
 		<property name="nombre" value="Juan"></property>
@@ -12,7 +16,11 @@
 		<property name="direccion" value="Calle Falsa 123"></property>
 		<property name="localidad" value="Springfield"></property>
 		<property name="provincia" value="Buenos Aires"></property>
-		<property name="fecha_nacimiento" value="1980-05-12"></property>
+		<property name="fecha_nacimiento">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1980-05-12" />
+			</bean>
+		</property>
 		<property name="correo_electronico" value="juan.perez@email.com"></property>
 		<property name="estado" value="True"></property>
 	</bean>
@@ -24,7 +32,11 @@
 		<property name="direccion" value="Av. Siempreviva 456"></property>
 		<property name="localidad" value="Córdoba Capital"></property>
 		<property name="provincia" value="Córdoba"></property>
-		<property name="fecha_nacimiento" value="1992-09-23"></property>
+		<property name="fecha_nacimiento">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="1992-09-23" />
+			</bean>
+		</property>
 		<property name="correo_electronico" value="maria.gomez@email.com"></property>
 		<property name="estado" value="True"></property>
 	</bean>

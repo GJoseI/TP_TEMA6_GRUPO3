@@ -45,6 +45,7 @@ public class daoUsuario implements IUsuario {
 	/// Si existe
 	public boolean Exist(String nombreUsuario)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
         Usuario usuario=(Usuario)session.get(Usuario.class,nombreUsuario);
@@ -58,6 +59,7 @@ public class daoUsuario implements IUsuario {
 	/// Devuelve por Nombre de usuario
 	public Usuario ReadOne(String nombreUsuario)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
         Usuario usuario=(Usuario)session.get(Usuario.class,nombreUsuario);

@@ -212,28 +212,6 @@ if(request.getParameter("btnBaja") != null) {
                             if(p != null) {
                     %>
                     <tr>
-                        <% if(editando && p.getDNI().equals(pacienteEnEdicion)) { %>
-                            <td><%=p.getDNI()%></td>
-                            <td><input type="text" name="editarNombre" value="<%=p.getNombre()%>" required></td>
-                            <td><input type="text" name="editarApellido" value="<%=p.getApellido()%>" required></td>
-                            <td><input type="text" name="editarTelefono" value="<%=p.getTelefono()%>"></td>
-                            <td><input type="text" name="editarDireccion" value="<%=p.getDireccion()%>"></td>
-                            <td><input type="text" name="editarLocalidad" value="<%=p.getLocalidad()%>"></td>
-                            <td><input type="text" name="editarProvincia" value="<%=p.getProvincia()%>"></td>
-                            <td><input type="date" name="editarFechaNac" value="<%=p.getFecha_nacimiento()%>" required></td>
-                            <td><input type="email" name="editarEmail" value="<%=p.getCorreo_electronico()%>" required></td>
-                            <td>
-                                <select name="editarEstado">
-                                    <option value="activo" <%=p.isEstado() ? "selected" : ""%>>Activo</option>
-                                    <option value="inactivo" <%=!p.isEstado() ? "selected" : ""%>>Inactivo</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="hidden" name="editarDni" value="<%=p.getDNI()%>">
-                                <button type="submit" class="btn-guardar-fila" name="btnGuardarEdicion">Guardar</button>
-                                <button type="submit" class="btn-cancelar">Cancelar</button>
-                            </td>
-                        <% } else { %>
                             <td><%=p.getDNI()%></td>
                             <td><%=p.getNombre()%></td>
                             <td><%=p.getApellido()%></td>
@@ -253,34 +231,11 @@ if(request.getParameter("btnBaja") != null) {
                     <%
                             }
                         }
-                    }
                     
                     if(!cuadro) {
                         for (Paciente p : ListaPasiente) { 
                     %>
                     <tr>
-                        <% if(editando && p.getDNI().equals(pacienteEnEdicion)) { %>
-                            <td><%=p.getDNI()%></td>
-                            <td><input type="text" name="editarNombre" value="<%=p.getNombre()%>" required></td>
-                            <td><input type="text" name="editarApellido" value="<%=p.getApellido()%>" required></td>
-                            <td><input type="text" name="editarTelefono" value="<%=p.getTelefono()%>"></td>
-                            <td><input type="text" name="editarDireccion" value="<%=p.getDireccion()%>"></td>
-                            <td><input type="text" name="editarLocalidad" value="<%=p.getLocalidad()%>"></td>
-                            <td><input type="text" name="editarProvincia" value="<%=p.getProvincia()%>"></td>
-                            <td><input type="date" name="editarFechaNac" value="<%=p.getFecha_nacimiento()%>" required></td>
-                            <td><input type="email" name="editarEmail" value="<%=p.getCorreo_electronico()%>" required></td>
-                            <td>
-                                <select name="editarEstado">
-                                    <option value="activo" <%=p.isEstado() ? "selected" : ""%>>Activo</option>
-                                    <option value="inactivo" <%=!p.isEstado() ? "selected" : ""%>>Inactivo</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="hidden" name="editarDni" value="<%=p.getDNI()%>">
-                                <button type="submit" class="btn-guardar-fila" name="btnGuardarEdicion">Guardar</button>
-                                <button type="submit" class="btn-cancelar">Cancelar</button>
-                            </td>
-                        <% } else { %>
                             <td><%=p.getDNI()%></td>
                             <td><%=p.getNombre()%></td>
                             <td><%=p.getApellido()%></td>
@@ -292,14 +247,12 @@ if(request.getParameter("btnBaja") != null) {
                             <td><%=p.getCorreo_electronico()%></td>
                             <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
                             <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnBaja" value="<%=p.getDNI()%>">Eliminar</button>
                                 <button type="submit" class="btn-guardar-fila" name="editarDni" value="<%=p.getDNI()%>">Modificar</button>
                             </td>
                         <% } %>
                     </tr>
                     <% 
                         } 
-                    } 
                     %>
                 </tbody>
             </table>

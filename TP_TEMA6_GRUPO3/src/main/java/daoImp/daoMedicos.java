@@ -46,19 +46,19 @@ private static Conexion conexion;
 	/// Si existe
 	public boolean Exist(int legajo)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
-        if(medicos!=null)
-        	return true;
         conexion.cerrarSession();
         
-        return false;
+        return (medicos!=null);
 	}
 	
 	/// Devuelve por Nombre de id
 	public Medicos ReadOne(int legajo)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
@@ -75,6 +75,9 @@ private static Conexion conexion;
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = " + especialidad +" ; ").list();
+        session.flush();
+
+        session.getTransaction().commit();
         conexion.cerrarSession();
         
         return medicos;
@@ -87,6 +90,9 @@ private static Conexion conexion;
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = "+ especialidad + " and m.legajo = "+ legajo + " ;").list();
+        session.flush();
+
+        session.getTransaction().commit();
         conexion.cerrarSession();
         
         return medicos;
@@ -166,6 +172,9 @@ private static Conexion conexion;
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("from Medicos").list();
+        session.flush();
+
+        session.getTransaction().commit();
         conexion.cerrarSession();
         
         return medicos;

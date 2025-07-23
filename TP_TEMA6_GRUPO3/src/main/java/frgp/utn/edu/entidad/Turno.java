@@ -1,6 +1,7 @@
 package frgp.utn.edu.entidad;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,34 +27,24 @@ public class Turno implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="legajo")
 	private Medicos Medico;
-	private String fecha;
+	private Date fecha;
 	private String hora;
-	private String observación;
+	private String observacion;
 	private String estadoTurno;
 	private boolean estado;
 	
 	public Turno () {}
-	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String observación, String estadoTurno) {
+	public Turno(Medicos medico, Paciente paciente, Date fecha, String hora, String observacion, String estadoTurno) {
 		super();
 		Medico = medico;
 		this.paciente = paciente;
 		this.fecha = fecha;
 		this.hora = hora;
-		this.observación = observación;
+		this.observacion = observacion;
 		this.estadoTurno = estadoTurno;
 		this.estado = true;
 	}
 	
-	public Turno(Medicos medico, Paciente paciente, String fecha, String hora, String estadoTurno) {
-		super();
-		Medico = medico;
-		this.paciente = paciente;
-		this.fecha = fecha;
-		this.hora = hora;
-		this.observación = " ";
-		this.estadoTurno = estadoTurno;
-		this.estado = true;
-	}
 
 	public Medicos getMedico() {
 		return Medico;
@@ -71,11 +62,11 @@ public class Turno implements Serializable{
 		this.paciente = paciente;
 	}
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
@@ -88,11 +79,11 @@ public class Turno implements Serializable{
 	}
 
 	public String getObservación() {
-		return observación;
+		return observacion;
 	}
 
 	public void setObservación(String observación) {
-		this.observación = observación;
+		this.observacion = observación;
 	}
 
 	public String getEstadoTurno() {
@@ -118,7 +109,7 @@ public class Turno implements Serializable{
 	@Override
 	public String toString() {
 		return "Turno [Medico=" + Medico + ", paciente=" + paciente + ", fecha=" + fecha + ", hora=" + hora
-				+ ", observación=" + observación + ", estado=" + estadoTurno + "]";
+				+ ", observación=" + observacion + ", estado=" + estadoTurno + "]";
 	}
 	
 	
