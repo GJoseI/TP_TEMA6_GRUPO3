@@ -8,36 +8,272 @@
 		<constructor-arg value="yyyy-MM-dd" />
 	</bean>
 	
-	<bean id="paciente1" class="frgp.utn.edu.entidad.Paciente">
-		<property name="DNI" value="12345678A"></property>
-		<property name="nombre" value="Juan"></property>
-		<property name="apellido" value="Pérez"></property>
-		<property name="telefono" value="11-2345-6789"></property>
-		<property name="direccion" value="Calle Falsa 123"></property>
-		<property name="localidad" value="Springfield"></property>
-		<property name="provincia" value="Buenos Aires"></property>
-		<property name="fecha_nacimiento">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1980-05-12" />
-			</bean>
-		</property>
-		<property name="correo_electronico" value="juan.perez@email.com"></property>
-		<property name="estado" value="True"></property>
-	</bean>
-	<bean id="paciente2" class="frgp.utn.edu.entidad.Paciente">
-		<property name="DNI" value="87654321B"></property>
-		<property name="nombre" value="María"></property>
-		<property name="apellido" value="Gómez"></property>
-		<property name="telefono" value="351-987-6543"></property>
-		<property name="direccion" value="Av. Siempreviva 456"></property>
-		<property name="localidad" value="Córdoba Capital"></property>
-		<property name="provincia" value="Córdoba"></property>
-		<property name="fecha_nacimiento">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1992-09-23" />
-			</bean>
-		</property>
-		<property name="correo_electronico" value="maria.gomez@email.com"></property>
-		<property name="estado" value="True"></property>
-	</bean>
-	</beans>
+	<!-- Paciente 1 -->
+<bean id="paciente1" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="12345678A"/>
+    <property name="nombre" value="Juan"/>
+    <property name="apellido" value="Pérez"/>
+    <property name="telefono" value="11-2345-6789"/>
+    <property name="direccion" value="Calle Falsa 123"/>
+    <property name="localidad" value="Springfield"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1980-05-12"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="juan.perez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 2 -->
+<bean id="paciente2" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="23456789B"/>
+    <property name="nombre" value="María"/>
+    <property name="apellido" value="Gómez"/>
+    <property name="telefono" value="11-3456-7890"/>
+    <property name="direccion" value="Avenida Siempreviva 742"/>
+    <property name="localidad" value="Quilmes"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1985-08-20"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="maria.gomez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 3 -->
+<bean id="paciente3" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="34567890C"/>
+    <property name="nombre" value="Carlos"/>
+    <property name="apellido" value="López"/>
+    <property name="telefono" value="11-4567-8901"/>
+    <property name="direccion" value="Calle 123 456"/>
+    <property name="localidad" value="La Plata"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1978-03-15"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="carlos.lopez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 4 -->
+<bean id="paciente4" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="45678901D"/>
+    <property name="nombre" value="Ana"/>
+    <property name="apellido" value="Martínez"/>
+    <property name="telefono" value="11-5678-9012"/>
+    <property name="direccion" value="Rivadavia 789"/>
+    <property name="localidad" value="Morón"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1990-11-30"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="ana.martinez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 5 -->
+<bean id="paciente5" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="56789012E"/>
+    <property name="nombre" value="Luis"/>
+    <property name="apellido" value="Rodríguez"/>
+    <property name="telefono" value="11-6789-0123"/>
+    <property name="direccion" value="Belgrano 321"/>
+    <property name="localidad" value="San Isidro"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1982-07-22"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="luis.rodriguez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 6 -->
+<bean id="paciente6" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="67890123F"/>
+    <property name="nombre" value="Laura"/>
+    <property name="apellido" value="Fernández"/>
+    <property name="telefono" value="11-7890-1234"/>
+    <property name="direccion" value="San Martín 654"/>
+    <property name="localidad" value="Tigre"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1987-04-18"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="laura.fernandez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 7 -->
+<bean id="paciente7" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="78901234G"/>
+    <property name="nombre" value="Pedro"/>
+    <property name="apellido" value="García"/>
+    <property name="telefono" value="11-8901-2345"/>
+    <property name="direccion" value="Mitre 987"/>
+    <property name="localidad" value="Vicente López"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1975-09-05"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="pedro.garcia@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 8 -->
+<bean id="paciente8" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="89012345H"/>
+    <property name="nombre" value="Sofía"/>
+    <property name="apellido" value="Díaz"/>
+    <property name="telefono" value="11-9012-3456"/>
+    <property name="direccion" value="Sarmiento 159"/>
+    <property name="localidad" value="Lanús"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1993-12-10"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="sofia.diaz@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 9 -->
+<bean id="paciente9" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="90123456I"/>
+    <property name="nombre" value="Jorge"/>
+    <property name="apellido" value="Sánchez"/>
+    <property name="telefono" value="11-0123-4567"/>
+    <property name="direccion" value="Alvear 753"/>
+    <property name="localidad" value="Avellaneda"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1981-02-28"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="jorge.sanchez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 10 -->
+<bean id="paciente10" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="01234567J"/>
+    <property name="nombre" value="Lucía"/>
+    <property name="apellido" value="Pereyra"/>
+    <property name="telefono" value="11-1234-5678"/>
+    <property name="direccion" value="Pueyrredón 258"/>
+    <property name="localidad" value="Lomas de Zamora"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1988-06-15"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="lucia.pereyra@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 11 -->
+<bean id="paciente11" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="11223344K"/>
+    <property name="nombre" value="Miguel"/>
+    <property name="apellido" value="Torres"/>
+    <property name="telefono" value="11-2233-4455"/>
+    <property name="direccion" value="Uruguay 369"/>
+    <property name="localidad" value="Banfield"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1979-10-20"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="miguel.torres@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 12 -->
+<bean id="paciente12" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="22334455L"/>
+    <property name="nombre" value="Valeria"/>
+    <property name="apellido" value="Mendoza"/>
+    <property name="telefono" value="11-3344-5566"/>
+    <property name="direccion" value="Chile 147"/>
+    <property name="localidad" value="Burzaco"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1992-01-25"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="valeria.mendoza@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 13 -->
+<bean id="paciente13" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="33445566M"/>
+    <property name="nombre" value="Fernando"/>
+    <property name="apellido" value="Rojas"/>
+    <property name="telefono" value="11-4455-6677"/>
+    <property name="direccion" value="Paraguay 258"/>
+    <property name="localidad" value="Adrogué"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1983-08-12"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="fernando.rojas@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 14 -->
+<bean id="paciente14" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="44556677N"/>
+    <property name="nombre" value="Carolina"/>
+    <property name="apellido" value="Hernández"/>
+    <property name="telefono" value="11-5566-7788"/>
+    <property name="direccion" value="Maipú 654"/>
+    <property name="localidad" value="Ramos Mejía"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1986-07-30"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="carolina.hernandez@email.com"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Paciente 15 -->
+<bean id="paciente15" class="frgp.utn.edu.entidad.Paciente">
+    <property name="DNI" value="55667788O"/>
+    <property name="nombre" value="Gabriel"/>
+    <property name="apellido" value="Flores"/>
+    <property name="telefono" value="11-6677-8899"/>
+    <property name="direccion" value="Libertador 951"/>
+    <property name="localidad" value="San Justo"/>
+    <property name="provincia" value="Buenos Aires"/>
+    <property name="fecha_nacimiento">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1984-04-05"/>
+        </bean>
+    </property>
+    <property name="correo_electronico" value="gabriel.flores@email.com"/>
+    <property name="estado" value="True"/>
+</bean>

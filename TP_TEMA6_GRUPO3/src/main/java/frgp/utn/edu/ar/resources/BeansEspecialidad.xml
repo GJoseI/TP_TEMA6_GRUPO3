@@ -5,19 +5,93 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="especialidad1" class="frgp.utn.edu.entidad.Especialidad">
-		<property name="Id" value="1"/>
-		<property name="nombre" value="Cardiologia"/>
-		<property name="estado" value="true"/>
-	</bean>
-	<bean id="especialidad2" class="frgp.utn.edu.entidad.Especialidad">
-		<property name="Id" value="2"/>
-		<property name="nombre" value="Dermatologia"/>
-		<property name="estado" value="true"/>
-	</bean>	
-	<bean id="especialidad3" class="frgp.utn.edu.entidad.Especialidad">
-		<property name="Id" value="3"/>
-		<property name="nombre" value="Psiquiatria"/>
-		<property name="estado" value="true"/>
-	</bean>
+    <property name="Id" value="1"/>
+    <property name="nombre" value="Cardiología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad2" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="2"/>
+    <property name="nombre" value="Pediatría"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad3" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="3"/>
+    <property name="nombre" value="Psiquiatría"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad4" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="4"/>
+    <property name="nombre" value="Dermatología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad5" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="5"/>
+    <property name="nombre" value="Oftalmología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad6" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="6"/>
+    <property name="nombre" value="Traumatología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad7" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="7"/>
+    <property name="nombre" value="Ginecología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad8" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="8"/>
+    <property name="nombre" value="Neurología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad9" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="9"/>
+    <property name="nombre" value="Oncología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad10" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="10"/>
+    <property name="nombre" value="Endocrinología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad11" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="11"/>
+    <property name="nombre" value="Urología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad12" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="12"/>
+    <property name="nombre" value="Otorrinolaringología"/>
+    <property name="estado" value="true"/>
+</bean>
+	
+<bean id="especialidad13" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="13"/>
+    <property name="nombre" value="Hematología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad14" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="14"/>
+    <property name="nombre" value="Neumología"/>
+    <property name="estado" value="true"/>
+</bean>
+
+<bean id="especialidad15" class="frgp.utn.edu.entidad.Especialidad">
+    <property name="Id" value="15"/>
+    <property name="nombre" value="Reumatología"/>
+    <property name="estado" value="true"/>
+</bean>
 		
 	</beans>

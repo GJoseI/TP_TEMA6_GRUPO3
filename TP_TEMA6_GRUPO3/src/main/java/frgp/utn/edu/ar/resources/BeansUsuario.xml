@@ -4,25 +4,139 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="usuario1" class="frgp.utn.edu.entidad.Usuario">
-		<property name="Nombre_Usuario" value="admin"/>
-		<property name="Contraseña" value="admincontrasena"/>
-		<property name="admin" value="true"/>
-		<property name="estado" value="True"/>
-	</bean>
-	
-	<bean id="usuario2" class="frgp.utn.edu.entidad.Usuario">
-		<property name="Nombre_Usuario" value="jose"/>
-		<property name="Contraseña" value="josecontrasena"/>
-		<property name="admin" value="false"/>
-		<property name="estado" value="True"/>
-	</bean>
-	
-	<bean id="usuario3" class="frgp.utn.edu.entidad.Usuario">
-		<property name="Nombre_Usuario" value="juan"/>
-		<property name="Contraseña" value="juancontrasena"/>
-		<property name="admin" value="false"/>
-		<property name="estado" value="True"/>
-	</bean>
+	<!-- Usuario 1 -->
+<bean id="usuario01" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="admin"/>
+    <property name="Contraseña" value="admin123"/>
+    <property name="admin" value="true"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 2 -->
+<bean id="usuario02" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="Admin2"/>
+    <property name="Contraseña" value="jose1234"/>
+    <property name="admin" value="true"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<bean id="usuario1" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="admin"/>
+    <property name="Contraseña" value="admin123"/>
+    <property name="admin" value="true"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 2 -->
+<bean id="usuario2" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="Admin2"/>
+    <property name="Contraseña" value="jose1234"/>
+    <property name="admin" value="true"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 3 -->
+<bean id="usuario3" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="juan"/>
+    <property name="Contraseña" value="juancontrasena"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 4 -->
+<bean id="usuario4" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="maria"/>
+    <property name="Contraseña" value="maria2023"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 5 -->
+<bean id="usuario5" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="carlos"/>
+    <property name="Contraseña" value="carlos456"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 6 -->
+<bean id="usuario6" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="ana"/>
+    <property name="Contraseña" value="ana7890"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 7 -->
+<bean id="usuario7" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="luis"/>
+    <property name="Contraseña" value="luispass"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 8 -->
+<bean id="usuario8" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="laura"/>
+    <property name="Contraseña" value="laura2024"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 9 -->
+<bean id="usuario9" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="pablo"/>
+    <property name="Contraseña" value="pablo123"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 10 -->
+<bean id="usuario10" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="sofia"/>
+    <property name="Contraseña" value="sofia456"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 11 -->
+<bean id="usuario11" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="diego"/>
+    <property name="Contraseña" value="diego789"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 12 -->
+<bean id="usuario12" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="lucia"/>
+    <property name="Contraseña" value="lucia2023"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 13 -->
+<bean id="usuario13" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="jorge"/>
+    <property name="Contraseña" value="jorgepass"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 14 -->
+<bean id="usuario14" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="valeria"/>
+    <property name="Contraseña" value="valeria123"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
+
+<!-- Usuario 15 -->
+<bean id="usuario15" class="frgp.utn.edu.entidad.Usuario">
+    <property name="Nombre_Usuario" value="fernando"/>
+    <property name="Contraseña" value="fernando456"/>
+    <property name="admin" value="false"/>
+    <property name="estado" value="True"/>
+</bean>
 	
 	</beans>

@@ -10,46 +10,333 @@
 		<constructor-arg value="yyyy-MM-dd" />
 	</bean>
 	
-	<bean id="medico1" class="frgp.utn.edu.entidad.Medicos">
-		<property name="legajo" value="1111"></property>
-		<property name="nombre" value="Jose"></property>
-		<property name="apellido" value="Jose"></property>
-		<property name="sexo" value="M"></property>
-		<property name="fechaNac">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="2003-04-22" />
-			</bean>
-		</property>
-		<property name="diasLab" value="Lu-Vie"></property>
-		<property name="HorarioLab" value="8hs-17hs"></property>
-		<property name="direccion" value="Argentina 123"></property>
-		<property name="localidad" value="Talar"></property>
-		<property name="email" value="jose@gmail.com"></property>
-		<property name="telefono" value="123456789"></property>
-		<property name="estado" value="True"></property>
-		<property name="especialidad" ref="especialidad1"></property>
-		<property name="usuario" ref="usuario2"></property>
-	</bean>	
-	
-	<bean id="medico2" class="frgp.utn.edu.entidad.Medicos">
-		<property name="legajo" value="2222" />
-		<property name="nombre" value="Juan" />
-		<property name="apellido" value="Gomez" />
-		<property name="sexo" value="M" />
-		<property name="fechaNac">
-			<bean factory-bean="dateFormat" factory-method="parse">
-				<constructor-arg value="1995-08-15" />
-			</bean>
-		</property>
-		<property name="diasLab" value="Lu-Sab" />
-		<property name="HorarioLab" value="9hs-18hs" />
-		<property name="direccion" value="Belgrano 456" />
-		<property name="localidad" value="San Isidro" />
-		<property name="email" value="ana.gomez@gmail.com" />
-		<property name="telefono" value="987654321" />
-		<property name="estado" value="true" />
-		<property name="especialidad" ref="especialidad2" />
-		<property name="usuario" ref="usuario3" />
-	</bean>
-</beans>
+	<!-- Médico 1 -->
+<bean id="medico1" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1111"/>
+    <property name="nombre" value="Jose"/>
+    <property name="apellido" value="García"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="2003-04-22"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Vie"/>
+    <property name="HorarioLab" value="8hs-17hs"/>
+    <property name="direccion" value="Argentina 123"/>
+    <property name="localidad" value="Talar"/>
+    <property name="email" value="jose@gmail.com"/>
+    <property name="telefono" value="123456789"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad1"/>
+    <property name="usuario" ref="usuario2"/>
+</bean>
+
+<!-- Médico 2 -->
+<bean id="medico2" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1112"/>
+    <property name="nombre" value="María"/>
+    <property name="apellido" value="López"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1985-07-15"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Sab"/>
+    <property name="HorarioLab" value="9hs-18hs"/>
+    <property name="direccion" value="Belgrano 456"/>
+    <property name="localidad" value="San Martín"/>
+    <property name="email" value="maria.lopez@gmail.com"/>
+    <property name="telefono" value="987654321"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad2"/>
+    <property name="usuario" ref="usuario3"/>
+</bean>
+
+<!-- Médico 3 -->
+<bean id="medico3" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1113"/>
+    <property name="nombre" value="Carlos"/>
+    <property name="apellido" value="Martínez"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1978-11-30"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mié-Dom"/>
+    <property name="HorarioLab" value="14hs-22hs"/>
+    <property name="direccion" value="Mitre 789"/>
+    <property name="localidad" value="Vicente López"/>
+    <property name="email" value="carlos.martinez@gmail.com"/>
+    <property name="telefono" value="456789123"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad3"/>
+    <property name="usuario" ref="usuario4"/>
+</bean>
+
+<!-- Médico 4 -->
+<bean id="medico4" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1114"/>
+    <property name="nombre" value="Ana"/>
+    <property name="apellido" value="Rodríguez"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1990-03-10"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Jue"/>
+    <property name="HorarioLab" value="7hs-16hs"/>
+    <property name="direccion" value="Sarmiento 321"/>
+    <property name="localidad" value="Olivos"/>
+    <property name="email" value="ana.rodriguez@gmail.com"/>
+    <property name="telefono" value="789123456"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad4"/>
+    <property name="usuario" ref="usuario5"/>
+</bean>
+
+<!-- Médico 5 -->
+<bean id="medico5" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1115"/>
+    <property name="nombre" value="Luis"/>
+    <property name="apellido" value="Fernández"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1982-09-25"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mar-Vie"/>
+    <property name="HorarioLab" value="10hs-19hs"/>
+    <property name="direccion" value="Rivadavia 654"/>
+    <property name="localidad" value="San Isidro"/>
+    <property name="email" value="luis.fernandez@gmail.com"/>
+    <property name="telefono" value="321654987"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad5"/>
+    <property name="usuario" ref="usuario6"/>
+</bean>
+
+<!-- Médico 6 -->
+<bean id="medico6" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1116"/>
+    <property name="nombre" value="Laura"/>
+    <property name="apellido" value="Gómez"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1975-12-05"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Mié-Vie"/>
+    <property name="HorarioLab" value="8hs-15hs"/>
+    <property name="direccion" value="San Martín 987"/>
+    <property name="localidad" value="Martínez"/>
+    <property name="email" value="laura.gomez@gmail.com"/>
+    <property name="telefono" value="654987321"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad6"/>
+    <property name="usuario" ref="usuario7"/>
+</bean>
+
+<!-- Médico 7 -->
+<bean id="medico7" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1117"/>
+    <property name="nombre" value="Pablo"/>
+    <property name="apellido" value="Díaz"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1988-06-18"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Sab"/>
+    <property name="HorarioLab" value="9hs-20hs"/>
+    <property name="direccion" value="Pueyrredón 147"/>
+    <property name="localidad" value="Acassuso"/>
+    <property name="email" value="pablo.diaz@gmail.com"/>
+    <property name="telefono" value="147258369"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad7"/>
+    <property name="usuario" ref="usuario8"/>
+</bean>
+
+<!-- Médico 8 -->
+<bean id="medico8" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1118"/>
+    <property name="nombre" value="Sofía"/>
+    <property name="apellido" value="Pérez"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1993-02-28"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mar-Jue-Sab"/>
+    <property name="HorarioLab" value="12hs-21hs"/>
+    <property name="direccion" value="Alvear 258"/>
+    <property name="localidad" value="Beccar"/>
+    <property name="email" value="sofia.perez@gmail.com"/>
+    <property name="telefono" value="369258147"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad8"/>
+    <property name="usuario" ref="usuario9"/>
+</bean>
+
+<!-- Médico 9 -->
+<bean id="medico9" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1119"/>
+    <property name="nombre" value="Diego"/>
+    <property name="apellido" value="Sánchez"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1980-08-12"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mié-Vie-Dom"/>
+    <property name="HorarioLab" value="7hs-14hs"/>
+    <property name="direccion" value="Libertador 369"/>
+    <property name="localidad" value="San Fernando"/>
+    <property name="email" value="diego.sanchez@gmail.com"/>
+    <property name="telefono" value="258147369"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad9"/>
+    <property name="usuario" ref="usuario10"/>
+</bean>
+
+<!-- Médico 10 -->
+<bean id="medico10" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1120"/>
+    <property name="nombre" value="Lucía"/>
+    <property name="apellido" value="Hernández"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1987-05-20"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Jue-Sab"/>
+    <property name="HorarioLab" value="10hs-18hs"/>
+    <property name="direccion" value="Maipú 753"/>
+    <property name="localidad" value="Tigre"/>
+    <property name="email" value="lucia.hernandez@gmail.com"/>
+    <property name="telefono" value="753159486"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad10"/>
+    <property name="usuario" ref="usuario11"/>
+</bean>
+
+<!-- Médico 11 -->
+<bean id="medico11" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1121"/>
+    <property name="nombre" value="Jorge"/>
+    <property name="apellido" value="Torres"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1973-10-08"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Vie"/>
+    <property name="HorarioLab" value="6hs-13hs"/>
+    <property name="direccion" value="Sucre 852"/>
+    <property name="localidad" value="Pilar"/>
+    <property name="email" value="jorge.torres@gmail.com"/>
+    <property name="telefono" value="852963741"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad11"/>
+    <property name="usuario" ref="usuario12"/>
+</bean>
+
+<!-- Médico 12 -->
+<bean id="medico12" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1122"/>
+    <property name="nombre" value="Valeria"/>
+    <property name="apellido" value="Ramírez"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1995-01-15"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mar-Jue-Sab"/>
+    <property name="HorarioLab" value="15hs-23hs"/>
+    <property name="direccion" value="Lavalle 159"/>
+    <property name="localidad" value="Escobar"/>
+    <property name="email" value="valeria.ramirez@gmail.com"/>
+    <property name="telefono" value="159753486"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad12"/>
+    <property name="usuario" ref="usuario13"/>
+</bean>
+
+<!-- Médico 13 -->
+<bean id="medico13" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1123"/>
+    <property name="nombre" value="Gabriel"/>
+    <property name="apellido" value="Flores"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1984-07-03"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Mié-Vie"/>
+    <property name="HorarioLab" value="11hs-20hs"/>
+    <property name="direccion" value="Uruguay 357"/>
+    <property name="localidad" value="Campana"/>
+    <property name="email" value="gabriel.flores@gmail.com"/>
+    <property name="telefono" value="357159852"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad13"/>
+    <property name="usuario" ref="usuario14"/>
+</bean>
+
+<!-- Médico 14 -->
+<bean id="medico14" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1124"/>
+    <property name="nombre" value="Carolina"/>
+    <property name="apellido" value="Mendoza"/>
+    <property name="sexo" value="F"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1991-04-17"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Mar-Vie-Dom"/>
+    <property name="HorarioLab" value="9hs-16hs"/>
+    <property name="direccion" value="Chile 468"/>
+    <property name="localidad" value="Zárate"/>
+    <property name="email" value="carolina.mendoza@gmail.com"/>
+    <property name="telefono" value="468135792"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad14"/>
+    <property name="usuario" ref="usuario15"/>
+</bean>
+
+<!-- Médico 15 -->
+<bean id="medico15" class="frgp.utn.edu.entidad.Medicos">
+    <property name="legajo" value="1125"/>
+    <property name="nombre" value="Fernando"/>
+    <property name="apellido" value="Rojas"/>
+    <property name="sexo" value="M"/>
+    <property name="fechaNac">
+        <bean factory-bean="dateFormat" factory-method="parse">
+            <constructor-arg value="1979-09-22"/>
+        </bean>
+    </property>
+    <property name="diasLab" value="Lu-Jue-Sab"/>
+    <property name="HorarioLab" value="7hs-15hs"/>
+    <property name="direccion" value="Paraguay 579"/>
+    <property name="localidad" value="San Pedro"/>
+    <property name="email" value="fernando.rojas@gmail.com"/>
+    <property name="telefono" value="579246813"/>
+    <property name="estado" value="True"/>
+    <property name="especialidad" ref="especialidad15"/>
+    <property name="usuario" ref="usuario16"/>
+</bean>
 	
