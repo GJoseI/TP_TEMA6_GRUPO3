@@ -33,9 +33,7 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
         EspecialidadNegocio epn = new EspecialidadNegocio();
         List<Especialidad> especialidades = epn.ReadAll();
         
-        MedicosNegocio medNeg = new MedicosNegocio();
         Medicos medico_m = (Medicos) request.getAttribute("medicoSeleccionado");
-        Usuario user = null;
         %>
 	<div class="admin-medicos-container">
     	<h3>Gestionar Médicos</h3>
@@ -56,9 +54,9 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                                 <strong>Legajo: <%= medico_m.getLegajo() %></strong><br><br>
                                 <input type="hidden" name="legajo" value="<%= medico_m.getLegajo() %>">
                                 <strong>Nombre:</strong>
-                                <input type="text" name="nombre" value="<%= medico_m.getNombre() %>" required><br><br>
+                                <input type="text" name="nombre" value="<%= medico_m.getNombre() %>" ><br><br>
                                 <strong>Apellido:</strong>
-                                <input type="text" name="apellido" value="<%= medico_m.getApellido() %>" required><br><br>
+                                <input type="text" name="apellido" value="<%= medico_m.getApellido() %>" ><br><br>
                                 <strong>Sexo:</strong>
                                 <select name="Sexo" required>
                                     <option value="Masculino" <%= "Masculino".equals(medico_m.getSexo()) ? "selected" : "" %>>Masculino</option>
@@ -66,27 +64,27 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                                     <option value="Otro" <%= "Otro".equals(medico_m.getSexo()) ? "selected" : "" %>>Otro</option>
                                 </select><br><br>
                                 <strong>Dirección:</strong>
-                                <input type="text" name="direccion" value="<%= medico_m.getDireccion() %>" required><br><br>
+                                <input type="text" name="direccion" value="<%= medico_m.getDireccion() %>" ><br><br>
                                 <strong>Localidad:</strong>
-                                <input type="text" name="localidad" value="<%= medico_m.getLocalidad() %>" required><br><br>
+                                <input type="text" name="localidad" value="<%= medico_m.getLocalidad() %>" ><br><br>
                                 <strong>Fecha de Nacimiento:</strong>
-                                <input type="date" name="fechaNac" value="<%= medico_m.getFechaNac() %>" required><br><br>
+                                <input type="date" name="fechaNac" value="<%= medico_m.getFechaNac() %>" ><br><br>
                                 <strong>Correo electrónico:</strong>
-                                <input type="email" name="email" value="<%= medico_m.getEmail() %>" required><br><br>
+                                <input type="email" name="email" value="<%= medico_m.getEmail() %>" ><br><br>
                                 <strong>Días de trabajo:</strong>
-                                <input type="text" name="Dias" value="<%= medico_m.getDiasLab() %>" required><br><br>
+                                <input type="text" name="Dias" value="<%= medico_m.getDiasLab() %>" ><br><br>
                                 <strong>Horarios de trabajo:</strong>
-                                <input type="text" name="horarios" value="<%= medico_m.getHorarioLab() %>" required><br><br>
+                                <input type="text" name="horarios" value="<%= medico_m.getHorarioLab() %>" ><br><br>
                                 <strong>Teléfono:</strong>
-                                <input type="tel" name="telefono" value="<%= medico_m.getTelefono() %>" required>
+                                <input type="tel" name="telefono" value="<%= medico_m.getTelefono() %>" >
                             </td>
                             <td>
                                 <strong>Usuario:</strong>
-                                <input type="text" name="user" value="<%= medico_m.getUsuario().getNombre_Usuario() %>" required><br><br>
+                                <input type="text" name="user" value="<%= medico_m.getUsuario().getNombre_Usuario() %>" ><br><br>
                                 <strong>Contraseña:</strong>
-                                <input type="password" name="password" value="<%= medico_m.getUsuario().getContraseña() %>" required><br><br>
+                                <input type="password" name="password" value="<%= medico_m.getUsuario().getContraseña() %>" ><br><br>
                                 <strong>Especialidad:</strong>
-                                <select name="especialidad" required>
+                                <select name="especialidad" >
                                     <% for(Especialidad es : especialidades) { %>
                                         <option value="<%= es.getId() %>" <%= es.getId() == medico_m.getEspecialidad().getId() ? "selected" : "" %>>
                                             <%= es.getNombre() %>
@@ -96,7 +94,7 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                             </td>
                             <td>
                                 <strong>Activo</strong>
-                                <input type="radio" name="estado" value="activo" <%= medico_m.isEstado() ? "checked" : "" %> required><br><br>
+                                <input type="radio" name="estado" value="activo" <%= medico_m.isEstado() ? "checked" : "" %> ><br><br>
                                 <strong>Inactivo</strong>
                                 <input type="radio" name="estado" value="inactivo" <%= !medico_m.isEstado() ? "checked" : "" %>>
                             </td>

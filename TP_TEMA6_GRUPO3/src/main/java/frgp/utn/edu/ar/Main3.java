@@ -32,14 +32,14 @@ public class Main3 {
 				"frgp/utn/edu/ar/resources/BeansMedico.xml", "frgp/utn/edu/ar/resources/BeansTurno.xml", "frgp/utn/edu/ar/resources/BeansUsuario.xml", 
 				"frgp/utn/edu/ar/resources/BeansPaciente.xml");
 		
-		Especialidad especialidad1 = (Especialidad)appContext.getBean("especialidad1");
-		Especialidad especialidad2 = (Especialidad)appContext.getBean("especialidad2");
-		Especialidad especialidad3 = (Especialidad)appContext.getBean("especialidad3");
-		System.out.println("Esp1 "+especialidad1.toString() + "Esp2 "+especialidad2 + "Esp3 "+especialidad3);
+		//Especialidad especialidad1 = (Especialidad)appContext.getBean("especialidad1");
+		//Especialidad especialidad2 = (Especialidad)appContext.getBean("especialidad2");
+		//Especialidad especialidad3 = (Especialidad)appContext.getBean("especialidad3");
+		//System.out.println("Esp1 "+especialidad1.toString() + "Esp2 "+especialidad2 + "Esp3 "+especialidad3);
 		
-		Usuario usuario1 = (Usuario)appContext.getBean("usuario1");
-		Usuario usuario2 = (Usuario)appContext.getBean("usuario2");
-		Usuario usuario3 = (Usuario)appContext.getBean("usuario3");
+		//Usuario usuario1 = (Usuario)appContext.getBean("usuario1");
+		//Usuario usuario2 = (Usuario)appContext.getBean("usuario2");
+		//Usuario usuario3 = (Usuario)appContext.getBean("usuario3");
 		//Usuario usuario4 = (Usuario)appContext.getBean("usuario4");
 		//Usuario usuario5 = (Usuario)appContext.getBean("usuario5");
 		//Usuario usuario6 = (Usuario)appContext.getBean("usuario6");
@@ -53,8 +53,8 @@ public class Main3 {
 		//Usuario usuario14 = (Usuario)appContext.getBean("usuario14");
 		//Usuario usuario15 = (Usuario)appContext.getBean("usuario15");
 		
-		Medicos medico1 = (Medicos)appContext.getBean("medico1");
-		Medicos medico2 = (Medicos)appContext.getBean("medico2");
+		//Medicos medico1 = (Medicos)appContext.getBean("medico1");
+		//Medicos medico2 = (Medicos)appContext.getBean("medico2");
 		//Medicos medico3 = (Medicos)appContext.getBean("medico3");
 		//Medicos medico4 = (Medicos)appContext.getBean("medico4");
 		//Medicos medico5 = (Medicos)appContext.getBean("medico5");
@@ -68,10 +68,10 @@ public class Main3 {
 		//Medicos medico13 = (Medicos)appContext.getBean("medico13");
 		//Medicos medico14 = (Medicos)appContext.getBean("medico14");
 		//Medicos medico15 = (Medicos)appContext.getBean("medico15");
-		System.out.println("Med1 "+medico1.toString() + "Med2 "+medico2.toString());
+		//System.out.println("Med1 "+medico1.toString() + "Med2 "+medico2.toString());
 
-		//Paciente paciente1 = (Paciente)appContext.getBean("paciente1");
-		//Paciente paciente2 = (Paciente)appContext.getBean("paciente2");
+		Paciente paciente1 = (Paciente)appContext.getBean("paciente1");
+		Paciente paciente2 = (Paciente)appContext.getBean("paciente2");
 		//System.out.println("Pac1 "+paciente1.toString() + "Pac2 "+paciente2.toString());
 		
 		//Turno turno1 = (Turno)appContext.getBean("turno1");
@@ -82,16 +82,16 @@ public class Main3 {
 		((ConfigurableApplicationContext)appContext).close();
 		
 		///Agregar todo
-		//pacNeg.AgregarPaciente(paciente1);
-		//pacNeg.AgregarPaciente(paciente2);
+		pacNeg.AgregarPaciente(paciente1);
+		pacNeg.AgregarPaciente(paciente2);
 		
-		espNeg.AgregarEspecialidad(especialidad1);
-		espNeg.AgregarEspecialidad(especialidad2);
-		espNeg.AgregarEspecialidad(especialidad3);
+		//espNeg.AgregarEspecialidad(especialidad1);
+		//espNeg.AgregarEspecialidad(especialidad2);
+		//espNeg.AgregarEspecialidad(especialidad3);
 
-		usNeg.AgregarUsuario(usuario1);
-		usNeg.AgregarUsuario(usuario2);
-		usNeg.AgregarUsuario(usuario3);
+		//usNeg.AgregarUsuario(usuario1);
+		//usNeg.AgregarUsuario(usuario2);
+		//usNeg.AgregarUsuario(usuario3);
 		//usNeg.AgregarUsuario(usuario4);
 		//usNeg.AgregarUsuario(usuario5);
 		//usNeg.AgregarUsuario(usuario6);
@@ -105,8 +105,8 @@ public class Main3 {
 		//usNeg.AgregarUsuario(usuario14);
 		//usNeg.AgregarUsuario(usuario15);
 		
-		medNeg.AgregarMedicos(medico1);
-		medNeg.AgregarMedicos(medico2);
+		//medNeg.AgregarMedicos(medico1);
+		//medNeg.AgregarMedicos(medico2);
 		//	medNeg.AgregarMedicos(medico3);
 		//	medNeg.AgregarMedicos(medico4);
 		//	medNeg.AgregarMedicos(medico5);

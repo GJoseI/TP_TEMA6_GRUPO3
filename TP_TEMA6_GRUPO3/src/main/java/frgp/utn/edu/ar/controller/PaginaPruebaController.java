@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import NegocioImp.EspecialidadNegocio;
 import NegocioImp.MedicosNegocio;
+import NegocioImp.PacienteNegocio;
 import NegocioImp.UsuarioNegocio;
 import frgp.utn.edu.entidad.Especialidad;
 import frgp.utn.edu.entidad.Medicos;
+import frgp.utn.edu.entidad.Paciente;
 import frgp.utn.edu.entidad.Usuario;
 
 @Controller
@@ -116,6 +118,56 @@ public class PaginaPruebaController extends HttpServlet {
 		return MV;
 	}
 	
+	@RequestMapping("alta_paciente.html")
+	public ModelAndView eventoAltaPaciente(HttpServletRequest request) {
+		ModelAndView MV = new ModelAndView();
+		PacienteNegocio pacNeg = new PacienteNegocio();
+        
+        MV.setViewName("admin_Paciente");
+        if (request.getParameter("btnguardar") != null) {
+            try {
+                
+                if(!pacNeg.Exist(request.getParameter("dni"))) {
+                    
+                    Paciente p = new Paciente();
+                    
+                    p.setDNI(request.getParameter("dni"));
+                    p.setNombre(request.getParameter("nombre"));
+                    p.setApellido(request.getParameter("apellido"));
+                    p.setCorreo_electronico(request.getParameter("email"));
+                    p.setDireccion(request.getParameter("direccion"));
+                    p.setLocalidad(request.getParameter("localidad"));
+                    p.setProvincia(request.getParameter("provincia"));
+                    p.setTelefono(request.getParameter("telefono"));
+                    p.setEstado("activo".equals(request.getParameter("estado")));
+                    try {
+                        String fechaNacStr = request.getParameter("fecha_nacimiento");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaNac = sdf.parse(fechaNacStr);
+                        p.setFecha_nacimiento(fechaNac);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(pacNeg.AgregarPaciente(p)) {
+                        request.setAttribute("mensajeExito", "Paciente registrado correctamente");
+                    } else {
+                        request.setAttribute("mensajeError", "Error al registrar el paciente");
+                    }
+                } else {
+                    request.setAttribute("mensajeError", "El DNI ya existe");
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensajeError", "DNI inválido");
+            } catch (Exception e) {
+                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        }
+
+		return MV;
+	}
+	
+	
 	@RequestMapping("redireccionar_modificarMed_admin.html")
 	public ModelAndView eventoRedireccionar_listaAdminMed(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
@@ -136,6 +188,31 @@ public class PaginaPruebaController extends HttpServlet {
                 }
             } catch (NumberFormatException e) {
             	request.setAttribute("mensajeError", "Legajo inválido");
+            } catch (Exception e) {
+            	request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        }
+		return MV;
+	}
+	
+	@RequestMapping("redireccionar_modificarPac_admin.html")
+	public ModelAndView eventoRedireccionar_ModifPac(HttpServletRequest request){
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("modificarPac_admin");
+		
+		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
+            try {
+                PacienteNegocio pacNeg = new PacienteNegocio();
+                Paciente paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
+                
+                if (paciente != null) {
+                    MV.addObject("pacienteSeleccionado", paciente);
+                } else {
+                    // Manejar médico no encontrado
+                    request.setAttribute("mensajeError", "Error al buscar el paciente");
+                }
+            } catch (NumberFormatException e) {
+            	request.setAttribute("mensajeError", "DNI inválido");
             } catch (Exception e) {
             	request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
             }
@@ -199,6 +276,62 @@ public class PaginaPruebaController extends HttpServlet {
             }
         }
 		return MV;
+	}
+	
+	@RequestMapping("modif_paciente.html")
+	public ModelAndView eventoModifPaciente(HttpServletRequest request) {
+		ModelAndView MV = new ModelAndView();
+		PacienteNegocio pacNeg = new PacienteNegocio();
+        
+        MV.setViewName("admin_Paciente");
+        if (request.getParameter("btnguardar_Modificar") != null) {
+            try {
+                
+                if(pacNeg.Exist(request.getParameter("dni"))) {
+                    
+                    Paciente p = new Paciente();
+                    
+                    p.setDNI(request.getParameter("dni"));
+                    p.setNombre(request.getParameter("nombre"));
+                    p.setApellido(request.getParameter("apellido"));
+                    p.setCorreo_electronico(request.getParameter("email"));
+                    p.setDireccion(request.getParameter("direccion"));
+                    p.setLocalidad(request.getParameter("localidad"));
+                    p.setProvincia(request.getParameter("provincia"));
+                    p.setTelefono(request.getParameter("telefono"));
+                    p.setEstado("activo".equals(request.getParameter("estado")));
+                    try {
+                        String fechaNacStr = request.getParameter("fecha_nacimiento");
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        Date fechaNac = sdf.parse(fechaNacStr);
+                        p.setFecha_nacimiento(fechaNac);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(pacNeg.Update(p)) {
+                        request.setAttribute("mensajeExito", "Paciente Actualizad correctamente");
+                    } else {
+                        request.setAttribute("mensajeError", "Error al actualizar el paciente");
+                    }
+                } 
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensajeError", "DNI inválido");
+            } catch (Exception e) {
+                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        }
+
+		return MV;
+	}
+	
+	@RequestMapping("filtrar_medicos.html")
+	public ModelAndView eventoFiltrar_medicos() {
+		ModelAndView MV = new ModelAndView();
+
+		//Codigo para filtrar en la lista de medicos
+		
+	return MV;
 	}
 	
 	@RequestMapping("redireccionar_Admin.html")

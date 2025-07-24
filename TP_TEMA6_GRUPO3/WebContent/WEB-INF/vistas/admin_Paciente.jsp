@@ -64,7 +64,7 @@ String pacienteEnEdicion = request.getParameter("editarDni");
 boolean editando = pacienteEnEdicion != null && !pacienteEnEdicion.isEmpty();
 
 // Procesar formulario de guardar nuevo paciente
-if(request.getParameter("btnguardar") != null){
+/*if(request.getParameter("btnguardar") != null){
     if(!negPaciente.Exist(request.getParameter("dni"))){
         paciente.setDNI(request.getParameter("dni"));
         paciente.setNombre(request.getParameter("nombre"));
@@ -113,6 +113,7 @@ if(request.getParameter("btnBaja") != null) {
     negPaciente.Delete(pp);
     ListaPasiente = negPaciente.ReadAll(); // Recargar lista
 }
+*/
 %>
 
 <div class="admin-pacientes-container">
@@ -126,10 +127,17 @@ if(request.getParameter("btnBaja") != null) {
         </div>
     </div>
     
+    <% if(request.getAttribute("mensajeError") != null) { %>
+            <div class="error"><%= request.getAttribute("mensajeError") %></div>
+        <% } %>
+        <% if(request.getAttribute("mensajeExito") != null) { %>
+            <div class="exito"><%= request.getAttribute("mensajeExito") %></div>
+        <% } %>
+        
     <div class="admin-pacientes-container">
         <h3>Gestionar Pacientes</h3>
         
-        <form action="" method="post" class="admin-pacientes-form">
+        <form action="alta_paciente.html" method="post" class="admin-pacientes-form">
             <table>
                 <thead>
                     <tr>
@@ -185,7 +193,7 @@ if(request.getParameter("btnBaja") != null) {
         </form>
         <br>
         
-        <form action="" method="post" class="admin-pacientes-form">
+        <form action="redireccionar_modificarPac_admin.html" method="post" class="admin-pacientes-form">
             <table>
                 <thead>
                     <tr>
@@ -223,8 +231,7 @@ if(request.getParameter("btnBaja") != null) {
                             <td><%=p.getCorreo_electronico()%></td>
                             <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
                             <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnBaja" value="<%=p.getDNI()%>">Eliminar</button>
-                                <button type="submit" class="btn-guardar-fila" name="editarDni" value="<%=p.getDNI()%>">Modificar</button>
+                                <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%=p.getDNI()%>">Modificar</button>
                             </td>
                         <% } %>
                     </tr>
@@ -247,7 +254,7 @@ if(request.getParameter("btnBaja") != null) {
                             <td><%=p.getCorreo_electronico()%></td>
                             <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
                             <td>
-                                <button type="submit" class="btn-guardar-fila" name="editarDni" value="<%=p.getDNI()%>">Modificar</button>
+                                <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%=p.getDNI()%>">Modificar</button>
                             </td>
                         <% } %>
                     </tr>

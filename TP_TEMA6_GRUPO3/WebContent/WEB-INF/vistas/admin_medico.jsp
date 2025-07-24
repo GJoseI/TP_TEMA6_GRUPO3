@@ -153,8 +153,7 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
         
         <div class="admin-medicos-container">
             <h3>Lista de Médicos</h3>
-            
-            <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
+            <form action="filtrar_medicos.html" method="post" class="admin-medicos-form">
                 <strong>Legajo:</strong>
                 <input type="text" name="Legajo" placeholder="Ingrese legajo">
                 <strong>Especialidad:</strong>
@@ -165,7 +164,8 @@ import="frgp.utn.edu.entidad.Medicos, java.util.List, java.text.SimpleDateFormat
                     <% } %>
                 </select>
                 <button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
-                
+            </form>    
+            <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
                 <table>
                     <thead>
                         <tr>
