@@ -2,58 +2,56 @@ package NegocioImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import Negocio.IMedicosNegocio;
+import dao.IMedicos;
 import daoImp.Conexion;
 import daoImp.daoMedicos;
 import frgp.utn.edu.entidad.Medicos;
 
 public class MedicosNegocio implements IMedicosNegocio {
-	public boolean AgregarMedicos(Medicos medicos) 
-	{
-		daoMedicos med = new daoMedicos();
-		return med.AgregarMedicos(medicos);
+	
+	@Autowired
+	private IMedicos daoMedicos;
+	
+	public boolean AgregarMedicos(Medicos medicos){
+		return daoMedicos.AgregarMedicos(medicos);
 	}
 
 	public boolean Exist(int legajo){
-		daoMedicos med = new daoMedicos();
-		return med.Exist(legajo);
+		return daoMedicos.Exist(legajo);
 	}
+	
 	public  Medicos ReadOne(int legajo) {
-		daoMedicos med = new daoMedicos();
-		return med.ReadOne(legajo);
+		return daoMedicos.ReadOne(legajo);
 	}
+	
 	public boolean Update(Medicos medicos) {
-		daoMedicos med = new daoMedicos();
-		return med.Update(medicos);
+		return daoMedicos.Update(medicos);
 	}
+	
 	public boolean Delete(Medicos medicos){
-		daoMedicos med = new daoMedicos();
-		return med.Delete(medicos);
+		return daoMedicos.Delete(medicos);
 	}
 
 	public List<Medicos> ReadAll(){
-		daoMedicos med = new daoMedicos();
-		return med.ReadAll();
+		return daoMedicos.ReadAll();
 	}
 
 	public Conexion getConexion() {
-		daoMedicos med = new daoMedicos();
-		return med.getConexion();
+		return daoMedicos.getConexion();
 	}
 	public void setConexion(Conexion conexion) {
-		daoMedicos med = new daoMedicos();
-		med.setConexion(conexion);
+		daoMedicos.setConexion(conexion);
 	}
 	
 	public List<Medicos> FiltarXEspecilidad(int especialidad){
-		daoMedicos med = new daoMedicos();
-		return med.FiltarXEspecilidad(especialidad);
-	
+		return daoMedicos.FiltarXEspecilidad(especialidad);
 	}
 	
 	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int especialidad){
-		daoMedicos med = new daoMedicos();
-		return med.FiltarXEspecilidadYLegajo(legajo, especialidad);
+		return daoMedicos.FiltarXEspecilidadYLegajo(legajo, especialidad);
 	}
 
 }

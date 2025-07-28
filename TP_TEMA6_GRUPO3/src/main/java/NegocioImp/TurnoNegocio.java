@@ -2,62 +2,57 @@ package NegocioImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import dao.ITurno;
 import daoImp.Conexion;
 import daoImp.daoTurno;
 import frgp.utn.edu.entidad.Turno;
 
 public class TurnoNegocio {
+	
+	@Autowired
+	private ITurno daoTurno;
 
 	public boolean AgregarTurno(Turno turno)
 	{
-		daoTurno t = new daoTurno();
-		return t.AgregarTurno(turno);
+		return daoTurno.AgregarTurno(turno);
 	}
 
 	public boolean Exist(int id){
-		daoTurno t = new daoTurno();
-		return t.Exist(id);
+		return daoTurno.Exist(id);
 	}
 	public Turno ReadOne(int id){
-		daoTurno t = new daoTurno();
-		return t.ReadOne(id);
+		return daoTurno.ReadOne(id);
 	}
 	public boolean Update(Turno turno) {
-		daoTurno t = new daoTurno();
-		return t.Update(turno);
+		return daoTurno.Update(turno);
 	}
 	public boolean Delete(Turno turno){
-		daoTurno t = new daoTurno();
-		return t.Delete(turno);
+		return daoTurno.Delete(turno);
 	}
 
 	public List<Turno> ReadAll(){
-		daoTurno t = new daoTurno();
-		return t.ReadAll();
+		return daoTurno.ReadAll();
 	}
 
 	public List<Turno> FiltarxFecha(String facha){
-		daoTurno t = new daoTurno();
-		return t.FiltarxFecha(facha);
+		return daoTurno.FiltarxFecha(facha);
 	}
 	
 	public List<Turno> FiltarxFechaxPciente(String facha, String dni){
-		daoTurno t = new daoTurno();
-		return t.FiltarxFechaxPciente( facha,  dni);
+		return daoTurno.FiltarxFechaxPciente( facha,  dni);
 	}
 	
 	public List<Turno> FiltarPciente(String dni){
-		daoTurno t = new daoTurno();
-		return t.FiltarPciente( dni);
+		return daoTurno.FiltarPciente( dni);
 	}
 	
 	public Conexion getConexion() {
-		daoTurno t = new daoTurno();
-		return t.getConexion();
+		return daoTurno.getConexion();
 	}
 	public void setConexion(Conexion conexion) {
-		daoTurno t = new daoTurno();
-		t.setConexion(conexion);
+		daoTurno.setConexion(conexion);
 	}
 
 }

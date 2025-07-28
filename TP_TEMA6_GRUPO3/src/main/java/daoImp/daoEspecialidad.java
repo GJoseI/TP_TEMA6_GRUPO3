@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.IEspecialidad;
 import daoImp.Conexion;
 import frgp.utn.edu.entidad.Especialidad;
 
 public class daoEspecialidad implements IEspecialidad{
-private static Conexion conexion;
+	
+	@Autowired
+	private Conexion conexion;
 	
 	///Agrergar Usuario
 	public boolean AgregarEspecialidad(Especialidad especialidad)
 	{
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 		try 
 		{
@@ -46,7 +48,6 @@ private static Conexion conexion;
 	/// Si existe
 	public boolean Exist(int id)
 	{
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad medicos=(Especialidad)session.get(Especialidad.class,id);
@@ -59,7 +60,6 @@ private static Conexion conexion;
 	/// Devuelve por Nombre de usuario
 	public Especialidad ReadOne(int id)
 	{
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
@@ -72,8 +72,6 @@ private static Conexion conexion;
 	{
 		boolean estado = true;
 	    Session session = null;
-	    conexion = new Conexion();
-
 	    try {
 	        session = conexion.abrirConexion();
 	        session.beginTransaction();
@@ -104,7 +102,6 @@ private static Conexion conexion;
 	public boolean Delete(Especialidad especialidad) 
 	{	
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -135,7 +132,6 @@ private static Conexion conexion;
 	
 	/// trae todo
 	public List<Especialidad> ReadAll() {		
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Especialidad> usuarios = session.createQuery("FROM Especialidad").list();
@@ -144,7 +140,6 @@ private static Conexion conexion;
 	}
 	
 	public Especialidad nombre(String n) {		
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         Query usuarios = session.createQuery("SELECT * FROM especialidad  WHERE nombre = "+ n +" LIMIT 1;");

@@ -14,4 +14,5 @@ public interface IEspecialidad {
 	public List<Especialidad> ReadAll();
 	public Conexion getConexion();
 	public void setConexion(Conexion conexion);
+	public Especialidad nombre (String n);
 }

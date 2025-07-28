@@ -12,6 +12,7 @@ public interface ITurno {
 	public boolean Update(Turno turno);
 	public boolean Delete(Turno turno) ;
 	public List<Turno> ReadAll() ;
+	public List<Turno> FiltarxFecha(String facha);
 	public List<Turno> FiltarxFechaxPciente(String facha, String dni);
 	public List<Turno> FiltarPciente( String dni);
 	public Conexion getConexion();

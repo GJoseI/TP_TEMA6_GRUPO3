@@ -2,6 +2,7 @@ package daoImp;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.IUsuario;
 import daoImp.Conexion;
@@ -9,7 +10,8 @@ import frgp.utn.edu.entidad.Usuario;
 
 public class daoUsuario implements IUsuario {
 
-	private static Conexion conexion;
+	@Autowired
+	private Conexion conexion;
 	
 	///Agrergar Usuario
 	public boolean AgregarUsuario(Usuario usuario)

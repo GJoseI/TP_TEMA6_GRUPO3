@@ -2,47 +2,43 @@ package NegocioImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import Negocio.IPacienteNegocio;
+import dao.IPaciente;
 import daoImp.Conexion;
-import daoImp.daoPaciente;
 import frgp.utn.edu.entidad.Paciente;
 
 public class PacienteNegocio implements IPacienteNegocio {
 	
-	public boolean AgregarPaciente(Paciente p)
-	{
-		daoPaciente paciente = new daoPaciente();
-		return paciente.AgregarPaciente(p);
+	@Autowired
+	private IPaciente daoPaciente;
+	
+	public boolean AgregarPaciente(Paciente p){
+		return daoPaciente.AgregarPaciente(p);
 	}
 
 	public boolean Exist(String dni){
-		daoPaciente paciente = new daoPaciente();
-		return paciente.Exist(dni);
+		return daoPaciente.Exist(dni);
 	}
 	public Paciente ReadOne(String dni){
-		daoPaciente paciente = new daoPaciente();
-		return paciente.ReadOne(dni);
+		return daoPaciente.ReadOne(dni);
 	}
 	public boolean Update(Paciente p) {
-		daoPaciente paciente = new daoPaciente();
-		return paciente.Update(p);
+		return daoPaciente.Update(p);
 	}
 	public boolean Delete(Paciente p) {
-		daoPaciente paciente = new daoPaciente();
-		return paciente.Delete(p);
+		return daoPaciente.Delete(p);
 	}
 
 	public List<Paciente> ReadAll(){
-		daoPaciente paciente = new daoPaciente();
-		return paciente.ReadAll();
+		return daoPaciente.ReadAll();
 	}
 
 	public Conexion getConexion() {
-		daoPaciente paciente = new daoPaciente();
-		return paciente.getConexion();
+		return daoPaciente.getConexion();
 	}
 	public void setConexion(Conexion conexion) {
-		daoPaciente paciente = new daoPaciente();;
-		paciente.setConexion(conexion);
+		daoPaciente.setConexion(conexion);
 	}
 }

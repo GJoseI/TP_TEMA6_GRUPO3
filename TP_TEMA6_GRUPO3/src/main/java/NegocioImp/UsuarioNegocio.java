@@ -2,47 +2,44 @@ package NegocioImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import Negocio.IUsuarioNegocio;
+import dao.IUsuario;
 import daoImp.Conexion;
-import daoImp.daoUsuario;
 import frgp.utn.edu.entidad.Usuario;
 
 public class UsuarioNegocio implements IUsuarioNegocio{
 
+	@Autowired
+	private IUsuario daoUsuario;
+	
 	public boolean AgregarUsuario(Usuario usuario)
 	{
-		daoUsuario s = new daoUsuario();
-		return s.AgregarUsuario(usuario);
+		return daoUsuario.AgregarUsuario(usuario);
 	}
 
 	public boolean Exist(String nombreUsuario){
-		daoUsuario s = new daoUsuario();
-		return s.Exist(nombreUsuario);
+		return daoUsuario.Exist(nombreUsuario);
 	}
 	public Usuario ReadOne(String nombreUsuario){
-		daoUsuario s = new daoUsuario();
-		return s.ReadOne(nombreUsuario);
+		return daoUsuario.ReadOne(nombreUsuario);
 	}
 	public boolean Update(Usuario usuario) {
-		daoUsuario s = new daoUsuario();
-		return s.Update(usuario);
+		return daoUsuario.Update(usuario);
 	}
 	public boolean Delete(Usuario usuario){
-		daoUsuario s = new daoUsuario();
-		return s.Delete(usuario);
+		return daoUsuario.Delete(usuario);
 	}
 
 	public List<Usuario> ReadAll(){
-		daoUsuario s = new daoUsuario();
-		return s.ReadAll();
+		return daoUsuario.ReadAll();
 	}
 
 	public Conexion getConexion() {
-		daoUsuario s = new daoUsuario();
-		return s.getConexion();
+		return daoUsuario.getConexion();
 	}
 	public void setConexion(Conexion conexion) {
-		daoUsuario s = new daoUsuario();
-		s.setConexion(conexion);
+		daoUsuario.setConexion(conexion);
 	}
 }

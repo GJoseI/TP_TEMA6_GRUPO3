@@ -2,6 +2,7 @@ package daoImp;
 
 import java.util.List;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.IPaciente;
 import dao.ITurno;
@@ -10,7 +11,8 @@ import frgp.utn.edu.entidad.Turno;
 
 public class daoTurno implements ITurno{
 	
-	private static Conexion conexion;
+	@Autowired
+	private Conexion conexion;
 	///Agrergar Usuario
 		public boolean AgregarTurno(Turno turno)
 		{

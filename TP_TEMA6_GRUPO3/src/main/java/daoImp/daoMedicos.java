@@ -3,6 +3,7 @@ package daoImp;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.IMedicos;
 import daoImp.Conexion;
@@ -10,13 +11,14 @@ import frgp.utn.edu.entidad.Especialidad;
 import frgp.utn.edu.entidad.Medicos;
 
 public class daoMedicos implements IMedicos{
-private static Conexion conexion;
+	
+	@Autowired	
+	private Conexion conexion;
 	
 	///Agrergar Usuario
 	public boolean AgregarMedicos(Medicos medicos)
 	{
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 		try 
 		{
@@ -46,7 +48,6 @@ private static Conexion conexion;
 	/// Si existe
 	public boolean Exist(int legajo)
 	{
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
@@ -58,7 +59,6 @@ private static Conexion conexion;
 	/// Devuelve por Nombre de id
 	public Medicos ReadOne(int legajo)
 	{
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
@@ -71,7 +71,6 @@ private static Conexion conexion;
 	/// Devuelve por Nombre de usuario y especialidad
 	public List<Medicos> FiltarXEspecilidad(int  especialidad)
 	{
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = " + especialidad +" ; ").list();
@@ -86,7 +85,6 @@ private static Conexion conexion;
 	/// Devuelve por Nombre de usuario y especialidad
 	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad)
 	{
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = "+ especialidad + " and m.legajo = "+ legajo + " ;").list();
@@ -102,7 +100,6 @@ private static Conexion conexion;
 	/// Modificar 
 	public boolean Update(Medicos medicos)
 	{
-		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -136,7 +133,6 @@ private static Conexion conexion;
 	public boolean Delete(Medicos medicos) 
 	{	
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -168,7 +164,6 @@ private static Conexion conexion;
 	
 	/// trae todo
 	public List<Medicos> ReadAll() {		
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("from Medicos").list();

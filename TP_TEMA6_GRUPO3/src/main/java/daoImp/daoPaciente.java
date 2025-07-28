@@ -3,19 +3,20 @@ package daoImp;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import dao.IPaciente;
 import daoImp.Conexion;
 import frgp.utn.edu.entidad.Paciente;
 
 public class daoPaciente implements IPaciente {
-private static Conexion conexion;
+	@Autowired
+	private  Conexion conexion;
 	
 	///Agrergar Paciente
 	public boolean AgregarPaciente(Paciente paciente)
 	{
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 		try 
 		{
@@ -44,7 +45,6 @@ private static Conexion conexion;
 	
 	/// Si existe
 	public boolean Exist(String dni){
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -57,7 +57,6 @@ private static Conexion conexion;
 	
 	/// Devuelve por Nombre de usuario
 	public Paciente ReadOne(String dni){
-		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -69,7 +68,6 @@ private static Conexion conexion;
 	/// Modificar 
 	public boolean Update(Paciente paciente){
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -101,7 +99,6 @@ private static Conexion conexion;
 	/// Borrar
 	public boolean Delete(Paciente paciente) {	
 		boolean estado = true;
-		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -133,7 +130,6 @@ private static Conexion conexion;
 	
 	/// trae todo
 	public List<Paciente> ReadAll() {		
-		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Paciente> usuarios = session.createQuery("FROM Paciente").list();
