@@ -277,3 +277,4 @@
     <property name="correo_electronico" value="gabriel.flores@email.com"/>
     <property name="estado" value="True"/>
 </bean>
+</beans>

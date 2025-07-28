@@ -87,7 +87,7 @@ List<Especialidad> especialidades = epn.ReadAll();
 String mensajeError = null;
 String mensajeExito = null;
 
-if(request.getParameter("btnguardar")!=null) {
+/*if(request.getParameter("btnguardar")!=null) {
     try {
         String dni = request.getParameter("dni");
         int legajo = Integer.parseInt(request.getParameter("Legajo"));
@@ -123,11 +123,11 @@ if(request.getParameter("btnguardar")!=null) {
         mensajeError = "Formato numérico inválido";
     }/*catch(DateTimeParseException e) {
         mensajeError = "Formato de fecha/hora inválido";
-    }*/
+    }
     catch(Exception e) {
         mensajeError = "Error inesperado: " + e.getMessage();
     } 
-}
+}*/
 %>
 
 <div class="admin-container">
