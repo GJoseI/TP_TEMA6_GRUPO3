@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
 import frgp.utn.edu.ar.NegocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
+import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Paciente;
 import frgp.utn.edu.ar.entidad.Usuario;
@@ -29,6 +31,16 @@ public class RedirectController extends HttpServlet {
 	UsuarioNegocio uNeg;
 	@Autowired
 	private Usuario user;
+	
+	@Autowired
+	@Qualifier("servicioEspecialidad")
+	EspecialidadNegocio epN;
+	
+	@Autowired
+	@Qualifier("servicioMedicos")
+	private MedicosNegocio medNeg;
+	@Autowired
+	private Medicos medico;
 	
 	@RequestMapping("redireccionar_pag1.html")
 	public ModelAndView eventoRedireccionar() {
@@ -137,7 +149,13 @@ public class RedirectController extends HttpServlet {
 	@RequestMapping("redireccionar_adminMedico.html")
 	public ModelAndView eventoRedireccionar_adminMedico() {
 		ModelAndView MV = new ModelAndView();
-			MV.setViewName("admin_medico");
+		MV.setViewName("admin_medico");
+		
+	    List<Especialidad> especialidades = epN.ReadAll();
+	    MV.addObject("especialidades", especialidades);
+
+	    List<Medicos> medicos = medNeg.ReadAll();
+	    MV.addObject("medicos", medicos);
 		return MV;
 	}
 

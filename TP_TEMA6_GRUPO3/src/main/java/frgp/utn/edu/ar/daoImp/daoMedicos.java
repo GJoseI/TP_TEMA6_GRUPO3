@@ -21,6 +21,7 @@ public class daoMedicos implements IMedicos{
 	@Override
 	public boolean AgregarMedicos(Medicos medicos)
 	{
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 		try 
@@ -50,8 +51,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// Si existe
 	@Override
-	public boolean Exist(int legajo)
-	{
+	public boolean Exist(int legajo){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
@@ -62,8 +63,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// Devuelve por Nombre de id
 	@Override
-	public Medicos ReadOne(int legajo)
-	{
+	public Medicos ReadOne(int legajo){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Medicos medicos=(Medicos)session.get(Medicos.class,legajo);
@@ -75,8 +76,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// Devuelve por Nombre de usuario y especialidad
 	@Override
-	public List<Medicos> FiltarXEspecilidad(int  especialidad)
-	{
+	public List<Medicos> FiltarXEspecilidad(int  especialidad){
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = " + especialidad +" ; ").list();
@@ -90,8 +91,8 @@ public class daoMedicos implements IMedicos{
 			
 	/// Devuelve por Nombre de usuario y especialidad
 	@Override
-	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad)
-	{
+	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad){
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = "+ especialidad + " and m.legajo = "+ legajo + " ;").list();
@@ -106,8 +107,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// Modificar 
 	@Override
-	public boolean Update(Medicos medicos)
-	{
+	public boolean Update(Medicos medicos){
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -139,8 +140,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// Borrar
 	@Override
-	public boolean Delete(Medicos medicos) 
-	{	
+	public boolean Delete(Medicos medicos) {
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -173,7 +174,8 @@ public class daoMedicos implements IMedicos{
 	
 	/// trae todo
 	@Override
-	public List<Medicos> ReadAll() {		
+	public List<Medicos> ReadAll() {	
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Medicos> medicos = session.createQuery("from Medicos").list();

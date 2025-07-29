@@ -65,12 +65,12 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
         </div>
         
         <%
-        EspecialidadNegocio epn = new EspecialidadNegocio();
-        List<Especialidad> especialidades = epn.ReadAll();
+        List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
         
-        MedicosNegocio medNeg = new MedicosNegocio();
         Medicos medico_m = null;
         Usuario user = null;
+        
+        List<Medicos> listaMed = (List<Medicos>) request.getAttribute("medicos");
         %>
         
         
@@ -185,56 +185,8 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                   <tbody>
                         <%
-                        List<Medicos> listaMed = medNeg.ReadAll();
-                        boolean unMedico = false;
-                        
-                        if(request.getParameter("btnBuscar") != null) {
-                            String legajoParam = request.getParameter("Legajo");
-                            String especialidadParam = request.getParameter("especialidad");
-                            
-                            if(legajoParam != null && !legajoParam.isEmpty() && especialidadParam != null && !especialidadParam.isEmpty()) {
-                                listaMed = medNeg.FiltarXEspecilidadYLegajo(Integer.parseInt(legajoParam), Integer.parseInt(especialidadParam));
-                            }
-                            else if(especialidadParam != null && !especialidadParam.isEmpty()) {
-                                listaMed = medNeg.FiltarXEspecilidad(Integer.parseInt(especialidadParam));
-                            }
-                            else if(legajoParam != null && !legajoParam.isEmpty()) {
-                                try {
-                                    int leg = Integer.parseInt(legajoParam);
-                                    Medicos medico = medNeg.ReadOne(leg);
-                                    if(medico != null) {
-                                        unMedico = true;
-                        %>
-                                        <tr>
-                                            <td><%= medico.getLegajo() %></td>
-                                            <td><%= medico.getUsuario() != null ? medico.getUsuario().getNombre_Usuario() : "" %></td>
-                                            <td><%= medico.getNombre() %></td>
-                                            <td><%= medico.getApellido() %></td>
-                                            <td><%= medico.getEspecialidad() != null ? medico.getEspecialidad().getNombre() : "" %></td>
-                                            <td><%= medico.getSexo() %></td>
-                                            <td><%= medico.getDireccion() %></td>
-                                            <td><%= medico.getLocalidad() %></td>
-                                            <td><%= medico.getFechaNac() != null ? medico.getFechaNac() : "" %></td>
-                                            <td><%= medico.getEmail() %></td>
-                                            <td><%= medico.getDiasLab() %></td>
-                                            <td><%= medico.getTelefono() %></td>
-                                            <td><%= medico.isEstado() ? "Activo" : "Inactivo" %></td>
-                                            <td>
-                                                <button type="submit" class="btn-guardar-fila" name="btnbaja" value="<%= medico.getLegajo() %>">Baja</button>
-                                                <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%= medico.getLegajo() %>">Modificar</button>
-                                            </td>
-                                        </tr>
-                        <%
-                                    }
-                                } catch(NumberFormatException e) {
-                                    request.setAttribute("mensajeError", "Legajo debe ser numérico");
-                                }
-                            }
-                        }
-                        
-                        if(!unMedico) {
                             for(Medicos medico : listaMed) {
                         %>
                                 <tr>
@@ -257,7 +209,6 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
                                 </tr>
                         <%
                             }
-                        }
                         %>
                     </tbody>
                 </table>
