@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page 
-import="frgp.utn.edu.entidad.Paciente, java.util.List, java.time.LocalDate ,NegocioImp.PacienteNegocio"
+import="frgp.utn.edu.ar.entidad.Paciente, java.util.List, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.PacienteNegocio"
 %>
 <!DOCTYPE html>
 <html>

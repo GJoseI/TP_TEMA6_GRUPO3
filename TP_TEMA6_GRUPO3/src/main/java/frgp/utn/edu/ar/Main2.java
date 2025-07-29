@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import daoImp.Confighiberneate;
-import daoImp.daohibernate;
-import frgp.utn.edu.entidad.Especialidad;
-import frgp.utn.edu.entidad.Medicos;
-import frgp.utn.edu.entidad.Usuario;
-import frgp.utn.edu.entidad.Turno;
-import frgp.utn.edu.entidad.Paciente;
+import frgp.utn.edu.ar.daoImp.Confighiberneate;
+import frgp.utn.edu.ar.daoImp.daohibernate;
+import frgp.utn.edu.ar.entidad.Especialidad;
+import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Paciente;
+import frgp.utn.edu.ar.entidad.Turno;
+import frgp.utn.edu.ar.entidad.Usuario;
 
 
 public class Main2 

@@ -6,16 +6,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import NegocioImp.EspecialidadNegocio;
-import NegocioImp.MedicosNegocio;
-import NegocioImp.PacienteNegocio;
-import NegocioImp.TurnoNegocio;
-import NegocioImp.UsuarioNegocio;
-import frgp.utn.edu.entidad.Especialidad;
-import frgp.utn.edu.entidad.Medicos;
-import frgp.utn.edu.entidad.Paciente;
-import frgp.utn.edu.entidad.Turno;
-import frgp.utn.edu.entidad.Usuario;
+import frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio;
+import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
+import frgp.utn.edu.ar.NegocioImp.PacienteNegocio;
+import frgp.utn.edu.ar.NegocioImp.TurnoNegocio;
+import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
+import frgp.utn.edu.ar.entidad.Especialidad;
+import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Paciente;
+import frgp.utn.edu.ar.entidad.Turno;
+import frgp.utn.edu.ar.entidad.Usuario;
 
 public class Main3 {
 

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page 
-import="frgp.utn.edu.entidad.Medicos, java.util.List, java.time.LocalDate ,NegocioImp.MedicosNegocio, NegocioImp.UsuarioNegocio,NegocioImp.EspecialidadNegocio,frgp.utn.edu.entidad.Usuario,frgp.utn.edu.entidad.Especialidad"
+import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.MedicosNegocio, frgp.utn.edu.ar.NegocioImp.UsuarioNegocio,frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio,frgp.utn.edu.ar.entidad.Usuario,frgp.utn.edu.ar.entidad.Especialidad"
 %>
 <%@page 
-import="frgp.utn.edu.entidad.Turno, NegocioImp.TurnoNegocio"
+import="frgp.utn.edu.ar.entidad.Turno, frgp.utn.edu.ar.NegocioImp.TurnoNegocio"
 %>
 <%@page 
-import="frgp.utn.edu.entidad.Paciente, NegocioImp.PacienteNegocio"
+import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNegocio"
 %>
 <!DOCTYPE html>
 <html>

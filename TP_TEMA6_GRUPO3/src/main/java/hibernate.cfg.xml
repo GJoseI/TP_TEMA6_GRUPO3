@@ -5,17 +5,17 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/AppTarea6_Grupo3?createDatabaseIfNotExist=true</property>
         <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/AppTarea6_Grupo3?createDatabaseIfNotExist=true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="frgp.utn.edu.entidad.Medicos"/>
-        <mapping class="frgp.utn.edu.entidad.Usuario"/>
-        <mapping class="frgp.utn.edu.entidad.Especialidad"/>
-        <mapping class="frgp.utn.edu.entidad.Paciente"/>
-        <mapping class="frgp.utn.edu.entidad.Turno"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Medicos"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Usuario"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Especialidad"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Paciente"/>
+        <mapping class="frgp.utn.edu.ar.entidad.Turno"/>
     </session-factory>
 </hibernate-configuration>

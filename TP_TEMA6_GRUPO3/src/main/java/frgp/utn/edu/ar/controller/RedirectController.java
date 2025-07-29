@@ -5,20 +5,30 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import NegocioImp.MedicosNegocio;
-import NegocioImp.PacienteNegocio;
-import NegocioImp.UsuarioNegocio;
-import frgp.utn.edu.entidad.Medicos;
-import frgp.utn.edu.entidad.Paciente;
-import frgp.utn.edu.entidad.Usuario;
+import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
+import frgp.utn.edu.ar.NegocioImp.PacienteNegocio;
+import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
+import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Paciente;
+import frgp.utn.edu.ar.entidad.Usuario;
 
+@Controller
 public class RedirectController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	@Qualifier("servicioUsuario")
+	UsuarioNegocio uNeg;
+	@Autowired
+	private Usuario user;
 	
 	@RequestMapping("redireccionar_pag1.html")
 	public ModelAndView eventoRedireccionar() {
@@ -30,7 +40,6 @@ public class RedirectController extends HttpServlet {
 	@RequestMapping("redireccionar_usuario.html")
 	public ModelAndView eventoRedireccionar_usuario(@RequestParam("usuario") String usuario, @RequestParam("contrasena") String contrasena) {
 		ModelAndView MV = new ModelAndView();
-		UsuarioNegocio uNeg = new UsuarioNegocio();
 		List<Usuario> usuarios = uNeg.ReadAll();
 		for(Usuario user : usuarios) {
 			if(usuario.equals(user.getNombre_Usuario()) && contrasena.equals(user.getContraseña())) {
