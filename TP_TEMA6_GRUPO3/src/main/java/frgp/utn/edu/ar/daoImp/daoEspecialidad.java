@@ -21,6 +21,7 @@ public class daoEspecialidad implements IEspecialidad{
 	public boolean AgregarEspecialidad(Especialidad especialidad)
 	{
 		boolean estado = true;
+		conexion = new Conexion();
 	    Session session = null;
 		try 
 		{
@@ -51,6 +52,7 @@ public class daoEspecialidad implements IEspecialidad{
 	public boolean Exist(int id)
 	{
 		Session session= conexion.abrirConexion();
+		conexion = new Conexion();
 		session.beginTransaction();
 		Especialidad medicos=(Especialidad)session.get(Especialidad.class,id);
         if(medicos!=null)
@@ -62,6 +64,7 @@ public class daoEspecialidad implements IEspecialidad{
 	/// Devuelve por Nombre de usuario
 	public Especialidad ReadOne(int id)
 	{
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Especialidad especialidad=(Especialidad)session.get(Especialidad.class,id);
@@ -73,6 +76,7 @@ public class daoEspecialidad implements IEspecialidad{
 	public boolean Update(Especialidad especialidad)
 	{
 		boolean estado = true;
+		conexion = new Conexion();
 	    Session session = null;
 	    try {
 	        session = conexion.abrirConexion();
@@ -104,6 +108,7 @@ public class daoEspecialidad implements IEspecialidad{
 	public boolean Delete(Especialidad especialidad) 
 	{	
 		boolean estado = true;
+		conexion = new Conexion();
 	    Session session = null;
 
 	    try {
@@ -134,6 +139,7 @@ public class daoEspecialidad implements IEspecialidad{
 	
 	/// trae todo
 	public List<Especialidad> ReadAll() {		
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Especialidad> usuarios = session.createQuery("FROM Especialidad").list();
@@ -141,7 +147,8 @@ public class daoEspecialidad implements IEspecialidad{
         return usuarios;
 	}
 	
-	public Especialidad nombre(String n) {		
+	public Especialidad nombre(String n) {	
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         Query usuarios = session.createQuery("SELECT * FROM especialidad  WHERE nombre = "+ n +" LIMIT 1;");

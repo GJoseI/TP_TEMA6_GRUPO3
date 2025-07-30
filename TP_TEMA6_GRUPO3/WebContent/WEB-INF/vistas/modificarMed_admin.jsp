@@ -30,8 +30,7 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
 </head>
 <body>
 <%
-        EspecialidadNegocio epn = new EspecialidadNegocio();
-        List<Especialidad> especialidades = epn.ReadAll();
+        List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
         
         Medicos medico_m = (Medicos) request.getAttribute("medicoSeleccionado");
         %>

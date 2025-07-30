@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,19 +17,21 @@ import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
 import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
+import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Usuario;
 
 @Controller
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Autowired
+	private ApplicationContext context;
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
 	private MedicosNegocio medNeg;
-	//No se que tan bien esta esto, investigar mas como se hace
 	@Autowired
-	private Medicos medico;
+	Medicos medico;
 	
 	@Autowired
 	@Qualifier("servicioUsuario")
@@ -43,9 +46,6 @@ public class MedicoController extends HttpServlet {
 	@RequestMapping("alta_medico.html")
 	public ModelAndView eventoAltaMedico(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		//MedicosNegocio medNeg = new MedicosNegocio();
-		//EspecialidadNegocio epn = new EspecialidadNegocio();
-        //Usuario user = null;
         
         MV.setViewName("admin_medico");
         if (request.getParameter("btnguardar") != null) {
@@ -55,12 +55,14 @@ public class MedicoController extends HttpServlet {
                 if(!medNeg.Exist(legajo)) {
                     user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
                     
-                    UsuarioNegocio negUser = new UsuarioNegocio();
-                    negUser.AgregarUsuario(user);
+                    uNeg.AgregarUsuario(user);
                     
-                    //Medicos m = new Medicos();
+                    //Medicos medico = context.getBean(Medicos.class);
+                    medico = new Medicos();
                     medico.setUsuario(user);
-                    medico.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
+                    int espe = Integer.parseInt(request.getParameter("especialidad"));
+                    Especialidad espes = epn.ReadOne(espe);
+                    medico.setEspecialidad(espes);
                     
                     medico.setLegajo(legajo);
                     medico.setNombre(request.getParameter("nombre")); 
@@ -76,7 +78,6 @@ public class MedicoController extends HttpServlet {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    //m.setFechaNac(request.getParameter("fechaNac"));
                     medico.setEmail(request.getParameter("email"));
                     medico.setDiasLab(request.getParameter("Dias"));
                     medico.setHorarioLab(request.getParameter("horarios"));
@@ -104,9 +105,6 @@ public class MedicoController extends HttpServlet {
 	@RequestMapping("modif_medico.html")
 	public ModelAndView eventoModif_medico(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
-		MedicosNegocio medNeg = new MedicosNegocio();
-		EspecialidadNegocio epn = new EspecialidadNegocio();
-        Usuario user = null;
         
         MV.setViewName("admin_medico");
         if (request.getParameter("btnguardar_Modificar") != null) {
@@ -116,35 +114,33 @@ public class MedicoController extends HttpServlet {
                 if(medNeg.Exist(legajo)) {
                     user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
                     
-                    UsuarioNegocio negUser = new UsuarioNegocio();
-                    negUser.Update(user);
+                    uNeg.Update(user);
+                    //Medicos medico = context.getBean(Medicos.class);
+                    medico.setUsuario(user);
+                    medico.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
                     
-                    Medicos m = new Medicos();
-                    m.setUsuario(user);
-                    m.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
-                    
-                    m.setLegajo(legajo);
-                    m.setNombre(request.getParameter("nombre")); 
-                    m.setApellido(request.getParameter("apellido"));
-                    m.setDireccion(request.getParameter("direccion"));
-                    m.setSexo(request.getParameter("Sexo"));
-                    m.setLocalidad(request.getParameter("localidad"));
+                    medico.setLegajo(legajo);
+                    medico.setNombre(request.getParameter("nombre")); 
+                    medico.setApellido(request.getParameter("apellido"));
+                    medico.setDireccion(request.getParameter("direccion"));
+                    medico.setSexo(request.getParameter("Sexo"));
+                    medico.setLocalidad(request.getParameter("localidad"));
                     try {
                         String fechaNacStr = request.getParameter("fechaNac");
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Date fechaNac = sdf.parse(fechaNacStr);
-                        m.setFechaNac(fechaNac);
+                        medico.setFechaNac(fechaNac);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     //m.setFechaNac(request.getParameter("fechaNac"));
-                    m.setEmail(request.getParameter("email"));
-                    m.setDiasLab(request.getParameter("Dias"));
-                    m.setHorarioLab(request.getParameter("horarios"));
-                    m.setTelefono(request.getParameter("telefono"));
-                    m.setEstado("activo".equals(request.getParameter("estado")));
+                    medico.setEmail(request.getParameter("email"));
+                    medico.setDiasLab(request.getParameter("Dias"));
+                    medico.setHorarioLab(request.getParameter("horarios"));
+                    medico.setTelefono(request.getParameter("telefono"));
+                    medico.setEstado("activo".equals(request.getParameter("estado")));
                     
-                    if(medNeg.Update(m)) {
+                    if(medNeg.Update(medico)) {
                         request.setAttribute("mensajeExito", "Médico actualizad correctamente");
                     } else {
                         request.setAttribute("mensajeError", "Error al actualizar el médico");

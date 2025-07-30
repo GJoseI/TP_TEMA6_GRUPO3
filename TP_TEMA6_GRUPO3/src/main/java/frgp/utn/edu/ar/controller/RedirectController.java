@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,8 @@ public class RedirectController extends HttpServlet {
 	@Autowired
 	@Qualifier("servicioPaciente")
 	PacienteNegocio pacNeg;
+	@Autowired
+	Paciente paciente;
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
@@ -80,14 +83,12 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_listaAdminMed(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("modificarMed_admin");
-		
+	    MV.addObject("especialidades", epN.ReadAll());
 		String legajoStr = request.getParameter("btnModificar");
 		if (legajoStr != null && !legajoStr.isEmpty()) {
             try {
             	int legajo = Integer.parseInt(legajoStr);
-                MedicosNegocio medNeg = new MedicosNegocio();
-                Medicos medico = medNeg.ReadOne(legajo);
-                
+            	medico = medNeg.ReadOne(legajo);
                 if (medico != null) {
                     MV.addObject("medicoSeleccionado", medico);
                 } else {
@@ -110,8 +111,7 @@ public class RedirectController extends HttpServlet {
 		
 		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
             try {
-                PacienteNegocio pacNeg = new PacienteNegocio();
-                Paciente paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
+                paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
                 
                 if (paciente != null) {
                     MV.addObject("pacienteSeleccionado", paciente);
@@ -164,11 +164,9 @@ public class RedirectController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_medico");
 		
-	    List<Especialidad> especialidades = epN.ReadAll();
-	    MV.addObject("especialidades", especialidades);
+	    MV.addObject("especialidades", epN.ReadAll());
 
-	    List<Medicos> medicos = medNeg.ReadAll();
-	    MV.addObject("medicos", medicos);
+	    MV.addObject("medicos", medNeg.ReadAll());
 		return MV;
 	}
 

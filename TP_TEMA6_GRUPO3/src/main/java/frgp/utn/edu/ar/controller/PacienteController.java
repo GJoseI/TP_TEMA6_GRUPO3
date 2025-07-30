@@ -29,15 +29,12 @@ public class PacienteController extends HttpServlet {
 	@RequestMapping("alta_paciente.html")
 	public ModelAndView eventoAltaPaciente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		PacienteNegocio pacNeg = new PacienteNegocio();
         
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar") != null) {
             try {
                 
-                if(!pacNeg.Exist(request.getParameter("dni"))) {
-                    
-                    Paciente p = new Paciente();
+                if(!pacNeg.Exist(request.getParameter("dni"))) {                  
                     
                     p.setDNI(request.getParameter("dni"));
                     p.setNombre(request.getParameter("nombre"));
@@ -78,15 +75,12 @@ public class PacienteController extends HttpServlet {
 	@RequestMapping("modif_paciente.html")
 	public ModelAndView eventoModifPaciente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		PacienteNegocio pacNeg = new PacienteNegocio();
         
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar_Modificar") != null) {
             try {
                 
-                if(pacNeg.Exist(request.getParameter("dni"))) {
-                    
-                    Paciente p = new Paciente();
+                if(pacNeg.Exist(request.getParameter("dni"))) {     
                     
                     p.setDNI(request.getParameter("dni"));
                     p.setNombre(request.getParameter("nombre"));

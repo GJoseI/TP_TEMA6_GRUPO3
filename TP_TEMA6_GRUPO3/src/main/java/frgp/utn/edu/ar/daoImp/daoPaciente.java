@@ -16,8 +16,8 @@ public class daoPaciente implements IPaciente {
 	private  Conexion conexion;
 	
 	///Agrergar Paciente
-	public boolean AgregarPaciente(Paciente paciente)
-	{
+	public boolean AgregarPaciente(Paciente paciente){
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 		try 
@@ -47,6 +47,7 @@ public class daoPaciente implements IPaciente {
 	
 	/// Si existe
 	public boolean Exist(String dni){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -59,6 +60,7 @@ public class daoPaciente implements IPaciente {
 	
 	/// Devuelve por Nombre de usuario
 	public Paciente ReadOne(String dni){
+		conexion = new Conexion();
 		Session session= conexion.abrirConexion();
 		session.beginTransaction();
 		Paciente paciente=(Paciente)session.get(Paciente.class,dni);
@@ -69,6 +71,7 @@ public class daoPaciente implements IPaciente {
 	
 	/// Modificar 
 	public boolean Update(Paciente paciente){
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -100,6 +103,7 @@ public class daoPaciente implements IPaciente {
 	
 	/// Borrar
 	public boolean Delete(Paciente paciente) {	
+		conexion = new Conexion();
 		boolean estado = true;
 	    Session session = null;
 
@@ -131,7 +135,8 @@ public class daoPaciente implements IPaciente {
 	}
 	
 	/// trae todo
-	public List<Paciente> ReadAll() {		
+	public List<Paciente> ReadAll() {
+		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
         List<Paciente> usuarios = session.createQuery("FROM Paciente").list();

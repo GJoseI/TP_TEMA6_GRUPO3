@@ -14,9 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Entity
 @Table(name="Medico")
 public class Medicos implements Serializable {
@@ -43,9 +46,16 @@ public class Medicos implements Serializable {
 	@JoinColumn(name="Usuario_c")
 	private Usuario usuario;
 	
+	public Medicos() {
+		this.usuario = new Usuario();
+		this.especialidad = new Especialidad();
+	}
+	
 	public Medicos(int legajo, String nombre, String apellido, String sexo, Date fechaNac, String diasLab, String horarioLab, String direccion,
 			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad) {
 		super();
+		this.usuario = new Usuario();
+		this.especialidad = new Especialidad();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -90,7 +100,6 @@ public class Medicos implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Medicos() {}
 
 	public int getLegajo() {
 		return legajo;
