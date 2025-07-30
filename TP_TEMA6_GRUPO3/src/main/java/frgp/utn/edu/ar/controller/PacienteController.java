@@ -21,7 +21,7 @@ public class PacienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	@Qualifier
+	@Qualifier("servicioPaciente")
 	PacienteNegocio pacNeg;
 	@Autowired
 	Paciente p;

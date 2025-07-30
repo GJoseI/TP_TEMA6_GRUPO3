@@ -38,7 +38,7 @@ public class RedirectController extends HttpServlet {
 	
 	@Autowired
 	@Qualifier("servicioPaciente")
-	PacienteNegocio negPaciente;
+	PacienteNegocio pacNeg;
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
@@ -140,7 +140,7 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_adminPaciente() {
 		ModelAndView MV = new ModelAndView();
 		
-		List<Paciente> ListaPasiente = negPaciente.ReadAll();;
+		List<Paciente> ListaPasiente = pacNeg.ReadAll();;
 	    MV.addObject("ListaPasiente", ListaPasiente);
 		
 			MV.setViewName("admin_Paciente");
