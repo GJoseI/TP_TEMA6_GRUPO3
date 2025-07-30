@@ -37,10 +37,16 @@ public class RedirectController extends HttpServlet {
 	EspecialidadNegocio epN;
 	
 	@Autowired
+	@Qualifier("servicioPaciente")
+	PacienteNegocio negPaciente;
+	
+	@Autowired
 	@Qualifier("servicioMedicos")
 	private MedicosNegocio medNeg;
 	@Autowired
 	private Medicos medico;
+	
+	
 	
 	@RequestMapping("redireccionar_pag1.html")
 	public ModelAndView eventoRedireccionar() {
@@ -133,6 +139,10 @@ public class RedirectController extends HttpServlet {
 	@RequestMapping("redireccionar_adminPaciente.html")
 	public ModelAndView eventoRedireccionar_adminPaciente() {
 		ModelAndView MV = new ModelAndView();
+		
+		List<Paciente> ListaPasiente = negPaciente.ReadAll();;
+	    MV.addObject("ListaPasiente", ListaPasiente);
+		
 			MV.setViewName("admin_Paciente");
 		return MV;
 	}
@@ -141,6 +151,9 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_adminTurnos() {
 		ModelAndView MV = new ModelAndView();
 
+		List<Especialidad> especialidades = epN.ReadAll();
+	    MV.addObject("especialidades", especialidades);
+		
 			MV.setViewName("admin_turnos");
 
 		return MV;

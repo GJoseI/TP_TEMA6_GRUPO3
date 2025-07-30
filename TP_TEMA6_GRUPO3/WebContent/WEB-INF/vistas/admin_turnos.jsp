@@ -80,10 +80,9 @@ import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNeg
 <%
 TurnoNegocio negTurno = new TurnoNegocio();
 MedicosNegocio negMedico = new MedicosNegocio();
-EspecialidadNegocio epn = new EspecialidadNegocio();
 PacienteNegocio negP = new PacienteNegocio();
 
-List<Especialidad> especialidades = epn.ReadAll();
+List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
 String mensajeError = null;
 String mensajeExito = null;
 
