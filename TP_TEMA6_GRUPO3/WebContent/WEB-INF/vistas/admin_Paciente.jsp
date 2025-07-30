@@ -54,7 +54,7 @@ import="frgp.utn.edu.ar.entidad.Paciente, java.util.List, java.time.LocalDate ,f
 </head>
 <body>
 <%
-PacienteNegocio negPaciente = new PacienteNegocio(); 
+PacienteNegocio negPaciente = new PacienteNegocio();
 List<Paciente> ListaPasiente =(List<Paciente>) request.getAttribute("ListaPasiente");
 Paciente paciente = new Paciente();
 boolean cuadro = false;

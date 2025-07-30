@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +19,12 @@ import frgp.utn.edu.ar.entidad.Paciente;
 @Controller
 public class PacienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	@Qualifier
+	PacienteNegocio pacNeg;
+	@Autowired
+	Paciente p;
 	
 	@RequestMapping("alta_paciente.html")
 	public ModelAndView eventoAltaPaciente(HttpServletRequest request) {
