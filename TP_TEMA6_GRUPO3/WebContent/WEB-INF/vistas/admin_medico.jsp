@@ -1,14 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <%@page 
 import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFormat, java.text.ParseException, java.util.Date, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.MedicosNegocio, frgp.utn.edu.ar.NegocioImp.UsuarioNegocio,frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio,frgp.utn.edu.ar.entidad.Usuario,frgp.utn.edu.ar.entidad.Especialidad"
 %>
 <html>
 <head>
-<link rel="stylesheet" href="./adminMedico.css">
 <meta charset="UTF-8">
+<style>
+	body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
+	.admin-medicos-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 2000px; margin: auto; }
+	.welcome-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
+    .welcome-header .info h2 { color: #005a9c; margin: 0; font-size: 22px; }
+    .welcome-header .info p { margin: 0; color: #555; }
+    .admin-medicos-form table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .admin-medicos-form th, .turnos-form td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: top; }
+    .admin-medicos-form th { background-color: #007bff; color: white; }
+    .admin-medicos-form td ul { margin: 0; padding-left: 20px; }
+    .admin-medicos-form textarea { width: 95%; height: 60px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; }
+    .btn-submit { display: block; width: 100%; padding: 15px; margin-top: 20px; border: none; border-radius: 5px; background-color: #28a745; color: white; font-size: 18px; cursor: pointer; }
+    .btn-submit:hover { background-color: #218838; }
+    .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-guardar-fila:hover { background-color: #218838; }
+    
+    .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-Buscar-fila:hover { background-color: #218838; }
+    
+      .pagination { text-align: center; }
+	    .pagination a {
+	        color: #007bff;
+	        padding: 8px 16px;
+	        text-decoration: none;
+	        border: 1px solid #ddd;
+	        margin: 0 4px;
+	        border-radius: 4px;
+	        transition: background-color .3s;
+	    }
+	    .pagination a.active {
+	        background-color: #007bff;
+	        color: white;
+	        border: 1px solid #007bff;
+	    }
+	    .pagination a:hover:not(.active) {
+	        background-color: #ddd;
+	    }
+	    .pagination a.disabled {
+	        color: #ccc;
+	        pointer-events: none;
+	        border-color: #ccc;
+	    }
+</style>
 <title>admin_medico</title>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script type="text/javascript">
+
+	$(document).ready( function () {
+	    $('#tabla').DataTable();
+	} );
+
+</script>
+
 </head>
 <body>
     <div class="admin-medicos-container">
@@ -21,23 +79,14 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
                 </form>
             </div>
         </div>
-        
-        <%
-        List<Especialidad> especialidades = (List<Especialidad>) request.getAttribute("especialidades");
-        
-        Medicos medico_m = null;
-        Usuario user = null;
-        
-        List<Medicos> listaMed = (List<Medicos>) request.getAttribute("medicos");
-        %>
-        
-        
-        <% if(request.getAttribute("mensajeError") != null) { %>
-            <div class="error"><%= request.getAttribute("mensajeError") %></div>
-        <% } %>
-        <% if(request.getAttribute("mensajeExito") != null) { %>
-            <div class="exito"><%= request.getAttribute("mensajeExito") %></div>
-        <% } %>
+          
+		<c:if test="${not empty mensajeError}">
+			<div class="error">${mensajeError}</div>
+		</c:if>
+		
+		<c:if test="${not empty mensajeExito}">
+			<div class="exito">${mensajeExito}</div>
+		</c:if>
         
         <div class="admin-medicos-container">
             <h3>Gestionar Médicos</h3>
@@ -89,9 +138,9 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
                                 <input type="password" name="password" value="" required><br><br>
                                 <strong>Especialidad:</strong>
                                 <select name="especialidad" required>
-                                    <% for(Especialidad es : especialidades) { %>
-                                        <option value="<%= es.getId() %>"><%= es.getNombre() %></option>
-                                    <% } %>
+                                	<c:forEach items="${especialidades }" var="especialidad">
+                                        <option value="${especialidad.id }">${especialidad.nombre }</option>
+                                	</c:forEach>
                                 </select><br><br>
                             </td>
                             <td>
@@ -111,20 +160,21 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
         
         <div class="admin-medicos-container">
             <h3>Lista de Médicos</h3>
-            <form action="filtrar_medicos.html" method="post" class="admin-medicos-form">
+            <form action="search" method="get" class="admin-medicos-form">
                 <strong>Legajo:</strong>
-                <input type="text" name="Legajo" placeholder="Ingrese legajo">
+                <input type="text" name="keyword" class="form-control" placeholder="Ingrese legajo">
                 <strong>Especialidad:</strong>
                 <select name="especialidad">
                     <option value="">Todas</option>
-                    <% for(Especialidad es : especialidades) { %>
-                        <option value="<%= es.getId() %>"><%= es.getNombre() %></option>
-                    <% } %>
+                    <c:forEach items="${especialidades }" var="especialidad">
+                    	<option value="${especialidad.id }">${especialidad.nombre }</option>
+                    </c:forEach>
                 </select>
-                <button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
+                <button type="submit" class="btn-Buscar-fila" name="btnBuscar" value="Buscar"></button>
+                
             </form>    
             <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
-                <table>
+                <table id="tabla" class="display">
                     <thead>
                         <tr>
                             <th>Legajo</th>
@@ -143,32 +193,43 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                   <tbody>
-                        <%
-                            for(Medicos medico : listaMed) {
-                        %>
-                                <tr>
-                                    <td><%= medico.getLegajo() %></td>
-                                    <td><%= medico.getUsuario() != null ? medico.getUsuario().getNombre_Usuario() : "" %></td>
-                                    <td><%= medico.getNombre() %></td>
-                                    <td><%= medico.getApellido() %></td>
-                                    <td><%= medico.getEspecialidad() != null ? medico.getEspecialidad().getNombre() : "" %></td>
-                                    <td><%= medico.getSexo() %></td>
-                                    <td><%= medico.getDireccion() %></td>
-                                    <td><%= medico.getLocalidad() %></td>
-                                    <td><%= medico.getFechaNac() != null ? medico.getFechaNac() : "" %></td>
-                                    <td><%= medico.getEmail() %></td>
-                                    <td><%= medico.getDiasLab() %></td>
-                                    <td><%= medico.getTelefono() %></td>
-                                    <td><%= medico.isEstado() ? "Activo" : "Inactivo" %></td>
-                                    <td>
-                                        <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%= medico.getLegajo() %>">Modificar</button>
-                                    </td>
-                                </tr>
-                        <%
-                            }
-                        %>
-                    </tbody>
+                    <tbody>
+				    <c:forEach items="${medicos}" var="medico">
+				        <tr>
+				            <td>${medico.legajo}</td>
+				            <td>${medico.usuario != null ? medico.usuario.nombre_Usuario : ''}</td>
+				            <td>${medico.nombre}</td>
+				            <td>${medico.apellido}</td>
+				            <td>${medico.especialidad != null ? medico.especialidad.nombre : ''}</td>
+				            <td>${medico.sexo}</td>
+				            <td>${medico.direccion}</td>
+				            <td>${medico.localidad}</td>
+				            <td>${medico.fechaNac}</td>
+				            <td>${medico.email}</td>
+				            <td>${medico.diasLab}</td>
+				            <td>${medico.telefono}</td>
+				
+				            <td>
+				                <c:choose>
+				                    <c:when test="${medico.estado}">
+				                        Activo
+				                    </c:when>
+				                    <c:otherwise>
+				                        Inactivo
+				                    </c:otherwise>
+				                </c:choose>
+				            </td>
+				
+				            <td>
+				                <button type="submit" class="btn-guardar-fila" 
+				                        name="btnModificar" 
+				                        value="${medico.legajo}">
+				                    Modificar
+				                </button>
+				            </td>
+				        </tr>
+				    </c:forEach>
+				</tbody>
                 </table>
             </form>
             

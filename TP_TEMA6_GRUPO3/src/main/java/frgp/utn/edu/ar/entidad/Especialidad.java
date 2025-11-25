@@ -15,25 +15,24 @@ public class Especialidad implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id 
-	private int Id;
+	private int id;
 	private String nombre;
 	private boolean estado;
-	
 	public Especialidad() {};
 	
 	public Especialidad(int id, String nombre) {
 		super();
-		Id = id;
+		this.id = id;
 		this.nombre = nombre;
 		this.estado= true;
 	}
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -54,7 +53,7 @@ public class Especialidad implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Especialidad [Id=" + Id + ", nombre=" + nombre + "]";
+		return "Especialidad [Id=" + id + ", nombre=" + nombre + "]";
 	}
 
 }

@@ -164,9 +164,9 @@ public class RedirectController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_medico");
 		
-	    MV.addObject("especialidades", epN.ReadAll());
+	    MV.addObject("especialidades", this.epN.ReadAll());
 
-	    MV.addObject("medicos", medNeg.ReadAll());
+	    MV.addObject("medicos", this.medNeg.ReadAll());
 		return MV;
 	}
 

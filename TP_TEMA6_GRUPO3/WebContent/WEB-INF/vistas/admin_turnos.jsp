@@ -14,7 +14,67 @@ import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNeg
 <head>
 <meta charset="UTF-8">
 <title>Panel de Administrador - Turnos</title>
-<link rel="stylesheet" href="./adminTurnos.css">
+<style>
+	.admin-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
+	.welcome-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
+    .welcome-header .info h2 { color: #005a9c; margin: 0; font-size: 22px; }
+    .welcome-header .info p { margin: 0; color: #555; }
+    .admin-turnos-form table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .admin-turnos-form th, .turnos-form td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: top; }
+    .admin-turnos-form th { background-color: #007bff; color: white; }
+    .admin-turnos-form td ul { margin: 0; padding-left: 20px; }
+    .admin-turnos-form textarea { width: 95%; height: 60px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; }
+    .admin-turnos-form .asistencia-group label { margin-right: 15px; }
+    .btn-submit { display: block; width: 100%; padding: 15px; margin-top: 20px; border: none; border-radius: 5px; background-color: #28a745; color: white; font-size: 18px; cursor: pointer; }
+    .btn-submit:hover { background-color: #218838; }
+    .btn-guardar-fila { width: 100%; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-guardar-fila:hover { background-color: #218838; }
+    
+    .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
+    .btn-Buscar-fila:hover { background-color: #218838; }
+    
+    .pagination { text-align: center; }
+	    .pagination a {
+	        color: #007bff;
+	        padding: 8px 16px;
+	        text-decoration: none;
+	        border: 1px solid #ddd;
+	        margin: 0 4px;
+	        border-radius: 4px;
+	        transition: background-color .3s;
+	    }
+	    .pagination a.active {
+	        background-color: #007bff;
+	        color: white;
+	        border: 1px solid #007bff;
+	    }
+	    .pagination a:hover:not(.active) {
+	        background-color: #ddd;
+	    }
+	    .pagination a.disabled {
+	        color: #ccc;
+	        pointer-events: none;
+	        border-color: #ccc;
+	    }
+	    
+	    .alert {
+		    padding: 10px;
+		    margin: 10px 0;
+		    border-radius: 4px;
+		}
+
+		.alert-error {
+		    background-color: #ffdddd;
+		    border-left: 5px solid #f44336;
+		    color: #d8000c;
+		}
+		
+		.alert-success {
+		    background-color: #ddffdd;
+		    border-left: 5px solid #4CAF50;
+		    color: #4F8A10;
+		}
+</style>
 </head>
 <body>
 <%
