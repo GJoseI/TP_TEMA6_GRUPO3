@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-
-<%@page 
-import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.MedicosNegocio, frgp.utn.edu.ar.NegocioImp.UsuarioNegocio,frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio,frgp.utn.edu.ar.entidad.Usuario,frgp.utn.edu.ar.entidad.Especialidad"
-%>
-<%@page 
-import="frgp.utn.edu.ar.entidad.Turno, frgp.utn.edu.ar.NegocioImp.TurnoNegocio"
-%>
-<%@page 
-import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNegocio"
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +8,25 @@ import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNeg
     <meta charset="UTF-8">
     <title>Panel del Médico - Turnos</title>
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" 
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 20],
+            searching: true,
+            ordering: true,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
+</script>
     <style>
     	        body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
         .medico-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
@@ -67,32 +75,6 @@ import="frgp.utn.edu.ar.entidad.Paciente, frgp.utn.edu.ar.NegocioImp.PacienteNeg
     </style>
 </head>
 <body>
-<%
-TurnoNegocio negT = new TurnoNegocio();
-List<Turno> listTurnos = negT.ReadAll();
-
-if (request.getParameter("btnguardar") != null) {
-    Turno t = new Turno();
-    t = negT.ReadOne(Integer.parseInt(request.getParameter("btnguardar")));
-    t.setObservación(request.getParameter("observacion"));
-    t.setEstadoTurno(request.getParameter("asistencia_34567890"));
-    negT.Update(t);
-}
-
-if (request.getParameter("btnFiltara") != null) {
-    if (request.getParameter("Fecha_Filtara") != null && !request.getParameter("Fecha_Filtara").isEmpty() 
-        && request.getParameter("DNI_Filtara") != null && !request.getParameter("DNI_Filtara").isEmpty()) {
-        listTurnos = negT.FiltarxFechaxPciente(request.getParameter("Fecha_Filtara"), request.getParameter("DNI_Filtara"));
-    } 
-    else if (request.getParameter("DNI_Filtara") != null && !request.getParameter("DNI_Filtara").isEmpty()) {
-        listTurnos = negT.FiltarPciente(request.getParameter("DNI_Filtara"));
-    }
-    else if (request.getParameter("Fecha_Filtara") != null && !request.getParameter("Fecha_Filtara").isEmpty()) {
-        listTurnos = negT.FiltarxFecha(request.getParameter("Fecha_Filtara"));
-    }
-}
-%>
-
 <div class="medico-container">
     <div class="welcome-header">
         <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
@@ -104,103 +86,83 @@ if (request.getParameter("btnFiltara") != null) {
 
     <h2>Turnos</h2>
 
-    <form method="post" class="filtros-form">
-        <strong>DNI:</strong>
-        <input type="text" name="DNI_Filtara" value="<%= request.getParameter("DNI_Filtara") != null ? request.getParameter("DNI_Filtara") : "" %>"><br><br>
-        <strong>Fecha:</strong>
-        <input type="date" name="Fecha_Filtara" value="<%= request.getParameter("Fecha_Filtara") != null ? request.getParameter("Fecha_Filtara") : "" %>"><br><br>
-        <button type="submit" class="btn-Buscar-fila" name="btnFiltara">Filtrar</button>
-    </form>
-
     <form action="" method="post" class="turnos-form">
-        <table>
-            <thead>
+    <table	id="tabla" class="display">
+        <thead>
+            <tr>
+                <th>Datos del Paciente</th>
+                <th>Datos del Turno</th>
+                <th>Acciones / Observaciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <c:forEach items="${listTurnos}" var="t">
+
                 <tr>
-                    <th>Datos del Paciente</th>
-                    <th>Datos del Turno</th>
-                    <th>Acciones / Observaciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(Turno t : listTurnos) { %>
-                <tr>
+                    <!-- DATOS DEL PACIENTE -->
                     <td>
-                        <strong>DNI:</strong> <%= t.getPaciente().getDNI() %><br>
-                        <strong>Nombre y apellido:</strong> <%= t.getPaciente().getNombre() + " " + t.getPaciente().getApellido() %><br>
-                        <strong>Teléfono:</strong> <%= t.getPaciente().getTelefono() %><br>
-                        <strong>Dirección:</strong> <%= t.getPaciente().getDireccion() %><br>
-                        <strong>Nacimiento:</strong> <%= t.getPaciente().getFecha_nacimiento() %><br>
-                        <strong>Email:</strong> <%= t.getPaciente().getCorreo_electronico() %>
+                        <strong>DNI:</strong> ${t.paciente.DNI}<br>
+                        <strong>Nombre y apellido:</strong> ${t.paciente.nombre} ${t.paciente.apellido}<br>
+                        <strong>Teléfono:</strong> ${t.paciente.telefono}<br>
+                        <strong>Dirección:</strong> ${t.paciente.direccion}<br>
+                        <strong>Nacimiento:</strong> ${t.paciente.fecha_nacimiento}<br>
+                        <strong>Email:</strong> ${t.paciente.correo_electronico}
                     </td>
+
+
+                    <!-- DATOS DEL TURNO -->
                     <td>
-                        <strong>ID:</strong> <%= t.getId() %><br>
-                        <strong>Fecha:</strong> <%= t.getFecha() %><br>
-                        <strong>Hora:</strong> <%= t.getHora() %>
+                        <strong>ID:</strong> ${t.id}<br>
+                        <strong>Fecha:</strong> ${t.fecha}<br>
+                        <strong>Hora:</strong> ${t.hora}
                     </td>
+                    <!-- ACCIONES / OBSERVACIONES -->
                     <td>
-                        <label for="obs_<%= t.getId() %>"><strong>Observación:</strong></label>
-                        <textarea id="obs_<%= t.getId() %>" name="observacion"><%= t.getObservación() != null ? t.getObservación() : "" %></textarea>
-                        
+                        <label for="obs_${t.id}">
+                            <strong>Observación:</strong>
+                        </label>
+
+                        <textarea id="obs_${t.id}" name="observacion">
+							${t.observación != null ? t.observación : ""}
+                        </textarea>
+
                         <div class="asistencia-group" style="margin-top: 10px;">
                             <strong>Asistencia:</strong><br>
-                            <input type="radio" id="presente_<%= t.getId() %>" name="asistencia_<%= t.getId() %>" value="presente" <%= "presente".equals(t.getEstadoTurno()) ? "checked" : "" %>>
-                            <label for="presente_<%= t.getId() %>">Presente</label>
-                            
-                            <input type="radio" id="ausente_<%= t.getId() %>" name="asistencia_<%= t.getId() %>" value="ausente" <%= "ausente".equals(t.getEstadoTurno()) ? "checked" : "" %>>
-                            <label for="ausente_<%= t.getId() %>">Ausente</label>
+
+                            <!-- RADIO: PRESENTE -->
+                            <input type="radio"
+                                   id="presente_${t.id}"
+                                   name="asistencia_${t.id}"
+                                   value="presente"
+                                   <c:if test="${t.estadoTurno == 'presente'}">checked</c:if>
+                            >
+                            <label for="presente_${t.id}">Presente</label>
+
+                            <!-- RADIO: AUSENTE -->
+                            <input type="radio"
+                                   id="ausente_${t.id}"
+                                   name="asistencia_${t.id}"
+                                   value="ausente"
+                                   <c:if test="${t.estadoTurno == 'ausente'}">checked</c:if>
+                            >
+                            <label for="ausente_${t.id}">Ausente</label>
                         </div>
-                        <button type="submit" class="btn-guardar-fila" name="btnguardar" value="<%= t.getId() %>">Guardar</button>
+
+                        <button type="submit"
+                                class="btn-guardar-fila"
+                                name="btnguardar"
+                                value="${t.id}">
+                            Guardar
+                        </button>
                     </td>
                 </tr>
-                <% } %>
-            </tbody>
-        </table>
-        
-        <br>
-        <div class="pagination">
-            <%
-            int currentPage = 1;
-            String pageParam = request.getParameter("page");
-            if (pageParam != null && !pageParam.isEmpty()) {
-                currentPage = Integer.parseInt(pageParam);
-            }
-            
-            int totalPages = 5;
-            
-            if(currentPage > 1) {
-            %>
-                <a href="?page=<%= currentPage-1 %>" class="page-link">&laquo; Anterior</a>
-            <%
-            } else {
-            %>
-                <span class="page-link disabled">&laquo; Anterior</span>
-            <%
-            }
-            
-            for(int i = 1; i <= totalPages; i++) {
-                if(i == currentPage) {
-            %>
-                    <span class="page-link active"><%= i %></span>
-            <%
-                } else {
-            %>
-                    <a href="?page=<%= i %>" class="page-link"><%= i %></a>
-            <%
-                }
-            }
-            
-            if(currentPage < totalPages) {
-            %>
-                <a href="?page=<%= currentPage+1 %>" class="page-link">Siguiente &raquo;</a>
-            <%
-            } else {
-            %>
-                <span class="page-link disabled">Siguiente &raquo;</span>
-            <%
-            }
-            %>
-        </div>
-    </form>
+
+            </c:forEach>
+        </tbody>
+
+    </table>
+</form>
 </div>
 </body>
 </html>

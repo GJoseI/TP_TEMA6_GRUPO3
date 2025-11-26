@@ -140,8 +140,8 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_adminPaciente() {
 		ModelAndView MV = new ModelAndView();
 		
-		List<Paciente> ListaPasiente = pacNeg.ReadAll();;
-	    MV.addObject("ListaPasiente", ListaPasiente);
+		List<Paciente> ListaPaciente = pacNeg.ReadAll();;
+	    MV.addObject("ListaPaciente", ListaPaciente);
 		
 			MV.setViewName("admin_Paciente");
 		return MV;

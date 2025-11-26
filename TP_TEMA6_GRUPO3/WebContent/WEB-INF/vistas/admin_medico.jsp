@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<%@page 
-import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFormat, java.text.ParseException, java.util.Date, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.MedicosNegocio, frgp.utn.edu.ar.NegocioImp.UsuarioNegocio,frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio,frgp.utn.edu.ar.entidad.Usuario,frgp.utn.edu.ar.entidad.Especialidad"
-%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -53,20 +50,25 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
 </style>
 <title>admin_medico</title>
 
-<script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
-<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-<script type="text/javascript">
+<link rel="stylesheet" 
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-	$(document).ready( function () {
-	    $('#tabla').DataTable();
-	} );
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 20],
+            searching: true,
+            ordering: true,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
 </script>
-
 </head>
 <body>
     <div class="admin-medicos-container">
@@ -159,20 +161,7 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
         </div>
         
         <div class="admin-medicos-container">
-            <h3>Lista de Médicos</h3>
-            <form action="search" method="get" class="admin-medicos-form">
-                <strong>Legajo:</strong>
-                <input type="text" name="keyword" class="form-control" placeholder="Ingrese legajo">
-                <strong>Especialidad:</strong>
-                <select name="especialidad">
-                    <option value="">Todas</option>
-                    <c:forEach items="${especialidades }" var="especialidad">
-                    	<option value="${especialidad.id }">${especialidad.nombre }</option>
-                    </c:forEach>
-                </select>
-                <button type="submit" class="btn-Buscar-fila" name="btnBuscar" value="Buscar"></button>
-                
-            </form>    
+            <h3>Lista de Médicos</h3> 
             <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
                 <table id="tabla" class="display">
                     <thead>
@@ -232,45 +221,6 @@ import="frgp.utn.edu.ar.entidad.Medicos, java.util.List, java.text.SimpleDateFor
 				</tbody>
                 </table>
             </form>
-            
-            <div class="pagination">
-                <%
-                int currentPage = 1;
-                int totalPages = 5;
-                
-                if(currentPage > 1) {
-                %>
-                    <a href="?page=<%= currentPage-1 %>" class="page-link">&laquo; Anterior</a>
-                <%
-                } else {
-                %>
-                    <span class="page-link disabled">&laquo; Anterior</span>
-                <%
-                }
-                
-                for(int i = 1; i <= totalPages; i++) {
-                    if(i == currentPage) {
-                %>
-                        <a href="?page=<%= i %>" class="page-link active"><%= i %></a>
-                <%
-                    } else {
-                %>
-                        <a href="?page=<%= i %>" class="page-link"><%= i %></a>
-                <%
-                    }
-                }
-                
-                if(currentPage < totalPages) {
-                %>
-                    <a href="?page=<%= currentPage+1 %>" class="page-link">Siguiente &raquo;</a>
-                <%
-                } else {
-                %>
-                    <span class="page-link disabled">Siguiente &raquo;</span>
-                <%
-                }
-                %>
-            </div>
         </div>
     </div>
 </body>

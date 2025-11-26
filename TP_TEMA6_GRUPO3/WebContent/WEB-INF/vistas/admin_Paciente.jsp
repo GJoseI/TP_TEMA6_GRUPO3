@@ -1,13 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page 
-import="frgp.utn.edu.ar.entidad.Paciente, java.util.List, java.time.LocalDate ,frgp.utn.edu.ar.NegocioImp.PacienteNegocio"
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Panel de Administrador - Pacientes</title>
+<link rel="stylesheet" 
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 20],
+            searching: true,
+            ordering: true,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
+</script>
 <style>
 	body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
 	.admin-pacientes-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
@@ -53,68 +70,6 @@ import="frgp.utn.edu.ar.entidad.Paciente, java.util.List, java.time.LocalDate ,f
 </style>
 </head>
 <body>
-<%
-PacienteNegocio negPaciente = new PacienteNegocio();
-List<Paciente> ListaPasiente =(List<Paciente>) request.getAttribute("ListaPasiente");
-Paciente paciente = new Paciente();
-boolean cuadro = false;
-
-// Variables para control de edición
-String pacienteEnEdicion = request.getParameter("editarDni");
-boolean editando = pacienteEnEdicion != null && !pacienteEnEdicion.isEmpty();
-
-// Procesar formulario de guardar nuevo paciente
-/*if(request.getParameter("btnguardar") != null){
-    if(!negPaciente.Exist(request.getParameter("dni"))){
-        paciente.setDNI(request.getParameter("dni"));
-        paciente.setNombre(request.getParameter("nombre"));
-        paciente.setApellido(request.getParameter("apellido"));
-        paciente.setTelefono(request.getParameter("telefono"));
-        paciente.setDireccion(request.getParameter("direccion"));
-        paciente.setLocalidad(request.getParameter("localidad"));
-        paciente.setProvincia(request.getParameter("provincia"));
-        paciente.setFecha_nacimiento(request.getParameter("fecha_nacimiento"));
-        paciente.setCorreo_electronico(request.getParameter("email")); // Corregido: estaba usando dni en lugar de email
-        paciente.setEstado("activo".equals(request.getParameter("estado")));
-        
-        negPaciente.AgregarPaciente(paciente);
-        ListaPasiente = negPaciente.ReadAll(); // Actualizar lista
-    }
-}
-
-// Procesar guardado de edición
-if(request.getParameter("btnGuardarEdicion") != null) {
-    Paciente p = new Paciente();
-    p.setDNI(request.getParameter("editarDni"));
-    p.setNombre(request.getParameter("editarNombre"));
-    p.setApellido(request.getParameter("editarApellido"));
-    p.setTelefono(request.getParameter("editarTelefono"));
-    p.setDireccion(request.getParameter("editarDireccion"));
-    p.setLocalidad(request.getParameter("editarLocalidad"));
-    p.setProvincia(request.getParameter("editarProvincia"));
-    
-    try {
-        p.setFecha_nacimiento(request.getParameter("editarFechaNac"));
-    } catch(Exception e) {
-        p.setFecha_nacimiento(LocalDate.now().toString());
-    }
-    
-    p.setCorreo_electronico(request.getParameter("editarEmail"));
-    p.setEstado("activo".equals(request.getParameter("editarEstado")));
-    
-    negPaciente.Update(p);
-    ListaPasiente = negPaciente.ReadAll(); // Recargar lista
-    editando = false;
-}
-
-// Procesar eliminación
-if(request.getParameter("btnBaja") != null) {
-	Paciente pp = negPaciente.ReadOne(request.getParameter("btnBaja"));
-    negPaciente.Delete(pp);
-    ListaPasiente = negPaciente.ReadAll(); // Recargar lista
-}
-*/
-%>
 
 <div class="admin-pacientes-container">
     <div class="welcome-header">
@@ -127,12 +82,13 @@ if(request.getParameter("btnBaja") != null) {
         </div>
     </div>
     
-    <% if(request.getAttribute("mensajeError") != null) { %>
-            <div class="error"><%= request.getAttribute("mensajeError") %></div>
-        <% } %>
-        <% if(request.getAttribute("mensajeExito") != null) { %>
-            <div class="exito"><%= request.getAttribute("mensajeExito") %></div>
-        <% } %>
+    <c:if test="${not empty mensajeError}">
+			<div class="error">${mensajeError}</div>
+		</c:if>
+		
+		<c:if test="${not empty mensajeExito}">
+			<div class="exito">${mensajeExito}</div>
+		</c:if>
         
     <div class="admin-pacientes-container">
         <h3>Gestionar Pacientes</h3>
@@ -186,15 +142,8 @@ if(request.getParameter("btnBaja") != null) {
     
     <div class="admin-pacientes-container">    
         <h3>Lista de Pacientes</h3>
-        <form method="post">
-            <strong>DNI:</strong>
-            <input type="text" name="dniBuscar" placeholder="Ingrese DNI">
-            <button type="submit" class="btn-Buscar-fila" name="btnBuscar">Filtrar</button>
-        </form>
-        <br>
-        
         <form action="redireccionar_modificarPac_admin.html" method="post" class="admin-pacientes-form">
-            <table>
+            <table id="tabla" class="display">
                 <thead>
                     <tr>
                         <th>DNI</th>
@@ -211,100 +160,31 @@ if(request.getParameter("btnBaja") != null) {
                     </tr>
                 </thead>
                 <tbody>
-                    <%
-                    if(request.getParameter("btnBuscar") != null) {
-                        String DniParam = request.getParameter("dniBuscar");
-                        if(DniParam != null && !DniParam.isEmpty()) {
-                            cuadro = true;
-                            Paciente p = negPaciente.ReadOne(DniParam);
-                            if(p != null) {
-                    %>
-                    <tr>
-                            <td><%=p.getDNI()%></td>
-                            <td><%=p.getNombre()%></td>
-                            <td><%=p.getApellido()%></td>
-                            <td><%=p.getTelefono()%></td>
-                            <td><%=p.getDireccion()%></td>
-                            <td><%=p.getLocalidad()%></td>
-                            <td><%=p.getProvincia()%></td>
-                            <td><%=p.getFecha_nacimiento()%></td>
-                            <td><%=p.getCorreo_electronico()%></td>
-                            <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
-                            <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%=p.getDNI()%>">Modificar</button>
-                            </td>
-                        <% } %>
-                    </tr>
-                    <%
-                            }
-                        }
-                    
-                    if(!cuadro) {
-                        for (Paciente p : ListaPasiente) { 
-                    %>
-                    <tr>
-                            <td><%=p.getDNI()%></td>
-                            <td><%=p.getNombre()%></td>
-                            <td><%=p.getApellido()%></td>
-                            <td><%=p.getTelefono()%></td>
-                            <td><%=p.getDireccion()%></td>
-                            <td><%=p.getLocalidad()%></td>
-                            <td><%=p.getProvincia()%></td>
-                            <td><%=p.getFecha_nacimiento()%></td>
-                            <td><%=p.getCorreo_electronico()%></td>
-                            <td><%=p.isEstado() ? "Activo" : "Inactivo"%></td>
-                            <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnModificar" value="<%=p.getDNI()%>">Modificar</button>
-                            </td>
-                        <% } %>
-                    </tr>
-                    <% 
-                        } 
-                    %>
-                </tbody>
+            		<c:forEach items="${listaPacientes}" var="p">
+		                <tr>
+		                    <td>${p.DNI}</td>
+		                    <td>${p.nombre}</td>
+		                    <td>${p.apellido}</td>
+		                    <td>${p.telefono}</td>
+		                    <td>${p.direccion}</td>
+		                    <td>${p.localidad}</td>
+		                    <td>${p.provincia}</td>
+		                    <td>${p.fecha_nacimiento}</td>
+		                    <td>${p.correo_electronico}</td>
+		                    <td>
+		                        <c:choose>
+		                            <c:when test="${p.estado}">Activo</c:when>
+		                            <c:otherwise>Inactivo</c:otherwise>
+		                        </c:choose>
+		                    </td>
+		                    <td>
+		                        <button type="submit" class="btn-guardar-fila" name="btnModificar" value="${p.DNI}">Modificar</button>
+		                    </td>
+		                </tr>
+            		</c:forEach>
+        		</tbody>
             </table>
-        </form>
-        
-        <br>
-        
-        <div class="pagination">
-            <%
-            int currentPage = 1;
-            int totalPages = 5;
-            
-            if(currentPage > 1) {
-            %>
-                <a href="?page=<%= currentPage-1 %>" class="page-link">&laquo; Anterior</a>
-            <%
-            } else {
-            %>
-                <span class="page-link disabled">&laquo; Anterior</span>
-            <%
-            }
-            
-            for(int i = 1; i <= totalPages; i++) {
-                if(i == currentPage) {
-            %>
-                    <span class="page-link active"><%= i %></span>
-            <%
-                } else {
-            %>
-                    <a href="?page=<%= i %>" class="page-link"><%= i %></a>
-            <%
-                }
-            }
-            
-            if(currentPage < totalPages) {
-            %>
-                <a href="?page=<%= currentPage+1 %>" class="page-link">Siguiente &raquo;</a>
-            <%
-            } else {
-            %>
-                <span class="page-link disabled">Siguiente &raquo;</span>
-            <%
-            }
-            %>
-        </div>
+        </form> 
     </div> 
 </div> 
 </body>
