@@ -100,7 +100,7 @@ public class TurnoController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_Turno");
 		
-		if(request.getParameter("btnguardar") != null) {
+		if(request.getParameter("btnmodificar") != null) {
 			try {
 				int id = Integer.parseInt(request.getParameter("idTurno"));
 				if(turNeg.Exist(id)) {
