@@ -37,7 +37,7 @@ public class MedicoController extends HttpServlet {
 	@Qualifier("servicioUsuario")
 	UsuarioNegocio uNeg;
 	@Autowired
-	private Usuario user;
+	Usuario user;
 	
 	@Autowired
 	@Qualifier("servicioEspecialidad")

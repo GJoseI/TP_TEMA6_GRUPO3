@@ -160,7 +160,7 @@
                     </tr>
                 </thead>
                 <tbody>
-            		<c:forEach items="${listaPacientes}" var="p">
+            		<c:forEach items="${ListaPaciente}" var="p">
 		                <tr>
 		                    <td>${p.DNI}</td>
 		                    <td>${p.nombre}</td>

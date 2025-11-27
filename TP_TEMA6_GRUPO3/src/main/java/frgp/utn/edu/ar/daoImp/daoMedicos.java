@@ -72,37 +72,6 @@ public class daoMedicos implements IMedicos{
 		
         return medicos;
 	}
-	
-	
-	/// Devuelve por Nombre de usuario y especialidad
-	@Override
-	public List<Medicos> FiltarXEspecilidad(int  especialidad){
-		conexion = new Conexion();
-	    Session session = conexion.abrirConexion();
-        session.beginTransaction();
-        List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = " + especialidad +" ; ").list();
-        session.flush();
-
-        session.getTransaction().commit();
-        conexion.cerrarSession();
-        
-        return medicos;
-	}
-			
-	/// Devuelve por Nombre de usuario y especialidad
-	@Override
-	public List<Medicos> FiltarXEspecilidadYLegajo(int legajo, int  especialidad){
-		conexion = new Conexion();
-	    Session session = conexion.abrirConexion();
-        session.beginTransaction();
-        List<Medicos> medicos = session.createQuery("SELECT m.* FROM medico m WHERE Especialidad_id = "+ especialidad + " and m.legajo = "+ legajo + " ;").list();
-        session.flush();
-
-        session.getTransaction().commit();
-        conexion.cerrarSession();
-        
-        return medicos;
-	}
 				
 	
 	/// Modificar 
