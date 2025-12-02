@@ -6,6 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Panel de Administrador - Turnos</title>
+<link rel="stylesheet" 
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tabla').DataTable({
+            pageLength: 10,
+            lengthMenu: [5, 10, 20],
+            searching: true,
+            ordering: true,
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+    });
+</script>
 <style>
 	.admin-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
 	.welcome-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
@@ -92,7 +111,7 @@
 			<div class="exito">${mensajeExito}</div>
 		</c:if>
     
-    <form method="post" class="admin-turnos-form">
+    <form method="post" class="admin-turnos-form" action="alta_turno.html">
         <table>
             <thead>
                 <tr>

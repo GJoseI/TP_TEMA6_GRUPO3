@@ -84,15 +84,15 @@ public class RedirectController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("modificarMed_admin");
 	    MV.addObject("especialidades", epN.ReadAll());
+	    
 		String legajoStr = request.getParameter("btnModificar");
 		if (legajoStr != null && !legajoStr.isEmpty()) {
             try {
             	int legajo = Integer.parseInt(legajoStr);
-            	medico = medNeg.ReadOne(legajo);
+            	medico = this.medNeg.ReadOne(legajo);
                 if (medico != null) {
                     MV.addObject("medicoSeleccionado", medico);
                 } else {
-                    // Manejar médico no encontrado
                     request.setAttribute("mensajeError", "Error al buscar el médico");
                 }
             } catch (NumberFormatException e) {
