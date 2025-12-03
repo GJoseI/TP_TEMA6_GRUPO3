@@ -127,6 +127,30 @@ public class RedirectController extends HttpServlet {
         }
 		return MV;
 	}
+	
+	@RequestMapping("redireccionar_modificarTur_admin.html")
+	public ModelAndView eventoRedireccionar_ModifTur(HttpServletRequest request){
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("modificarTur_admin");
+		
+		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
+            try {
+                paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
+                
+                if (paciente != null) {
+                    MV.addObject("turnoSeleccionado", paciente);
+                } else {
+                    // Manejar médico no encontrado
+                    request.setAttribute("mensajeError", "Error al buscar el turno");
+                }
+            } catch (NumberFormatException e) {
+            	request.setAttribute("mensajeError", "Inválido");
+            } catch (Exception e) {
+            	request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        }
+		return MV;
+	}
 
 	@RequestMapping("redireccionar_Admin.html")
 	public ModelAndView eventoRedireccionar_Admin() {

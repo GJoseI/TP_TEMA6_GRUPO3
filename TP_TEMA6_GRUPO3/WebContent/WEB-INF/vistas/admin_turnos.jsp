@@ -151,6 +151,60 @@
             </tbody>
         </table>
         <br>
-    </form>  
+    </form>
+    
+    <div class="admin-container">
+            <h3>Lista de Turnos</h3> 
+            <form action="redireccionar_modificarTur_admin.html" method="post" class="admin-turnos-form">
+                <table id="tabla" class="display">
+                    <thead>
+                        <tr>
+                            <th>ID Turno</th>
+                            <th>DNI Paciente</th>
+                            <th>Legajo Medico</th>
+                            <th>Especialidad</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Observaciones</th>
+                            <th>Asistencia</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+				    <c:forEach items="${turnos}" var="turno">
+				        <tr>
+				            <td>${turno.id}</td>
+				            <td>${turno.paciente != null ? turno.paciente.DNI : ''}</td>
+				            <td>${turno.Medico != null ? turno.Medico.legajo : ''}</td>
+				            <td>${turno.especialidad != null ? turno.especialidad.nombre : ''}</td>
+				            <td>${turno.fecha}</td>
+				            <td>${turno.hora}</td>
+				            <td>${turno.observacion}</td>
+				            <td>${turno.estadoTurno}</td>
+				            <td>
+				                <c:choose>
+				                    <c:when test="${turno.estado}">
+				                        Activo
+				                    </c:when>
+				                    <c:otherwise>
+				                        Inactivo
+				                    </c:otherwise>
+				                </c:choose>
+				            </td>
+				
+				            <td>
+				                <button type="submit" class="btn-guardar-fila" 
+				                        name="btnModificar" 
+				                        value="${turno.id}">
+				                    Modificar
+				                </button>
+				            </td>
+				        </tr>
+				    </c:forEach>
+				</tbody>
+                </table>
+            </form>
+        </div>  
 </div>
 </html>

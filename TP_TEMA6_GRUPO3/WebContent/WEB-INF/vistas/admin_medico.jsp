@@ -48,7 +48,7 @@
 	        border-color: #ccc;
 	    }
 </style>
-<title>admin_medico</title>
+<title>Panel de Administrador - Medico</title>
 
 <link rel="stylesheet" 
       href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
