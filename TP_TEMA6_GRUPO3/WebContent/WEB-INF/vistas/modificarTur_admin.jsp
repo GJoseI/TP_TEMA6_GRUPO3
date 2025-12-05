@@ -47,9 +47,9 @@
 	                            <strong>ID Turno: ${turno.id}</strong><br><br>
 	                            <input type="hidden" name="legajo" value="${turno.id}">
 	                            <strong>DNI Paciente:</strong>
-	                            <input type="hidden" name="dniP" value="${${turno.paciente != null ? turno.paciente.DNI : ''}"><br><br>
+	                            <input type="hidden" name="dniP" value="${turno.paciente != null ? turno.paciente.DNI : ''}"><br><br>
 	                            <strong>Legajo Medico</strong>
-	                            <input type="hidden" name="legajoM" value="${turno.Medico != null ? turno.Medico.legajo : ''}"><br><br>
+	                            <input type="hidden" name="legajoM" value="${turno.medico != null ? turno.medico.legajo : ''}"><br><br>
 	                            <strong>Fecha:</strong>
 	                            <input type="text" name="direccion" value="${turno.fecha}"><br><br>
 	                            <strong>Hora:</strong>

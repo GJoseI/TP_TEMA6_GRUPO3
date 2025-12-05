@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.NegocioImp;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class TurnoNegocio {
 	public boolean Exist(int id){
 		return daoTurno.Exist(id);
 	}
+	public boolean validarTurno(int legajoM, Date fecha, String hora) {
+		return daoTurno.validarTurno(legajoM, fecha, hora);
+	};
 	public Turno ReadOne(int id){
 		return daoTurno.ReadOne(id);
 	}
@@ -36,18 +40,6 @@ public class TurnoNegocio {
 
 	public List<Turno> ReadAll(){
 		return daoTurno.ReadAll();
-	}
-
-	public List<Turno> FiltarxFecha(String facha){
-		return daoTurno.FiltarxFecha(facha);
-	}
-	
-	public List<Turno> FiltarxFechaxPciente(String facha, String dni){
-		return daoTurno.FiltarxFechaxPciente( facha,  dni);
-	}
-	
-	public List<Turno> FiltarPciente(String dni){
-		return daoTurno.FiltarPciente( dni);
 	}
 	
 	public Conexion getConexion() {

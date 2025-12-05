@@ -3,6 +3,7 @@ package frgp.utn.edu.ar.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,11 +54,13 @@ public class TurnoController extends HttpServlet {
 	@RequestMapping("alta_turno.html")
 	public ModelAndView eventoAltaTurno (HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-		MV.setViewName("admin_Turno");
+		MV.setViewName("admin_turnos");
+	    List<Turno> turnos = turNeg.ReadAll();
+	    MV.addObject("ListaTurnos", turnos);
 		
 		if(request.getParameter("btnguardar") != null) {
 			try {
-				//Despues veo de hacer un if de validaciones de turnos
+				//Despues hago un if de validaciones de turnos
 				String dniPaciente = request.getParameter("dni");
 				p = this.pacNeg.ReadOne(dniPaciente);
 				int legajoMed = Integer.parseInt(request.getParameter("Legajo"));
@@ -72,20 +75,21 @@ public class TurnoController extends HttpServlet {
 				turno.setEspecialidad(especialidad);
 				turno.setEstadoTurno("Pendiente");
 				turno.setEstado("activo".equals(request.getParameter("estado")));
-				try {
+				
 	                String fechaStr = request.getParameter("fecha");
 	                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	                Date fecha = sdf.parse(fechaStr);
-	                turno.setFecha(fecha);
-	            } catch (ParseException e) {
-	                e.printStackTrace();
-	            }
-				
-				if(turNeg.AgregarTurno(turno)) {
-					request.setAttribute("mensajeExito", "Turno asignado correctamente");
-                } else {
-                    request.setAttribute("mensajeError", "Error al asignar el turno");
-                }
+	            turno.setFecha(fecha);
+				if(turNeg.validarTurno(legajoMed, fecha, request.getParameter("hora"))) {
+					request.setAttribute("mensajeError", "El médico ya tiene un turno en esa hora/dia.");
+					return MV;
+				} else {
+					if(turNeg.AgregarTurno(turno)) {
+						request.setAttribute("mensajeExito", "Turno asignado correctamente");
+	                } else {
+	                    request.setAttribute("mensajeError", "Error al asignar el turno");
+	                }
+				}
 			
 			} catch(Exception e){
 				request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());

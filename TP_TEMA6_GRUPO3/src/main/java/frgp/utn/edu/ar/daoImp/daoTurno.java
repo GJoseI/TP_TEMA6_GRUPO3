@@ -1,6 +1,9 @@
 package frgp.utn.edu.ar.daoImp;
 
+import java.util.Date;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,17 +50,30 @@ public class daoTurno implements ITurno{
 		}
 		
 		/// Si existe
-		public boolean Exist(int id)
+		public boolean validarTurno(int legajoM, Date fecha, String hora)
 		{
+			String hql = "SELECT COUNT(t) FROM Turno t WHERE t.medico.legajo = :legajo AND t.fecha = :fecha AND t.hora = :hora";
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			
+			Long count = (Long) session.createQuery(hql)
+			.setParameter("legajo", legajoM)
+			.setParameter("fecha", fecha)
+			.setParameter("hora", hora).uniqueResult();		
+			
+	        conexion.cerrarSession();
+	        return count > 0;
+		}
+		
+		public boolean Exist(int id) {
 			conexion = new Conexion();
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			Turno savedTurno = (Turno) session.get(Turno.class, id);
-	        if(savedTurno!=null)
-	        	return true;
+	        if(savedTurno!=null) return true;
 	        conexion.cerrarSession();
-	        
-	        return false;
+	        return savedTurno != null;
 		}
 		
 		/// Devuelve por Nombre de usuario
@@ -149,48 +165,6 @@ public class daoTurno implements ITurno{
 	        
 	        return usuarios;
 		}
-		
-		/// trae todo por fecha
-		public List<Turno> FiltarxFecha(String facha) {		
-			conexion = new Conexion();
-		    Session session = conexion.abrirConexion();
-	        session.beginTransaction();
-	        List<Turno> usuarios = session.createQuery("SELECT * FROM turno  WHERE fecha = "+ facha +";").list();
-	        session.flush();
-
-	        session.getTransaction().commit();
-	        conexion.cerrarSession();
-	        
-	        return usuarios;
-		}
-		/// trae por fecha y paciente
-		public List<Turno> FiltarxFechaxPciente(String facha, String dni) {		
-			conexion = new Conexion();
-		    Session session = conexion.abrirConexion();
-	        session.beginTransaction();
-	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on p.DNI = t.DNI WHERE t.fecha = "+ facha +" and p.DNI = "+dni+";").list();
-	        session.flush();
-
-	        session.getTransaction().commit();
-	        conexion.cerrarSession();
-	        
-	        return usuarios;
-		}
-		
-		/// trae por paciente
-		public List<Turno> FiltarPciente( String dni) {		
-			conexion = new Conexion();
-		    Session session = conexion.abrirConexion();
-	        session.beginTransaction();
-	        List<Turno> usuarios = session.createQuery("SELECT t.* FROM turno t inner join paciente p on   p.DNI = t.DNI where p.DNI = "+dni+";").list();
-	        session.flush();
-
-	        session.getTransaction().commit();
-	        conexion.cerrarSession();
-	        
-	        return usuarios;
-		}
-
 		
 
 		//Agrego los gettes y setters para Spring Core

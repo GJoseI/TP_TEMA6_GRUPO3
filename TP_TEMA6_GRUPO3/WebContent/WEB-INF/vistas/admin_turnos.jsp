@@ -172,11 +172,11 @@
                         </tr>
                     </thead>
                     <tbody>
-				    <c:forEach items="${turnos}" var="turno">
+				    <c:forEach items="${ListaTurnos}" var="turno">
 				        <tr>
 				            <td>${turno.id}</td>
 				            <td>${turno.paciente != null ? turno.paciente.DNI : ''}</td>
-				            <td>${turno.Medico != null ? turno.Medico.legajo : ''}</td>
+				            <td>${turno.medico != null ? turno.medico.legajo : ''}</td>
 				            <td>${turno.especialidad != null ? turno.especialidad.nombre : ''}</td>
 				            <td>${turno.fecha}</td>
 				            <td>${turno.hora}</td>

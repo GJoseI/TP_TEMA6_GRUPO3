@@ -1,6 +1,5 @@
 package frgp.utn.edu.ar.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -16,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
 import frgp.utn.edu.ar.NegocioImp.PacienteNegocio;
+import frgp.utn.edu.ar.NegocioImp.TurnoNegocio;
 import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Paciente;
+import frgp.utn.edu.ar.entidad.Turno;
 import frgp.utn.edu.ar.entidad.Usuario;
 
 @Controller
@@ -42,6 +43,12 @@ public class RedirectController extends HttpServlet {
 	PacienteNegocio pacNeg;
 	@Autowired
 	Paciente paciente;
+	
+	@Autowired
+	@Qualifier("servicioTurno")
+	TurnoNegocio turNeg;	
+	@Autowired
+	Turno turno;
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
@@ -132,13 +139,14 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_ModifTur(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("modificarTur_admin");
+		MV.addObject("especialidades", epN.ReadAll());
 		
 		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
             try {
-                paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
+                turno = turNeg.ReadOne(Integer.parseInt(request.getParameter("btnModificar")));
                 
-                if (paciente != null) {
-                    MV.addObject("turnoSeleccionado", paciente);
+                if (turno != null) {
+                    MV.addObject("turnoSeleccionado", turno);
                 } else {
                     // Manejar médico no encontrado
                     request.setAttribute("mensajeError", "Error al buscar el turno");
@@ -177,6 +185,9 @@ public class RedirectController extends HttpServlet {
 
 		List<Especialidad> especialidades = epN.ReadAll();
 	    MV.addObject("especialidades", especialidades);
+	    
+	    List<Turno> turnos = turNeg.ReadAll();
+	    MV.addObject("ListaTurnos", turnos);
 		
 			MV.setViewName("admin_turnos");
 

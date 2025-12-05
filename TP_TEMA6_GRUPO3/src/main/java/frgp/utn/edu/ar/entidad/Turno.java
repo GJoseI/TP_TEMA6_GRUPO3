@@ -30,7 +30,7 @@ public class Turno implements Serializable{
 	private Paciente paciente;
 	@ManyToOne
 	@JoinColumn(name="legajo")
-	private Medicos Medico;
+	private Medicos medico;
 	@ManyToOne
 	@JoinColumn(name="Especialidad_id")
 	private Especialidad especialidad;
@@ -43,7 +43,7 @@ public class Turno implements Serializable{
 	public Turno () {}
 	public Turno(Medicos medico, Paciente paciente, Especialidad especialidad, Date fecha, String hora, String observacion, String estadoTurno) {
 		super();
-		Medico = medico;
+		this.medico = medico;
 		this.paciente = paciente;
 		this.fecha = fecha;
 		this.hora = hora;
@@ -61,11 +61,11 @@ public class Turno implements Serializable{
 		this.especialidad = especialidad;
 	}
 	public Medicos getMedico() {
-		return Medico;
+		return medico;
 	}
 
 	public void setMedico(Medicos medico) {
-		Medico = medico;
+		this.medico = medico;
 	}
 
 	public Paciente getPaciente() {
@@ -122,7 +122,7 @@ public class Turno implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Turno [Medico=" + Medico + ", paciente=" + paciente + ", fecha=" + fecha + ", hora=" + hora
+		return "Turno [Medico=" + medico + ", paciente=" + paciente + ", fecha=" + fecha + ", hora=" + hora
 				+ ", observación=" + observacion + ", estado=" + estadoTurno + "]";
 	}
 	
