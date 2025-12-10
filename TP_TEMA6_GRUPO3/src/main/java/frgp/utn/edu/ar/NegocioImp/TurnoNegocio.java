@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import frgp.utn.edu.ar.Negocio.ITurnoNegocio;
 import frgp.utn.edu.ar.dao.ITurno;
 import frgp.utn.edu.ar.daoImp.Conexion;
 import frgp.utn.edu.ar.daoImp.daoTurno;
 import frgp.utn.edu.ar.entidad.Turno;
 
 @Service("servicioTurno")
-public class TurnoNegocio {
+public class TurnoNegocio implements ITurnoNegocio {
 	
 	@Autowired
 	private ITurno daoTurno;
@@ -47,6 +48,30 @@ public class TurnoNegocio {
 	}
 	public void setConexion(Conexion conexion) {
 		daoTurno.setConexion(conexion);
+	}
+
+	@Override
+	public int informeAusencias(int mes) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int informeTotalTurnos(int mes) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int informePacienteAtendidos(int mes) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double informePorcentAsistencias(int mes) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

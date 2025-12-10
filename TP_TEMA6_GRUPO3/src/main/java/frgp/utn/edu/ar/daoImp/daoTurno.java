@@ -57,6 +57,7 @@ public class daoTurno implements ITurno{
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			
+			
 			Long count = (Long) session.createQuery(hql)
 			.setParameter("legajo", legajoM)
 			.setParameter("fecha", fecha)
@@ -175,5 +176,29 @@ public class daoTurno implements ITurno{
 
 		public void setConexion(Conexion conexion) {
 			this.conexion = conexion;
+		}
+
+		@Override
+		public int informeAusencias(int mes) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int informeTotalTurnos(int mes) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int informePacienteAtendidos(int mes) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public double informePorcentAsistencias(int mes) {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 }
