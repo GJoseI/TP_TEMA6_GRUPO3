@@ -208,12 +208,13 @@ public class RedirectController extends HttpServlet {
 	@RequestMapping("redireccionar_adminInforme.html")
 	public ModelAndView eventoRedireccionar_adminInforme() {
 		ModelAndView MV = new ModelAndView();
-		
-		//addobject count ausencias
-		//addobject count turnos total
-		//addobject count pacientes att
-		//addobject avg asistencias
 		MV.setViewName("admin_informe");
+		
+		MV.addObject("ausencias",turNeg.informeAusencias(0));
+		MV.addObject("totalTurnos", turNeg.informeTotalTurnos(0));
+		MV.addObject("pacientesAtendidos", turNeg.informePacienteAtendidos(0));
+		MV.addObject("porcentajeAsistencias", turNeg.informePorcentAsistencias(0));
+		
 		return MV;
 	}
 }

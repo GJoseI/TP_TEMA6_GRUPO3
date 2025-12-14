@@ -51,27 +51,23 @@ public class TurnoNegocio implements ITurnoNegocio {
 	}
 
 	@Override
-	public int informeAusencias(int mes) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long informeAusencias(int mes) {
+		return daoTurno.informeAusencias(mes);
 	}
 
 	@Override
-	public int informeTotalTurnos(int mes) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long informeTotalTurnos(int mes) {
+		return daoTurno.informeTotalTurnos(mes);
 	}
 
 	@Override
-	public int informePacienteAtendidos(int mes) {
-		// TODO Auto-generated method stub
-		return 0;
+	public long informePacienteAtendidos(int mes) {
+		return daoTurno.informePacienteAtendidos(mes);
 	}
 
 	@Override
 	public double informePorcentAsistencias(int mes) {
-		// TODO Auto-generated method stub
-		return 0;
+		return daoTurno.informePorcentAsistencias(mes);
 	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,58 +176,61 @@
 	             <div class="list-choice-title">Mes</div>
 	             <div class="list-choice-objects">
 	              <label>
-	                <input type="radio" name="mes" /> <span>Enero</span>
+	                <input type="radio" name="mes" value="1" onchange="this.form.submit()" ${param.mes == '1' ? 'checked' : ''} /> <span>Enero</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Febrero</span>
+	                <input type="radio" name="mes" value="2" onchange="this.form.submit()" ${param.mes == '2' ? 'checked' : ''} /> <span>Febrero</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Marzo</span>
+	                <input type="radio" name="mes" value="3" onchange="this.form.submit()" ${param.mes == '3' ? 'checked' : ''} /> <span>Marzo</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Abril</span>
+	                <input type="radio" name="mes" value="4" onchange="this.form.submit()" ${param.mes == '4' ? 'checked' : ''}/> <span>Abril</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Mayo</span>
+	                <input type="radio" name="mes" value="5" onchange="this.form.submit()" ${param.mes == '5' ? 'checked' : ''}/> <span>Mayo</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Junio</span>
+	                <input type="radio" name="mes" value="6" onchange="this.form.submit()" ${param.mes == '6' ? 'checked' : ''}/> <span>Junio</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Julio</span>
+	                <input type="radio" name="mes" value="7" onchange="this.form.submit()" ${param.mes == '7' ? 'checked' : ''}/> <span>Julio</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Septiembtr</span>
+	                <input type="radio" name="mes" value="8" onchange="this.form.submit()" ${param.mes == '8' ? 'checked' : ''}/> <span>Agosto</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Octubre</span>
+	                <input type="radio" name="mes" value="9" onchange="this.form.submit()" ${param.mes == '9' ? 'checked' : ''}/> <span>Septiembre</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Noviembre</span>
+	                <input type="radio" name="mes" value="10" onchange="this.form.submit()" ${param.mes == '10' ? 'checked' : ''}/> <span>Octubre</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Diciembre</span>
+	                <input type="radio" name="mes" value="11" onchange="this.form.submit()" ${param.mes == '11' ? 'checked' : ''}/> <span>Noviembre</span>
 	              </label>
 	              <label>
-	                <input type="radio" name="mes" /> <span>Total</span>
+	                <input type="radio" name="mes" value="12" onchange="this.form.submit()" ${param.mes == '12' ? 'checked' : ''}/> <span>Diciembre</span>
+	              </label>
+	              <label>
+	                <input type="radio" name="mes" value="0" onchange="this.form.submit()" ${param.mes == '0' ? 'checked' : ''}/> <span>Total</span>
 	              </label>
 	             </div>
 	          	</div>
 			<div class="report-grid">
 				<div class="stat-card">
-					<p class="stat-value">Numero</p>
+					<p class="stat-value">${totalTurnos}</p>
 					<p class="stat-label">Total de Turnos Agendados</p>
 				</div>
 				<div class="stat-card">
-					<p class="stat-value">Numero</p>
+					<p class="stat-value">${pacientesAtendidos}</p>
 					<p class="stat-label">Pacientes Atendidos</p>
 				</div>
 				<div class="stat-card">
-					<p class="stat-value">Numero</p>
+					<p class="stat-value">${ausencias}</p>
 					<p class="stat-label">Ausencias Registradas</p>
 				</div>
 				<div class="stat-card">
-					<p class="stat-value">Numero</p>
+					<p class="stat-value">${porcentajeAsistencias}%</p>
 					<p class="stat-label">Tasa de Asistencia</p>
 				</div>
 			</div>

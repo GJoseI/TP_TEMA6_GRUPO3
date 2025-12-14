@@ -1,5 +1,6 @@
 package frgp.utn.edu.ar.daoImp;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -179,26 +180,130 @@ public class daoTurno implements ITurno{
 		}
 
 		@Override
-		public int informeAusencias(int mes) {
-			// TODO Auto-generated method stub
-			return 0;
+		public long informeAusencias(int mes) {
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			if(mes > 0) {
+				String hql = "SELECT COUNT(t) FROM Turno t WHERE t.estadoTurno = 'Ausente' AND t.fecha BETWEEN :inicio AND :fin";
+				Calendar calInicio = Calendar.getInstance();
+				calInicio.set(2025, mes -1, 1);
+				
+				Calendar calFin = Calendar.getInstance();
+				calFin.set(2025, mes -1, calInicio.getActualMaximum(Calendar.DAY_OF_MONTH));
+				
+				Date inicio = calInicio.getTime();
+				Date fin = calFin.getTime();
+				
+				Long count = (Long) session.createQuery(hql)
+				.setParameter("inicio", inicio)
+				.setParameter("fin", fin).uniqueResult();
+				
+				session.getTransaction().commit();
+				conexion.cerrarSession();
+				return count;
+			}
+			String hql = "SELECT COUNT(t) FROM Turno t WHERE t.estadoTurno = 'Ausente'";
+			Long count = (Long) session.createQuery(hql).uniqueResult();
+			session.getTransaction().commit();
+			conexion.cerrarSession();
+			return count;
 		}
 
 		@Override
-		public int informeTotalTurnos(int mes) {
-			// TODO Auto-generated method stub
-			return 0;
+		public long informeTotalTurnos(int mes) {
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			if(mes > 0) {
+				String hql = "SELECT COUNT(t) FROM Turno t WHERE t.fecha BETWEEN :inicio AND :fin";
+				Calendar calInicio = Calendar.getInstance();
+				calInicio.set(2025, mes -1, 1);
+				
+				Calendar calFin = Calendar.getInstance();
+				calFin.set(2025, mes -1, calInicio.getActualMaximum(Calendar.DAY_OF_MONTH));
+				
+				Date inicio = calInicio.getTime();
+				Date fin = calFin.getTime();
+				
+				Long count = (Long) session.createQuery(hql)
+				.setParameter("inicio", inicio)
+				.setParameter("fin", fin).uniqueResult();
+				
+				session.getTransaction().commit();
+				conexion.cerrarSession();
+				return count;
+			}
+			String hql = "SELECT COUNT(t) FROM Turno t";
+			Long count = (Long) session.createQuery(hql).uniqueResult();
+			session.getTransaction().commit();
+			conexion.cerrarSession();
+			return count;
 		}
 
 		@Override
-		public int informePacienteAtendidos(int mes) {
-			// TODO Auto-generated method stub
-			return 0;
+		public long informePacienteAtendidos(int mes) {
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			if(mes > 0) {
+				String hql = "SELECT COUNT(t) FROM Turno t WHERE t.estadoTurno = 'Atendido' AND t.fecha BETWEEN :inicio AND :fin";
+				Calendar calInicio = Calendar.getInstance();
+				calInicio.set(2025, mes -1, 1);
+				
+				Calendar calFin = Calendar.getInstance();
+				calFin.set(2025, mes -1, calInicio.getActualMaximum(Calendar.DAY_OF_MONTH));
+				
+				Date inicio = calInicio.getTime();
+				Date fin = calFin.getTime();
+				
+				Long count = (Long) session.createQuery(hql)
+				.setParameter("inicio", inicio)
+				.setParameter("fin", fin).uniqueResult();
+				
+				session.getTransaction().commit();
+				conexion.cerrarSession();
+				return count;
+			}
+			String hql = "SELECT COUNT(t) FROM Turno t WHERE t.estadoTurno = 'Atendido'";
+			Long count = (Long) session.createQuery(hql).uniqueResult();
+			session.getTransaction().commit();
+			conexion.cerrarSession();
+			return count;
 		}
 
 		@Override
-		public double informePorcentAsistencias(int mes) {
-			// TODO Auto-generated method stub
-			return 0;
+		public Double informePorcentAsistencias(int mes) {
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			if(mes > 0) {
+				String hql = "SELECT AVG(CASE WHEN t.estadoTurno = 'Atendido' THEN 1.0 ELSE 0.0 END) FROM Turno t WHERE t.fecha BETWEEN :inicio AND :fin";
+				Calendar calInicio = Calendar.getInstance();
+				calInicio.set(2025, mes -1, 1);
+				
+				Calendar calFin = Calendar.getInstance();
+				calFin.set(2025, mes -1, calInicio.getActualMaximum(Calendar.DAY_OF_MONTH));
+				
+				Date inicio = calInicio.getTime();
+				Date fin = calFin.getTime();
+				
+				Double count = (Double) session.createQuery(hql)
+				.setParameter("inicio", inicio)
+				.setParameter("fin", fin).uniqueResult();
+				
+				session.getTransaction().commit();
+				conexion.cerrarSession();
+				if(count == null) {
+					count = 0.0;
+				}
+				
+				return count *= 100;
+			}
+			String hql = "SELECT AVG(CASE WHEN t.estadoTurno = 'Atendido' THEN 1.0 ELSE 0.0 END) FROM Turno t";
+			Double count = (Double) session.createQuery(hql).uniqueResult();
+			session.getTransaction().commit();
+			conexion.cerrarSession();
+			return count *= 100;
 		}
 }
