@@ -123,20 +123,22 @@
             <tbody>
                 <tr>
                     <td>
-                        <strong>DNI Paciente:</strong><br><br>
-                        <input type="text" name="dni" required><br><br>
-                        <strong>Legajo Medico:</strong><br><br>
-                        <input type="number" name="Legajo" required><br><br>
+                        <strong>DNI Paciente:</strong><br>
+                        <select name="dni" required>
+                            <c:forEach items="${paciente}" var="paciente">
+                            	<option value="${paciente.DNI}">${paciente.DNI} - ${paciente.nombre} ${paciente.apellido}</option>
+                            </c:forEach>
+                        </select><br><br>
+                        <strong>Medico:</strong><br>
+                        <select name="Legajo" required>
+                            <c:forEach items="${medicos}" var="medicos">
+                            	<option value="${medicos.legajo}">${medicos.legajo} - ${medicos.nombre}</option>
+                            </c:forEach>
+                        </select><br><br>
                         <strong>Fecha:</strong>
                         <input type="date" name="fecha" required><br><br>
                         <strong>Hora:</strong>
                         <input type="time" name="hora" required><br><br>
-                        <strong>Especialidad:</strong>
-                        <select name="especialidad" required>
-                            <c:forEach items="${especialidades }" var="especialidad">
-                            	<option value="${especialidad.id }">${especialidad.nombre }</option>
-                            </c:forEach>
-                        </select><br><br>
                     </td>
                     <td>
                     	<strong>Activo</strong>

@@ -182,9 +182,12 @@ public class RedirectController extends HttpServlet {
 	@RequestMapping("redireccionar_adminTurnos.html")
 	public ModelAndView eventoRedireccionar_adminTurnos() {
 		ModelAndView MV = new ModelAndView();
-
-		List<Especialidad> especialidades = epN.ReadAll();
-	    MV.addObject("especialidades", especialidades);
+		
+		List<Paciente> paciente = pacNeg.ReadAll();
+	    MV.addObject("paciente", paciente);
+    
+	    List<Medicos> medicos = medNeg.ReadAll();
+	    MV.addObject("medicos", medicos);
 	    
 	    List<Turno> turnos = turNeg.ReadAll();
 	    MV.addObject("ListaTurnos", turnos);

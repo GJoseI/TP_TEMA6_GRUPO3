@@ -65,8 +65,7 @@ public class TurnoController extends HttpServlet {
 				p = this.pacNeg.ReadOne(dniPaciente);
 				int legajoMed = Integer.parseInt(request.getParameter("Legajo"));
 				m = this.medNeg.ReadOne(legajoMed);
-				int idEspecialidad = Integer.parseInt(request.getParameter("especialidad"));
-				especialidad = this.epn.ReadOne(idEspecialidad);
+				especialidad = m.getEspecialidad();
 				
 				turno = new Turno();
 				turno.setHora(request.getParameter("hora"));
