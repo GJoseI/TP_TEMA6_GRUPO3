@@ -218,6 +218,17 @@ public class RedirectController extends HttpServlet {
 		MV.addObject("pacientesAtendidos", turNeg.informePacienteAtendidos(0));
 		MV.addObject("porcentajeAsistencias", turNeg.informePorcentAsistencias(0));
 		
+		MV.addObject("especialidad1",turNeg.informeEspecialidad(1));
+		MV.addObject("especialidad2",turNeg.informeEspecialidad(2));
+		MV.addObject("especialidad3",turNeg.informeEspecialidad(3));
+		MV.addObject("especialidad4",turNeg.informeEspecialidad(4));
+		MV.addObject("especialidad5",turNeg.informeEspecialidad(5));
+		MV.addObject("especialidad6",turNeg.informeEspecialidad(6));
+		MV.addObject("especialidad7",turNeg.informeEspecialidad(7));
+		MV.addObject("especialidad8",turNeg.informeEspecialidad(8));
+		MV.addObject("especialidad9",turNeg.informeEspecialidad(9));
+		MV.addObject("especialidad10",turNeg.informeEspecialidad(10));
+		
 		return MV;
 	}
 }

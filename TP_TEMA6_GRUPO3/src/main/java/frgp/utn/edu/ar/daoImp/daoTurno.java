@@ -306,4 +306,17 @@ public class daoTurno implements ITurno{
 			conexion.cerrarSession();
 			return count *= 100;
 		}
+		
+		@Override
+		public long informeEspecialidad(int id) {
+			conexion = new Conexion();
+			Session session= conexion.abrirConexion();
+			session.beginTransaction();
+			
+			String hql = "SELECT COUNT(t) FROM Turno t WHERE t.especialidad.id = :id";
+			Long count = (Long) session.createQuery(hql).setParameter("id", id).uniqueResult();
+			session.getTransaction().commit();
+			conexion.cerrarSession();
+			return count;
+		}
 }

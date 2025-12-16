@@ -15,6 +15,7 @@ public interface ITurno {
 	public long informeTotalTurnos(int mes);
 	public long informePacienteAtendidos(int mes);
 	public Double informePorcentAsistencias(int mes);
+	public long informeEspecialidad(int id);
 	public boolean Update(Turno turno);
 	public boolean Delete(Turno turno) ;
 	public List<Turno> ReadAll() ;

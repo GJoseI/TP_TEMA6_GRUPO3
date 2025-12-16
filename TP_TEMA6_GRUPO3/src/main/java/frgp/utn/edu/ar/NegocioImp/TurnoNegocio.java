@@ -70,4 +70,9 @@ public class TurnoNegocio implements ITurnoNegocio {
 		return daoTurno.informePorcentAsistencias(mes);
 	}
 
+	@Override
+	public long informeEspecialidad(int id) {
+		return daoTurno.informeEspecialidad(id);
+	}
+
 }

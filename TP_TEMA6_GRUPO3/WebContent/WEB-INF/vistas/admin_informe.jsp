@@ -236,6 +236,51 @@
 			</div>
 			</form>
 		</div>
+		<div class = "report-section">
+			<h3>Especialidades</h3>
+			<div class="report-grid">
+            <div class="stat-card">
+              <p class="stat-value">${especialidad1}</p>
+              <p class="stat-label">Cardiologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad2}</p>
+              <p class="stat-label">Dermatologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad3}</p>
+              <p class="stat-label">Psiquiatria</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad4}</p>
+              <p class="stat-label">Clinica Medica</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad5}</p>
+              <p class="stat-label">Pediatria</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad6}</p>
+              <p class="stat-label">Ginecologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad7}</p>
+              <p class="stat-label">Traumatologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad8}</p>
+              <p class="stat-label">Neurologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad9}</p>
+              <p class="stat-label">Oftalmologia</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-value">${especialidad10}</p>
+              <p class="stat-label">Otorrinolaringologia</p>
+            </div>
+          </div>
+		</div>
 		<div class="initial-message">
 	        <form method="get">
 	          <button type="submit" formaction="redireccionar_Admin.html" class="btn-generate">Vover a menu</button>
