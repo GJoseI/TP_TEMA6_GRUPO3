@@ -76,7 +76,6 @@
 <body>
 
     <div class="login-container">
-        <img src="hospital.png" class="logo">
         <h2>Inicio de Sesión</h2>
         <form action="redireccionar_usuario.html" method="post">
             <div class="input-group">

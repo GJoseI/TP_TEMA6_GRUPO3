@@ -170,8 +170,7 @@
 	<section class="container">
 		<div class="welcome-header">
     	<div class="info">
-    		<h2>Bienvenido/a</h2>
-    		<p>${usuarioLogeado}</p>
+    		<h2>Bienvenido/a ${usuarioLogueado}</h2>
     	</div>
      </div>
 		<h1>Informe de Actividad</h1>
@@ -288,9 +287,9 @@
           </div>
 		</div>
 		<div class="initial-message">
-	        <form method="get">
-	          <button type="submit" formaction="redireccionar_Admin.html" class="btn-generate">Vover a menu</button>
-	          <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+	        <form method="get" action="redireccionar_Admin.html">
+	          <button type="submit" class="btn-generate">Vover a menu</button>
+	          <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
 	        </form>
       	</div>
 	</section>

@@ -67,11 +67,10 @@
 <div class="admin-pacientes-container">
     <div class="welcome-header">
         <div class="info">
-            <h2>Bienvenido/a</h2>
-            <p>${usuarioLogeado}</p>
-            <form method="get">
-                <button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Volver a menú</button>
-                <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+            <h2>Bienvenido/a ${usuarioLogueado}</h2>
+            <form method="get" action="redireccionar_Admin.html">
+                <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
+                <button type="submit" class="btn-guardar-fila">Volver a menú</button>
             </form>
         </div>
     </div>

@@ -73,7 +73,7 @@ public class RedirectController extends HttpServlet {
 			if(usuario.equals(user.getNombre_Usuario()) && contrasena.equals(user.getContraseña())) {
 				
 				if(user.isAdmin()) {
-					MV.addObject("usuarioLogueado", user);
+					MV.addObject("usuarioLogueado", user.getNombre_Usuario());
 					MV.setViewName("admin");
 				}
 				else {
@@ -176,6 +176,7 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_Admin(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin");
+		
 		String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
 		

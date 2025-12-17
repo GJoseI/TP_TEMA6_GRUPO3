@@ -71,14 +71,13 @@
 
     <div class="admin-container">
         <div class="welcome-header">
-            <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
-            <h2>Bienvenido ${usuarioLogueado.Nombre_Usuario}</h2>
-            <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+            <h2>Bienvenido ${usuarioLogueado}</h2>
         </div>
 
         <p style="color: #555;">Seleccione una opción:</p>
 
         <form class="nav-form" method="get" >
+            <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
             <button type="submit" formaction="redireccionar_adminPaciente.html" class="nav-button">
                 Gestionar Pacientes
             </button>
