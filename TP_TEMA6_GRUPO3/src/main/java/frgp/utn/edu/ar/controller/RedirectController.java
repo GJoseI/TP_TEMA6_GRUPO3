@@ -78,6 +78,7 @@ public class RedirectController extends HttpServlet {
 				}
 				else {
 					MV.addObject("medicoLogueado", this.medNeg.getMedicoFromUser(user));
+					MV.addObject("listTurnos",this.turNeg.getTurnosMedico(this.medNeg.getMedicoFromUser(user)));
 					MV.setViewName("medico");
 				}
 				return MV;

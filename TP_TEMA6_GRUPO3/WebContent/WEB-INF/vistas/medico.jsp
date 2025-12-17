@@ -46,47 +46,19 @@
         .btn-guardar-fila:hover { background-color: #218838; }
         
         .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
-    	.btn-Buscar-fila:hover { background-color: #218838; }
-        
-        .pagination { text-align: center; }
-    .pagination a {
-        color: #007bff;
-        padding: 8px 16px;
-        text-decoration: none;
-        border: 1px solid #ddd;
-        margin: 0 4px;
-        border-radius: 4px;
-        transition: background-color .3s;
-    }
-    .pagination a.active {
-        background-color: #007bff;
-        color: white;
-        border: 1px solid #007bff;
-    }
-    .pagination a:hover:not(.active) {
-        background-color: #ddd;
-    }
-    .pagination a.disabled {
-        color: #ccc;
-        pointer-events: none;
-        border-color: #ccc;
-    }
-    
+    	.btn-Buscar-fila:hover { background-color: #218838; }    
     </style>
 </head>
 <body>
 <div class="medico-container">
     <div class="welcome-header">
-        <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
         <div class="info">
             <h2>Bienvenido/a, ${medicoLogueado.nombre} ${medicoLogueado.apellido}</h2>
             <p>Legajo: ${medicoLogueado.legajo}</p>
-            <input type="hidden" value="${medicoLogueado}" name="medicoLogueado">
+	        <button type="submit" formaction="redireccionar_pag1.html" class="btn-guardar-fila">Cerrar Sesion</button>
         </div>
     </div>
-
     <h2>Turnos</h2>
-
     <form action="" method="post" class="turnos-form">
     <table	id="tabla" class="display">
         <thead>
@@ -96,10 +68,8 @@
                 <th>Acciones / Observaciones</th>
             </tr>
         </thead>
-
         <tbody>
             <c:forEach items="${listTurnos}" var="t">
-
                 <tr>
                     <td>
                         <strong>DNI:</strong> ${t.paciente.DNI}<br>
@@ -109,8 +79,6 @@
                         <strong>Nacimiento:</strong> ${t.paciente.fecha_nacimiento}<br>
                         <strong>Email:</strong> ${t.paciente.correo_electronico}
                     </td>
-
-
                     <td>
                         <strong>ID:</strong> ${t.id}<br>
                         <strong>Fecha:</strong> ${t.fecha}<br>
@@ -120,37 +88,23 @@
                         <label for="obs_${t.id}">
                             <strong>Observación:</strong>
                         </label>
-
-                        <textarea id="obs_${t.id}" name="observacion">
-							${t.observación != null ? t.observación : ""}
-                        </textarea>
-
+                        <textarea id="obs_${t.id}" name="observacion">${t.observacion}</textarea>
                         <div class="asistencia-group" style="margin-top: 10px;">
                             <strong>Asistencia:</strong><br>
-
                             <input type="radio"
                                    id="presente_${t.id}"
                                    name="asistencia_${t.id}"
                                    value="presente"
-                                   <c:if test="${t.estadoTurno == 'presente'}">checked</c:if>
-                            >
+                                   <c:if test="${t.estadoTurno == 'Atendido'}">checked</c:if>>
                             <label for="presente_${t.id}">Presente</label>
-
                             <input type="radio"
                                    id="ausente_${t.id}"
                                    name="asistencia_${t.id}"
                                    value="ausente"
-                                   <c:if test="${t.estadoTurno == 'ausente'}">checked</c:if>
-                            >
+                                   <c:if test="${t.estadoTurno == 'Ausente'}">checked</c:if>>
                             <label for="ausente_${t.id}">Ausente</label>
                         </div>
-
-                        <button type="submit"
-                                class="btn-guardar-fila"
-                                name="btnguardar"
-                                value="${t.id}">
-                            Guardar
-                        </button>
+                        <button type="submit" class="btn-guardar-fila" name="btnguardar" value="${t.id}">Guardar</button>
                     </td>
                 </tr>
 

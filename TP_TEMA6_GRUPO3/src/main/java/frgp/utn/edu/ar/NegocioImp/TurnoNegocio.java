@@ -10,6 +10,7 @@ import frgp.utn.edu.ar.Negocio.ITurnoNegocio;
 import frgp.utn.edu.ar.dao.ITurno;
 import frgp.utn.edu.ar.daoImp.Conexion;
 import frgp.utn.edu.ar.daoImp.daoTurno;
+import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Turno;
 
 @Service("servicioTurno")
@@ -73,6 +74,11 @@ public class TurnoNegocio implements ITurnoNegocio {
 	@Override
 	public long informeEspecialidad(int id) {
 		return daoTurno.informeEspecialidad(id);
+	}
+
+	@Override
+	public List<Turno> getTurnosMedico(Medicos medico) {
+		return daoTurno.getTurnosMedico(medico);
 	}
 
 }

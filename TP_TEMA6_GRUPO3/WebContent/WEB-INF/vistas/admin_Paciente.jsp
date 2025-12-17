@@ -43,30 +43,23 @@
     
     .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-Buscar-fila:hover { background-color: #218838; }
-    
-    .pagination { text-align: center; }
-	    .pagination a {
-	        color: #007bff;
-	        padding: 8px 16px;
-	        text-decoration: none;
-	        border: 1px solid #ddd;
-	        margin: 0 4px;
-	        border-radius: 4px;
-	        transition: background-color .3s;
-	    }
-	    .pagination a.active {
-	        background-color: #007bff;
-	        color: white;
-	        border: 1px solid #007bff;
-	    }
-	    .pagination a:hover:not(.active) {
-	        background-color: #ddd;
-	    }
-	    .pagination a.disabled {
-	        color: #ccc;
-	        pointer-events: none;
-	        border-color: #ccc;
-	    }
+    .alert {
+		    padding: 10px;
+		    margin: 10px 0;
+		    border-radius: 4px;
+		}
+
+		.alert-error {
+		    background-color: #ffdddd;
+		    border-left: 5px solid #f44336;
+		    color: #d8000c;
+		}
+		
+		.alert-success {
+		    background-color: #ddffdd;
+		    border-left: 5px solid #4CAF50;
+		    color: #4F8A10;
+		}
 </style>
 </head>
 <body>
@@ -84,11 +77,11 @@
     </div>
     
     <c:if test="${not empty mensajeError}">
-			<div class="error">${mensajeError}</div>
+			<div class="alert-error">${mensajeError}</div>
 		</c:if>
 		
 		<c:if test="${not empty mensajeExito}">
-			<div class="exito">${mensajeExito}</div>
+			<div class="alert-success">${mensajeExito}</div>
 		</c:if>
         
     <div class="admin-pacientes-container">

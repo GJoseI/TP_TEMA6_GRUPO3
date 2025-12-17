@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import frgp.utn.edu.ar.dao.IPaciente;
 import frgp.utn.edu.ar.dao.ITurno;
 import frgp.utn.edu.ar.daoImp.Conexion;
+import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Turno;
 
 @Repository("daoTurno")
@@ -163,10 +164,11 @@ public class daoTurno implements ITurno{
 			conexion = new Conexion();
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
-	        List<Turno> usuarios = session.createQuery("FROM Turno").list();
+	        @SuppressWarnings("unchecked")
+			List<Turno> turnos = session.createQuery("FROM Turno").list();
 	        conexion.cerrarSession();
 	        
-	        return usuarios;
+	        return turnos;
 		}
 		
 
@@ -319,5 +321,16 @@ public class daoTurno implements ITurno{
 			session.getTransaction().commit();
 			conexion.cerrarSession();
 			return count;
+		}
+		
+		public List<Turno> getTurnosMedico(Medicos medico){
+			conexion = new Conexion();
+		    Session session = conexion.abrirConexion();
+	        session.beginTransaction();
+	        @SuppressWarnings("unchecked")
+			List<Turno> turnos = session.createQuery("FROM Turno t WHERE t.medico.legajo = :legajo").setParameter("legajo", medico.getLegajo()).list();
+	        conexion.cerrarSession();
+	        
+	        return turnos;
 		}
 }

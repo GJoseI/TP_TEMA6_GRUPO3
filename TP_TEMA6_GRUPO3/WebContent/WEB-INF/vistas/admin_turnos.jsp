@@ -44,32 +44,7 @@
     
     .btn-Buscar-fila { width: 100px; padding: 10px; margin-top: 10px; border: none; border-radius: 4px; background-color: #28a745; color: white; font-size: 16px; cursor: pointer; }
     .btn-Buscar-fila:hover { background-color: #218838; }
-    
-    .pagination { text-align: center; }
-	    .pagination a {
-	        color: #007bff;
-	        padding: 8px 16px;
-	        text-decoration: none;
-	        border: 1px solid #ddd;
-	        margin: 0 4px;
-	        border-radius: 4px;
-	        transition: background-color .3s;
-	    }
-	    .pagination a.active {
-	        background-color: #007bff;
-	        color: white;
-	        border: 1px solid #007bff;
-	    }
-	    .pagination a:hover:not(.active) {
-	        background-color: #ddd;
-	    }
-	    .pagination a.disabled {
-	        color: #ccc;
-	        pointer-events: none;
-	        border-color: #ccc;
-	    }
-	    
-	    .alert {
+	.alert {
 		    padding: 10px;
 		    margin: 10px 0;
 		    border-radius: 4px;
@@ -106,11 +81,11 @@
     <h2>Asignación de Turnos</h2>
     
     <c:if test="${not empty mensajeError}">
-			<div class="error">${mensajeError}</div>
+			<div class="alert-error">${mensajeError}</div>
 		</c:if>
 		
 		<c:if test="${not empty mensajeExito}">
-			<div class="exito">${mensajeExito}</div>
+			<div class="alert-succes">${mensajeExito}</div>
 		</c:if>
     
     <form method="post" class="admin-turnos-form" action="alta_turno.html">

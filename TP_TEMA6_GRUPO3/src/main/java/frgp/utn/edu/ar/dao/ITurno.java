@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import frgp.utn.edu.ar.daoImp.Conexion;
+import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Turno;
 
 public interface ITurno {
@@ -16,6 +17,7 @@ public interface ITurno {
 	public long informePacienteAtendidos(int mes);
 	public Double informePorcentAsistencias(int mes);
 	public long informeEspecialidad(int id);
+	public List<Turno> getTurnosMedico(Medicos medico);
 	public boolean Update(Turno turno);
 	public boolean Delete(Turno turno) ;
 	public List<Turno> ReadAll() ;
