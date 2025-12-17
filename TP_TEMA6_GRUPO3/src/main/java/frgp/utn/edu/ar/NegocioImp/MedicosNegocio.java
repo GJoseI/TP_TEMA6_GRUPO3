@@ -10,6 +10,7 @@ import frgp.utn.edu.ar.dao.IMedicos;
 import frgp.utn.edu.ar.daoImp.Conexion;
 import frgp.utn.edu.ar.daoImp.daoMedicos;
 import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Usuario;
 
 @Service("servicioMedicos")
 public class MedicosNegocio implements IMedicosNegocio {
@@ -48,5 +49,7 @@ public class MedicosNegocio implements IMedicosNegocio {
 		daoMedicos.setConexion(conexion);
 	}
 	
-
+	public Medicos getMedicoFromUser(Usuario usuario) {
+		return daoMedicos.getMedicoFromUser(usuario);
+	}
 }

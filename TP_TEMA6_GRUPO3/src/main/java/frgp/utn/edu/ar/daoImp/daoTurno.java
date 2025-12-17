@@ -64,6 +64,7 @@ public class daoTurno implements ITurno{
 			.setParameter("fecha", fecha)
 			.setParameter("hora", hora).uniqueResult();		
 			
+			session.getTransaction().commit();
 	        conexion.cerrarSession();
 	        return count > 0;
 		}
@@ -278,7 +279,7 @@ public class daoTurno implements ITurno{
 			Session session= conexion.abrirConexion();
 			session.beginTransaction();
 			if(mes > 0) {
-				String hql = "SELECT AVG(CASE WHEN t.estadoTurno = 'Atendido' THEN 1.0 ELSE 0.0 END) FROM Turno t WHERE t.fecha BETWEEN :inicio AND :fin";
+				String hql = "SELECT AVG(CASE WHEN t.estadoTurno = 'Atendido' THEN 1 ELSE 0 END) FROM Turno t WHERE t.fecha BETWEEN :inicio AND :fin";
 				Calendar calInicio = Calendar.getInstance();
 				calInicio.set(2025, mes -1, 1);
 				

@@ -79,8 +79,9 @@
     <div class="welcome-header">
         <img src="img/user_icon.png" alt="Logo de Usuario" class="user-icon">
         <div class="info">
-            <h2>Bienvenido/a, Perz Juan</h2>
-            <p>Legajo: 0011</p>
+            <h2>Bienvenido/a, ${medicoLogueado.nombre} ${medicoLogueado.apellido}</h2>
+            <p>Legajo: ${medicoLogueado.legajo}</p>
+            <input type="hidden" value="${medicoLogueado}" name="medicoLogueado">
         </div>
     </div>
 
@@ -100,7 +101,6 @@
             <c:forEach items="${listTurnos}" var="t">
 
                 <tr>
-                    <!-- DATOS DEL PACIENTE -->
                     <td>
                         <strong>DNI:</strong> ${t.paciente.DNI}<br>
                         <strong>Nombre y apellido:</strong> ${t.paciente.nombre} ${t.paciente.apellido}<br>
@@ -111,13 +111,11 @@
                     </td>
 
 
-                    <!-- DATOS DEL TURNO -->
                     <td>
                         <strong>ID:</strong> ${t.id}<br>
                         <strong>Fecha:</strong> ${t.fecha}<br>
                         <strong>Hora:</strong> ${t.hora}
                     </td>
-                    <!-- ACCIONES / OBSERVACIONES -->
                     <td>
                         <label for="obs_${t.id}">
                             <strong>Observación:</strong>
@@ -130,7 +128,6 @@
                         <div class="asistencia-group" style="margin-top: 10px;">
                             <strong>Asistencia:</strong><br>
 
-                            <!-- RADIO: PRESENTE -->
                             <input type="radio"
                                    id="presente_${t.id}"
                                    name="asistencia_${t.id}"
@@ -139,7 +136,6 @@
                             >
                             <label for="presente_${t.id}">Presente</label>
 
-                            <!-- RADIO: AUSENTE -->
                             <input type="radio"
                                    id="ausente_${t.id}"
                                    name="asistencia_${t.id}"

@@ -24,8 +24,6 @@ import frgp.utn.edu.ar.entidad.Usuario;
 @Controller
 public class MedicoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	@Autowired
-	private ApplicationContext context;
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
@@ -46,6 +44,8 @@ public class MedicoController extends HttpServlet {
 	@RequestMapping("alta_medico.html")
 	public ModelAndView eventoAltaMedico(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
         
         MV.setViewName("admin_medico");
         if (request.getParameter("btnguardar") != null) {
@@ -105,6 +105,9 @@ public class MedicoController extends HttpServlet {
 	@RequestMapping("modif_medico.html")
 	public ModelAndView eventoModif_medico(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
         
         MV.setViewName("admin_medico");
         if (request.getParameter("btnguardar_Modificar") != null) {
@@ -154,14 +157,4 @@ public class MedicoController extends HttpServlet {
         }
 		return MV;
 	}
-	
-	@RequestMapping("filtrar_medicos.html")
-	public ModelAndView eventoFiltrar_medicos() {
-		ModelAndView MV = new ModelAndView();
-
-		//Codigo para filtrar en la lista de medicos
-		
-	return MV;
-	}
-
 }

@@ -31,6 +31,7 @@
 	<div class="admin-medicos-container">
     	<h3>Gestionar Médicos</h3>
         <form action="modif_medico.html" method="post" class="admin-medicos-form">
+        <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
         	<table>
             	<thead>
                 	<tr>

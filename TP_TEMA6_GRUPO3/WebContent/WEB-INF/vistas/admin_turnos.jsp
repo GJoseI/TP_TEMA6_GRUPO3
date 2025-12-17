@@ -26,6 +26,7 @@
     });
 </script>
 <style>
+	body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
 	.admin-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 1200px; margin: auto; }
 	.welcome-header { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; }
     .welcome-header .info h2 { color: #005a9c; margin: 0; font-size: 22px; }
@@ -94,9 +95,10 @@
     <div class="welcome-header">
         <div class="info">
             <h2>Bienvenido/a</h2>
-            <p>ID Admin</p>
+            <p>${usuarioLogeado}</p>
             <form method="get">
                 <button type="submit" formaction="redireccionar_Admin.html" class="btn-guardar-fila">Volver a menú</button>
+                <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
             </form>
         </div>
     </div>

@@ -168,6 +168,12 @@
 </head>
 <body>
 	<section class="container">
+		<div class="welcome-header">
+    	<div class="info">
+    		<h2>Bienvenido/a</h2>
+    		<p>${usuarioLogeado}</p>
+    	</div>
+     </div>
 		<h1>Informe de Actividad</h1>
 		<div class="report-section">
 			<h3>Resultado de turnos</h3>
@@ -284,6 +290,7 @@
 		<div class="initial-message">
 	        <form method="get">
 	          <button type="submit" formaction="redireccionar_Admin.html" class="btn-generate">Vover a menu</button>
+	          <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
 	        </form>
       	</div>
 	</section>

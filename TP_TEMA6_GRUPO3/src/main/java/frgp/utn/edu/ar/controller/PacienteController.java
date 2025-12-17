@@ -29,6 +29,10 @@ public class PacienteController extends HttpServlet {
 	@RequestMapping("alta_paciente.html")
 	public ModelAndView eventoAltaPaciente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
         
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar") != null) {
@@ -75,7 +79,10 @@ public class PacienteController extends HttpServlet {
 	@RequestMapping("modif_paciente.html")
 	public ModelAndView eventoModifPaciente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-        
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar_Modificar") != null) {
             try {

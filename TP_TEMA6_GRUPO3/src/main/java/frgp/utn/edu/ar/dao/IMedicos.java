@@ -4,6 +4,7 @@ import java.util.List;
 
 import frgp.utn.edu.ar.daoImp.Conexion;
 import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Usuario;
 
 public interface IMedicos {
 	public boolean AgregarMedicos(Medicos medicos);
@@ -14,4 +15,5 @@ public interface IMedicos {
 	public List<Medicos> ReadAll();
 	public Conexion getConexion();
 	public void setConexion(Conexion conexion);
+	public Medicos getMedicoFromUser(Usuario usuario);
 }

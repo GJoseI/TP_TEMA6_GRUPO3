@@ -41,7 +41,7 @@ public class Paciente implements Serializable{
 		this.provincia = provincia;
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.correo_electronico = correo_electronico;
-		this.estado=true;
+		this.estado = true;
 	}
 
 	public String getNombre() {

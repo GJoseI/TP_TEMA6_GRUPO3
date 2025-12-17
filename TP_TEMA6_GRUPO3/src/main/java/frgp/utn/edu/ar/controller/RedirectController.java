@@ -32,7 +32,7 @@ public class RedirectController extends HttpServlet {
 	@Qualifier("servicioUsuario")
 	UsuarioNegocio uNeg;
 	@Autowired
-	private Usuario user;
+	Usuario user;
 	
 	@Autowired
 	@Qualifier("servicioEspecialidad")
@@ -52,9 +52,9 @@ public class RedirectController extends HttpServlet {
 	
 	@Autowired
 	@Qualifier("servicioMedicos")
-	private MedicosNegocio medNeg;
+	MedicosNegocio medNeg;
 	@Autowired
-	private Medicos medico;
+	Medicos medico;
 	
 	
 	
@@ -71,11 +71,13 @@ public class RedirectController extends HttpServlet {
 		List<Usuario> usuarios = uNeg.ReadAll();
 		for(Usuario user : usuarios) {
 			if(usuario.equals(user.getNombre_Usuario()) && contrasena.equals(user.getContraseña())) {
-				MV.addObject("usuarioLogueado", user);
+				
 				if(user.isAdmin()) {
+					MV.addObject("usuarioLogueado", user);
 					MV.setViewName("admin");
 				}
 				else {
+					MV.addObject("medicoLogueado", this.medNeg.getMedicoFromUser(user));
 					MV.setViewName("medico");
 				}
 				return MV;
@@ -91,6 +93,9 @@ public class RedirectController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("modificarMed_admin");
 	    MV.addObject("especialidades", epN.ReadAll());
+	    
+	    String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 	    
 		String legajoStr = request.getParameter("btnModificar");
 		if (legajoStr != null && !legajoStr.isEmpty()) {
@@ -115,6 +120,9 @@ public class RedirectController extends HttpServlet {
 	public ModelAndView eventoRedireccionar_ModifPac(HttpServletRequest request){
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("modificarPac_admin");
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
 		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
             try {
@@ -141,6 +149,9 @@ public class RedirectController extends HttpServlet {
 		MV.setViewName("modificarTur_admin");
 		MV.addObject("especialidades", epN.ReadAll());
 		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
 		if (request.getParameter("btnModificar") != null && !request.getParameter("btnModificar").isEmpty()) {
             try {
                 turno = turNeg.ReadOne(Integer.parseInt(request.getParameter("btnModificar")));
@@ -161,27 +172,37 @@ public class RedirectController extends HttpServlet {
 	}
 
 	@RequestMapping("redireccionar_Admin.html")
-	public ModelAndView eventoRedireccionar_Admin() {
+	public ModelAndView eventoRedireccionar_Admin(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
-			MV.setViewName("admin");
+		MV.setViewName("admin");
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
 		return MV;
 	}
 	
 	
 	@RequestMapping("redireccionar_adminPaciente.html")
-	public ModelAndView eventoRedireccionar_adminPaciente() {
+	public ModelAndView eventoRedireccionar_adminPaciente(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
 		List<Paciente> ListaPaciente = pacNeg.ReadAll();
 	    MV.addObject("ListaPaciente", ListaPaciente);
+	    
 		
 			MV.setViewName("admin_Paciente");
 		return MV;
 	}
 	
 	@RequestMapping("redireccionar_adminTurnos.html")
-	public ModelAndView eventoRedireccionar_adminTurnos() {
+	public ModelAndView eventoRedireccionar_adminTurnos(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
 		List<Paciente> paciente = pacNeg.ReadAll();
 	    MV.addObject("paciente", paciente);
@@ -198,9 +219,12 @@ public class RedirectController extends HttpServlet {
 	}
 	
 	@RequestMapping("redireccionar_adminMedico.html")
-	public ModelAndView eventoRedireccionar_adminMedico() {
+	public ModelAndView eventoRedireccionar_adminMedico(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_medico");
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
 	    MV.addObject("especialidades", this.epN.ReadAll());
 
@@ -209,9 +233,12 @@ public class RedirectController extends HttpServlet {
 	}
 
 	@RequestMapping("redireccionar_adminInforme.html")
-	public ModelAndView eventoRedireccionar_adminInforme() {
+	public ModelAndView eventoRedireccionar_adminInforme(HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_informe");
+		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
 		MV.addObject("ausencias",turNeg.informeAusencias(0));
 		MV.addObject("totalTurnos", turNeg.informeTotalTurnos(0));

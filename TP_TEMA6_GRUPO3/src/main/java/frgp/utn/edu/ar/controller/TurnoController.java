@@ -57,6 +57,10 @@ public class TurnoController extends HttpServlet {
 		MV.setViewName("admin_turnos");
 	    List<Turno> turnos = turNeg.ReadAll();
 	    MV.addObject("ListaTurnos", turnos);
+	    
+	    String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
 		
 		if(request.getParameter("btnguardar") != null) {
 			try {
@@ -103,6 +107,10 @@ public class TurnoController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_turnos");
 		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
+		
 		if(request.getParameter("btnmodificar") != null) {
 			try {
 				int id = Integer.parseInt(request.getParameter("idTurno"));
@@ -143,18 +151,4 @@ public class TurnoController extends HttpServlet {
 		
 		return MV;
 	}
-	
-	@RequestMapping("filtroMes_Informe.html")
-	public ModelAndView eventoFiltrarMes(HttpServletRequest request) {
-		ModelAndView MV = new ModelAndView();
-		MV.setViewName("admin_informe");
-		
-		MV.addObject("ausencias",turNeg.informeAusencias(Integer.parseInt(request.getParameter("mes"))));
-		MV.addObject("totalTurnos", turNeg.informeTotalTurnos(Integer.parseInt(request.getParameter("mes"))));
-		MV.addObject("pacientesAtendidos", turNeg.informePacienteAtendidos(Integer.parseInt(request.getParameter("mes"))));
-		MV.addObject("porcentajeAsistencias", turNeg.informePorcentAsistencias(Integer.parseInt(request.getParameter("mes"))));
-		
-		return MV;
-	}
-
 }

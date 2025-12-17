@@ -36,6 +36,7 @@ Paciente paciente_p = (Paciente) request.getAttribute("pacienteSeleccionado");
         <h3>Gestionar Pacientes</h3>
         
         <form action="modif_paciente.html" method="post" class="admin-pacientes-form">
+        <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
             <table>
                 <thead>
                     <tr>

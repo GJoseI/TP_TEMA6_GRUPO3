@@ -10,6 +10,7 @@ import frgp.utn.edu.ar.dao.IMedicos;
 import frgp.utn.edu.ar.daoImp.Conexion;
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Usuario;
 
 @Repository("daoMedicos")
 public class daoMedicos implements IMedicos{
@@ -167,6 +168,19 @@ public class daoMedicos implements IMedicos{
 		this.conexion = conexion;
 	}
 	
-	
+	public Medicos getMedicoFromUser(Usuario usuario) {
+		String hql = "SELECT m FROM Medicos m WHERE m.usuario.Nombre_Usuario= :usuario";
+		conexion = new Conexion();
+		Session session= conexion.abrirConexion();
+		session.beginTransaction();
+		
+		
+		Medicos medico = (Medicos) session.createQuery(hql)
+		.setParameter("usuario", usuario.getNombre_Usuario()).uniqueResult();
+		
+		session.getTransaction().commit();
+        conexion.cerrarSession();
+        return medico;
+	}
 	
 }
