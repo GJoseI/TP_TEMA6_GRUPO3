@@ -130,7 +130,7 @@ public class RedirectController extends HttpServlet {
                 paciente = pacNeg.ReadOne(request.getParameter("btnModificar"));
                 
                 if (paciente != null) {
-                    MV.addObject("pacienteSeleccionado", paciente);
+                    MV.addObject("paciente_p", paciente);
                 } else {
                     // Manejar médico no encontrado
                     request.setAttribute("mensajeError", "Error al buscar el paciente");

@@ -3,6 +3,7 @@ package frgp.utn.edu.ar.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +41,7 @@ public class PacienteController extends HttpServlet {
                 
                 if(!pacNeg.Exist(request.getParameter("dni"))) {                  
                     
+                	p = new Paciente();
                     p.setDNI(request.getParameter("dni"));
                     p.setNombre(request.getParameter("nombre"));
                     p.setApellido(request.getParameter("apellido"));
@@ -72,7 +74,8 @@ public class PacienteController extends HttpServlet {
                 request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
             }
         }
-
+        List<Paciente> ListaPaciente = pacNeg.ReadAll();
+	    MV.addObject("ListaPaciente", ListaPaciente);
 		return MV;
 	}
 	
@@ -86,7 +89,6 @@ public class PacienteController extends HttpServlet {
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar_Modificar") != null) {
             try {
-                
                 if(pacNeg.Exist(request.getParameter("dni"))) {     
                     
                     p.setDNI(request.getParameter("dni"));
@@ -119,7 +121,8 @@ public class PacienteController extends HttpServlet {
                 request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
             }
         }
-
+        List<Paciente> ListaPaciente = pacNeg.ReadAll();
+	    MV.addObject("ListaPaciente", ListaPaciente);
 		return MV;
 	}
 	

@@ -100,9 +100,9 @@
                                 <input type="text" name="apellido" value="" required><br><br>
                                 <strong>Sexo:</strong>
                                 <select name="Sexo" required>
-                                    <option value="Masculino" selected>Masculino</option>
-                                    <option value="Femenino">Femenino</option>
-                                    <option value="Otro">Otro</option>
+                                    <option value="M" selected>Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="X">Otro</option>
                                 </select><br><br>
                                 <strong>Dirección:</strong>
                                 <input type="text" name="direccion" value="" required><br><br>

@@ -31,11 +31,13 @@ public class MedicoController extends HttpServlet {
 	@Autowired
 	Medicos medico;
 	
+	
 	@Autowired
 	@Qualifier("servicioUsuario")
 	UsuarioNegocio uNeg;
 	@Autowired
 	Usuario user;
+	
 	
 	@Autowired
 	@Qualifier("servicioEspecialidad")
@@ -53,17 +55,15 @@ public class MedicoController extends HttpServlet {
                 int legajo = Integer.parseInt(request.getParameter("legajo"));
                 
                 if(!medNeg.Exist(legajo)) {
+                	int espe = Integer.parseInt(request.getParameter("especialidad"));
+                	Especialidad espes = epn.ReadOne(espe);
+                	
                     user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
-                    
                     uNeg.AgregarUsuario(user);
                     
-                    //Medicos medico = context.getBean(Medicos.class);
                     medico = new Medicos();
                     medico.setUsuario(user);
-                    int espe = Integer.parseInt(request.getParameter("especialidad"));
-                    Especialidad espes = epn.ReadOne(espe);
-                    medico.setEspecialidad(espes);
-                    
+                    medico.setEspecialidad(espes);            
                     medico.setLegajo(legajo);
                     medico.setNombre(request.getParameter("nombre")); 
                     medico.setApellido(request.getParameter("apellido"));
@@ -98,7 +98,9 @@ public class MedicoController extends HttpServlet {
                 request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
             }
         }
+	    MV.addObject("especialidades", this.epn.ReadAll());
 
+	    MV.addObject("medicos", this.medNeg.ReadAll());
 		return MV;
 	}
 	
@@ -118,7 +120,6 @@ public class MedicoController extends HttpServlet {
                     user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
                     
                     uNeg.Update(user);
-                    //Medicos medico = context.getBean(Medicos.class);
                     medico.setUsuario(user);
                     medico.setEspecialidad(epn.ReadOne(Integer.parseInt(request.getParameter("especialidad"))));
                     
@@ -136,7 +137,6 @@ public class MedicoController extends HttpServlet {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    //m.setFechaNac(request.getParameter("fechaNac"));
                     medico.setEmail(request.getParameter("email"));
                     medico.setDiasLab(request.getParameter("Dias"));
                     medico.setHorarioLab(request.getParameter("horarios"));
@@ -144,9 +144,9 @@ public class MedicoController extends HttpServlet {
                     medico.setEstado("activo".equals(request.getParameter("estado")));
                     
                     if(medNeg.Update(medico)) {
-                        request.setAttribute("mensajeExito", "Médico actualizad correctamente");
+                        request.setAttribute("mensajeExito", "Medico actualizado correctamente");
                     } else {
-                        request.setAttribute("mensajeError", "Error al actualizar el médico");
+                        request.setAttribute("mensajeError", "Error al actualizar el medico");
                     }
                 }
             } catch (NumberFormatException e) {
@@ -155,6 +155,9 @@ public class MedicoController extends HttpServlet {
                 request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
             }
         }
+	    MV.addObject("especialidades", this.epn.ReadAll());
+
+	    MV.addObject("medicos", this.medNeg.ReadAll());
 		return MV;
 	}
 }

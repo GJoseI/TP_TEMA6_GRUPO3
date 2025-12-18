@@ -18,6 +18,7 @@ import frgp.utn.edu.ar.NegocioImp.EspecialidadNegocio;
 import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
 import frgp.utn.edu.ar.NegocioImp.PacienteNegocio;
 import frgp.utn.edu.ar.NegocioImp.TurnoNegocio;
+import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Paciente;
@@ -51,20 +52,26 @@ public class TurnoController extends HttpServlet {
 	@Autowired
 	Paciente p;
 	
+	@Autowired
+	@Qualifier("servicioUsuario")
+	UsuarioNegocio uNeg;
+	
 	@RequestMapping("alta_turno.html")
 	public ModelAndView eventoAltaTurno (HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_turnos");
-	    List<Turno> turnos = turNeg.ReadAll();
-	    MV.addObject("ListaTurnos", turnos);
+		
+		List<Paciente> paciente = pacNeg.ReadAll();
+	    MV.addObject("paciente", paciente);
+	    
+	    List<Medicos> medicos = medNeg.ReadAll();
+	    MV.addObject("medicos", medicos);
 	    
 	    String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
-		
-		
+	
 		if(request.getParameter("btnguardar") != null) {
 			try {
-				//Despues hago un if de validaciones de turnos
 				String dniPaciente = request.getParameter("dni");
 				p = this.pacNeg.ReadOne(dniPaciente);
 				int legajoMed = Integer.parseInt(request.getParameter("Legajo"));
@@ -98,7 +105,8 @@ public class TurnoController extends HttpServlet {
 				request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
 			}
 		}
-		
+	    List<Turno> turnos = turNeg.ReadAll();
+	    MV.addObject("ListaTurnos", turnos);
 		return MV;
 	}
 	
@@ -107,26 +115,24 @@ public class TurnoController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_turnos");
 		
+	    MV.addObject("paciente", this.pacNeg.ReadAll());
+	    
+	    MV.addObject("medicos", this.medNeg.ReadAll());
+	    
 		String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
 		
-		
 		if(request.getParameter("btnmodificar") != null) {
 			try {
-				int id = Integer.parseInt(request.getParameter("idTurno"));
+				int id = Integer.parseInt(request.getParameter("btnmodificar"));
 				if(turNeg.Exist(id)) {
-					String dniPaciente = request.getParameter("dni");
-					p = this.pacNeg.ReadOne(dniPaciente);
-					int legajoMed = Integer.parseInt(request.getParameter("Legajo"));
-					m = this.medNeg.ReadOne(legajoMed);
-					int idEspecialidad = Integer.parseInt(request.getParameter("especialidad"));
-					especialidad = this.epn.ReadOne(idEspecialidad);
-					
 					turno = new Turno();
+					turno = this.turNeg.ReadOne(id);
 					turno.setHora(request.getParameter("hora"));
-					turno.setMedico(m);
-					turno.setPaciente(p);
-					turno.setEspecialidad(especialidad);
+					turno.setMedico(turno.getMedico());
+					turno.setPaciente(turno.getPaciente());
+					turno.setEspecialidad(turno.getEspecialidad());
+					turno.setEstadoTurno(request.getParameter("asistencia"));
 					try {
 		                String fechaStr = request.getParameter("fecha");
 		                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -136,7 +142,7 @@ public class TurnoController extends HttpServlet {
 		                e.printStackTrace();
 		            }
 					
-					if(turNeg.AgregarTurno(turno)) {
+					if(turNeg.Update(turno)) {
 						request.setAttribute("mensajeExito", "Turno actualizado correctamente");
 	                } else {
 	                    request.setAttribute("mensajeError", "Error al actualizar el turno");
@@ -148,7 +154,41 @@ public class TurnoController extends HttpServlet {
 			}
 			
 		}
+	    MV.addObject("ListaTurnos", this.turNeg.ReadAll());
+		return MV;
+	}
+	
+	@RequestMapping("modif_turnoMedico.html")
+	public ModelAndView eventoModificarTurnoMedico (HttpServletRequest request) {
+		ModelAndView MV = new ModelAndView();
+		MV.setViewName("medico");
 		
+		this.m = medNeg.ReadOne(Integer.parseInt(request.getParameter("medicoLegajo")));
+		MV.addObject("medicoLogueado", this.m);	
+		
+
+		if(request.getParameter("btnguardar") != null) {
+			try {
+				int id = Integer.parseInt(request.getParameter("btnguardar"));
+				if(turNeg.Exist(id)) {
+					turno = new Turno();
+					turno = this.turNeg.ReadOne(id);
+					turno.setObservacion(request.getParameter("observacion_" + turno.getId()));
+					turno.setEstadoTurno(request.getParameter("asistencia_" + turno.getId()));
+					
+					if(turNeg.Update(turno)) {
+						request.setAttribute("mensajeExito", "Turno actualizado correctamente");
+	                } else {
+	                    request.setAttribute("mensajeError", "Error al actualizar el turno");
+	                }
+				}
+				
+			} catch(Exception e){
+				request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+			}
+			
+		}
+		MV.addObject("listTurnos",this.turNeg.getTurnosMedico(this.m));
 		return MV;
 	}
 }

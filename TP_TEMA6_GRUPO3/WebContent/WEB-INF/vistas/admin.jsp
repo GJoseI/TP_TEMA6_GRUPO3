@@ -6,10 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Administrador</title>
-    <link rel="icon" href="../img/administrado.ico" type="image/x-icon">
     <style>
     	body {
-            background-color: #f0f8ff; /* Azul muy claro, como en el login */
+            background-color: #f0f8ff; 
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -19,7 +18,7 @@
         }
 
         .admin-container {
-            background-color: #ffffff; /* Blanco */
+            background-color: #ffffff; 
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,12 +38,12 @@
         .welcome-header .user-icon {
             width: 60px;
             height: 60px;
-            border-radius: 50%; /* Para que la imagen sea redonda */
+            border-radius: 50%; 
             margin-right: 15px;
         }
 
         .welcome-header h2 {
-            color: #005a9c; /* Azul oscuro */
+            color: #005a9c; 
             margin: 0;
             font-size: 24px;
         }
@@ -55,7 +54,7 @@
             margin-top: 15px;
             border: none;
             border-radius: 5px;
-            background-color: #007bff; /* Azul primario */
+            background-color: #007bff; 
             color: white;
             font-size: 18px;
             cursor: pointer;
@@ -63,7 +62,7 @@
         }
 
         .nav-form .nav-button:hover {
-            background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+            background-color: #0056b3; 
         }
     </style>
 </head>

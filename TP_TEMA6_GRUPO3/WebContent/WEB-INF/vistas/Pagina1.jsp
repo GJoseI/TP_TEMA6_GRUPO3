@@ -5,10 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Sistema Hospitalario</title>
-    <link rel="icon" href="img/hospital.ico" type="image/x-icon">
     <style>
     body {
-            background-color: #f0f8ff; /* Un azul muy claro, casi blanco */
+            background-color: #f0f8ff; 
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -18,7 +17,7 @@
         }
 
         .login-container {
-            background-color: #ffffff; /* Blanco */
+            background-color: #ffffff;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -32,7 +31,7 @@
         }
 
         .login-container h2 {
-            color: #005a9c; /* Azul oscuro para el título */
+            color: #005a9c; 
             margin-bottom: 30px;
         }
 
@@ -53,7 +52,7 @@
             padding: 10px;
             border: 1px solid #cccccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+            box-sizing: border-box; 
         }
 
         .login-container .btn-login {
@@ -61,7 +60,7 @@
             padding: 12px;
             border: none;
             border-radius: 4px;
-            background-color: #007bff; /* Azul primario */
+            background-color: #007bff; 
             color: white;
             font-size: 16px;
             cursor: pointer;
@@ -69,7 +68,7 @@
         }
 
         .login-container .btn-login:hover {
-            background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+            background-color: #0056b3;
         }
     </style>
 </head>

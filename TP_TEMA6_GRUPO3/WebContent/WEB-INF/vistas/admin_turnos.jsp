@@ -84,7 +84,7 @@
 		</c:if>
 		
 		<c:if test="${not empty mensajeExito}">
-			<div class="alert-succes">${mensajeExito}</div>
+			<div class="alert-success">${mensajeExito}</div>
 		</c:if>
     
     <form method="post" class="admin-turnos-form" action="alta_turno.html">

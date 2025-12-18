@@ -53,9 +53,9 @@
 	                            <input type="text" name="apellido" value="${medico_m.apellido}"><br><br>
 	                            <strong>Sexo:</strong>
 	                            <select name="Sexo" required>
-	                                <option value="Masculino" ${medico_m.sexo == 'Masculino' ? 'selected' : ''}>Masculino</option>
-	                                <option value="Femenino"  ${medico_m.sexo == 'Femenino' ? 'selected' : ''}>Femenino</option>
-	                                <option value="Otro"       ${medico_m.sexo == 'Otro' ? 'selected' : ''}>Otro</option>
+	                                <option value="M" ${medico_m.sexo == 'Masculino' ? 'selected' : ''}>Masculino</option>
+	                                <option value="F"  ${medico_m.sexo == 'Femenino' ? 'selected' : ''}>Femenino</option>
+	                                <option value="X"       ${medico_m.sexo == 'Otro' ? 'selected' : ''}>Otro</option>
 	                            </select><br><br>
 	                            <strong>Dirección:</strong>
 	                            <input type="text" name="direccion" value="${medico_m.direccion}"><br><br>

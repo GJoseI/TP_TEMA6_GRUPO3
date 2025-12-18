@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Modificar Turno</title>
 <style>
 		 body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
 	.admin-medicos-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 2000px; margin: auto; }
@@ -46,19 +46,20 @@
                         <tr>
                             <td>
 	                            <strong>ID Turno: ${turno.id}</strong><br><br>
-	                            <input type="hidden" name="legajo" value="${turno.id}">
-	                            <strong>DNI Paciente:</strong>
-	                            <input type="hidden" name="dniP" value="${turno.paciente != null ? turno.paciente.DNI : ''}"><br><br>
-	                            <strong>Legajo Medico</strong>
-	                            <input type="hidden" name="legajoM" value="${turno.medico != null ? turno.medico.legajo : ''}"><br><br>
+	                            <strong>DNI Paciente: ${turno.paciente.DNI}</strong><br><br>
+	                            <strong>Legajo Medico: ${turno.medico.legajo}</strong><br><br>
 	                            <strong>Fecha:</strong>
-	                            <input type="text" name="direccion" value="${turno.fecha}"><br><br>
+	                            <input type="text" name="fecha" value="${turno.fecha}"><br><br>
 	                            <strong>Hora:</strong>
-	                            <input type="text" name="localidad" value="${turno.hora}"><br><br>
+	                            <input type="text" name="hora" value="${turno.hora}"><br><br>
 	                            <strong>Observaciones:</strong>
-	                            <input type="date" name="fechaNac" value="${turno.observacion}"><br><br>
-	                            <strong>Asistencia:</strong>
-	                            <input type="email" name="email" value="${turno.estadoTurno}"><br><br>
+	                            <input type="text" name="observacion" value="${turno.observacion}"><br><br>
+	                            <strong>Atendido</strong>
+                                <input type="radio" name="asistencia" value="Atendido" ${turno.estadoTurno == 'Atendido' ? 'checked' : ''}><br><br>
+                                <strong>Ausente</strong>
+                                <input type="radio" name="asistencia" value="Ausente" ${turno.estadoTurno == 'Ausente' ? 'checked' : ''}><br><br>
+                                <strong>Atendido</strong>
+                                <input type="radio" name="asistencia" value="Pendiente" ${turno.estadoTurno == 'Pendiente' ? 'checked' : ''}>
                             </td>
                             <td>
                             	<strong>Especialidad:</strong>
@@ -78,7 +79,7 @@
                                 <input type="radio" name="estado" value="inactivo" ${!turno.estado ? 'checked' : ''}>
                             </td>
                             <td>
-                                <button type="submit" class="btn-guardar-fila" name="btnmodificar">Guardar</button>
+                                <button type="submit" value="${turno.id}" class="btn-guardar-fila" name="btnmodificar">Guardar</button>
                             </td>
                         </tr>
                        </c:if>
