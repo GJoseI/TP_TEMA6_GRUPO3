@@ -80,6 +80,7 @@
             <h3>Gestionar Médicos</h3>
             
             <form action="alta_medico.html" method="post" class="admin-medicos-form">
+            <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
                 <table>
                     <thead>
                         <tr>
@@ -149,6 +150,7 @@
         <div class="admin-medicos-container">
             <h3>Lista de Médicos</h3> 
             <form action="redireccionar_modificarMed_admin.html" method="post" class="admin-medicos-form">
+            <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
                 <table id="tabla" class="display">
                     <thead>
                         <tr>

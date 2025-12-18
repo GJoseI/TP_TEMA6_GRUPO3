@@ -29,16 +29,13 @@ public class PacienteController extends HttpServlet {
 	
 	@RequestMapping("alta_paciente.html")
 	public ModelAndView eventoAltaPaciente(HttpServletRequest request) {
-		ModelAndView MV = new ModelAndView();
-		
+		ModelAndView MV = new ModelAndView();		
 		String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
-		
-        
+		       
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar") != null) {
-            try {
-                
+            try { 
                 if(!pacNeg.Exist(request.getParameter("dni"))) {                  
                     
                 	p = new Paciente();
@@ -59,7 +56,6 @@ public class PacienteController extends HttpServlet {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
                     if(pacNeg.AgregarPaciente(p)) {
                         request.setAttribute("mensajeExito", "Paciente registrado correctamente");
                     } else {
@@ -89,8 +85,7 @@ public class PacienteController extends HttpServlet {
         MV.setViewName("admin_Paciente");
         if (request.getParameter("btnguardar_Modificar") != null) {
             try {
-                if(pacNeg.Exist(request.getParameter("dni"))) {     
-                    
+                if(pacNeg.Exist(request.getParameter("dni"))) {                       
                     p.setDNI(request.getParameter("dni"));
                     p.setNombre(request.getParameter("nombre"));
                     p.setApellido(request.getParameter("apellido"));
@@ -114,7 +109,24 @@ public class PacienteController extends HttpServlet {
                     } else {
                         request.setAttribute("mensajeError", "Error al actualizar el paciente");
                     }
-                } 
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensajeError", "DNI inválido");
+            } catch (Exception e) {
+                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        } else if (request.getParameter("btneliminar") != null) {
+        	try {
+                if(pacNeg.Exist(request.getParameter("dni"))) {     
+                	p = new Paciente ();
+                	p = pacNeg.ReadOne(request.getParameter("dni"));
+                	p.setEstado(false);
+                    if(pacNeg.Update(p)) {
+                        request.setAttribute("mensajeExito", "Paciente eliminado correctamente");
+                    } else {
+                        request.setAttribute("mensajeError", "Error al eliminar el paciente");
+                    }
+                }
             } catch (NumberFormatException e) {
                 request.setAttribute("mensajeError", "DNI inválido");
             } catch (Exception e) {

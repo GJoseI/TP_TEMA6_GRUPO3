@@ -20,7 +20,7 @@ public class daoTurno implements ITurno{
 	
 	@Autowired
 	private Conexion conexion;
-	///Agrergar Usuario
+
 		public boolean AgregarTurno(Turno turno)
 		{
 			boolean estado = true;
@@ -51,7 +51,6 @@ public class daoTurno implements ITurno{
 		    return estado;
 		}
 		
-		/// Si existe
 		public boolean validarTurno(int legajoM, Date fecha, String hora)
 		{
 			String hql = "SELECT COUNT(t) FROM Turno t WHERE t.medico.legajo = :legajo AND t.fecha = :fecha AND t.hora = :hora";
@@ -80,7 +79,6 @@ public class daoTurno implements ITurno{
 	        return savedTurno != null;
 		}
 		
-		/// Devuelve por Nombre de usuario
 		public Turno ReadOne(int id)
 		{
 			conexion = new Conexion();
@@ -92,7 +90,6 @@ public class daoTurno implements ITurno{
 	        return savedTurno;
 		}
 		
-		/// Modificar 
 		public boolean Update(Turno turno)
 		{
 			conexion = new Conexion();
@@ -125,7 +122,6 @@ public class daoTurno implements ITurno{
 		    return estado;
 		}
 		
-		/// Borrar
 		public boolean Delete(Turno turno) 
 		{	
 			boolean estado = true;
@@ -159,20 +155,16 @@ public class daoTurno implements ITurno{
 			return estado;
 		}
 		
-		/// trae todo
 		public List<Turno> ReadAll() {		
 			conexion = new Conexion();
 		    Session session = conexion.abrirConexion();
 	        session.beginTransaction();
 	        @SuppressWarnings("unchecked")
-			List<Turno> turnos = session.createQuery("FROM Turno").list();
+			List<Turno> turnos = session.createQuery("FROM Turno t WHERE t.estado = true").list();
 	        conexion.cerrarSession();
 	        
 	        return turnos;
 		}
-		
-
-		//Agrego los gettes y setters para Spring Core
 		
 		public Conexion getConexion() {
 			return conexion;

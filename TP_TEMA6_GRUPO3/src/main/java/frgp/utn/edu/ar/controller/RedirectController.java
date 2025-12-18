@@ -31,8 +31,6 @@ public class RedirectController extends HttpServlet {
 	@Autowired
 	@Qualifier("servicioUsuario")
 	UsuarioNegocio uNeg;
-	@Autowired
-	Usuario user;
 	
 	@Autowired
 	@Qualifier("servicioEspecialidad")
@@ -85,7 +83,7 @@ public class RedirectController extends HttpServlet {
 			}
 		}
 		MV.setViewName("Pagina1");
-	    MV.addObject("error", "Usuario o contraseña incorrectos.");
+	    MV.addObject("mensajeError", "Usuario o contraseña incorrectos.");
 		return MV;
 	}
 	
@@ -132,7 +130,6 @@ public class RedirectController extends HttpServlet {
                 if (paciente != null) {
                     MV.addObject("paciente_p", paciente);
                 } else {
-                    // Manejar médico no encontrado
                     request.setAttribute("mensajeError", "Error al buscar el paciente");
                 }
             } catch (NumberFormatException e) {
@@ -160,7 +157,6 @@ public class RedirectController extends HttpServlet {
                 if (turno != null) {
                     MV.addObject("turnoSeleccionado", turno);
                 } else {
-                    // Manejar médico no encontrado
                     request.setAttribute("mensajeError", "Error al buscar el turno");
                 }
             } catch (NumberFormatException e) {

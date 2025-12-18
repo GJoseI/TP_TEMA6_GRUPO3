@@ -28,9 +28,17 @@
 </head>
 <body>
 <div class="admin-pacientes-container">
+		<div class="welcome-header">
+	        <div class="info">
+	            <form method="get" action="redireccionar_adminPaciente.html">
+	                <button type="submit" class="btn-guardar-fila">Volver a menú</button>
+	                <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
+	            </form>
+	        </div>
+	    </div>
         <h3>Gestionar Pacientes</h3>    
         <form action="modif_paciente.html" method="post" class="admin-pacientes-form">
-        <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+        <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
             <table>
                 <thead>
                     <tr>
@@ -58,18 +66,15 @@
 			                <strong>Provincia:</strong>
 			                <input type="text" name="provincia" value="${paciente_p.provincia}"><br><br>	
 			                <strong>Fecha de Nacimiento:</strong>
-			                <input type="date" name="fecha_nacimiento" value="${paciente_p.fecha_nacimiento}"><br><br>
+			                <input type="text" name="fecha_nacimiento" value="${paciente_p.fecha_nacimiento}"><br><br>
 			                <strong>Correo electrónico:</strong>
-			                <input type="email" name="email" value="${paciente_p.correo_electronico}">
+			                <input type="text" name="email" value="${paciente_p.correo_electronico}">
 			            </td>
-			
 			            <td>
-			                <strong>Activo</strong>
-			                <input type="radio" name="estado" value="activo"
-			                       <c:if test="${paciente_p.estado}">checked</c:if>><br>
-			                <strong>Inactivo</strong>
-			                <input type="radio" name="estado" value="inactivo"
-			                       <c:if test="${not paciente_p.estado}">checked</c:if>>
+			                <button type="submit" class="btn-guardar-fila"
+			                        name="btneliminar">
+			                    Eliminar
+			                </button>
 			            </td>
 			            <td>
 			                <button type="submit" class="btn-guardar-fila"

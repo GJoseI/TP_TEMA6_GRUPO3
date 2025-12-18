@@ -18,7 +18,6 @@ public class daoMedicos implements IMedicos{
 	@Autowired	
 	private Conexion conexion;
 	
-	///Agrergar Usuario
 	@Override
 	public boolean AgregarMedicos(Medicos medicos)
 	{
@@ -50,7 +49,6 @@ public class daoMedicos implements IMedicos{
 	    return estado;
 	}
 	
-	/// Si existe
 	@Override
 	public boolean Exist(int legajo){
 		conexion = new Conexion();
@@ -62,7 +60,6 @@ public class daoMedicos implements IMedicos{
         return (medicos!=null);
 	}
 	
-	/// Devuelve por Nombre de id
 	@Override
 	public Medicos ReadOne(int legajo){
 		conexion = new Conexion();
@@ -74,8 +71,6 @@ public class daoMedicos implements IMedicos{
         return medicos;
 	}
 				
-	
-	/// Modificar 
 	@Override
 	public boolean Update(Medicos medicos){
 		conexion = new Conexion();
@@ -108,7 +103,6 @@ public class daoMedicos implements IMedicos{
 	    return estado;
 	}
 	
-	/// Borrar
 	@Override
 	public boolean Delete(Medicos medicos) {
 		conexion = new Conexion();
@@ -119,7 +113,7 @@ public class daoMedicos implements IMedicos{
 	        session = conexion.abrirConexion();
 	        session.beginTransaction();
 
-	        session.update(medicos);
+	        session.delete(medicos);
 	        
 	        session.flush();
 
@@ -142,13 +136,13 @@ public class daoMedicos implements IMedicos{
 		return estado;
 	}
 	
-	/// trae todo
 	@Override
 	public List<Medicos> ReadAll() {	
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Medicos> medicos = session.createQuery("from Medicos").list();
+        @SuppressWarnings("unchecked")
+		List<Medicos> medicos = session.createQuery("FROM Medicos m WHERE m.estado = true").list();
         session.flush();
 
         session.getTransaction().commit();
@@ -156,9 +150,6 @@ public class daoMedicos implements IMedicos{
         
         return medicos;
 	}
-	
-	
-	//Agrego los gettes y setters para Spring Core
 	
 	public Conexion getConexion() {
 		return conexion;

@@ -88,6 +88,7 @@
 		</c:if>
     
     <form method="post" class="admin-turnos-form" action="alta_turno.html">
+    <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
         <table>
             <thead>
                 <tr>
@@ -134,6 +135,7 @@
     <div class="admin-container">
             <h3>Lista de Turnos</h3> 
             <form action="redireccionar_modificarTur_admin.html" method="post" class="admin-turnos-form">
+            <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
                 <table id="tabla" class="display">
                     <thead>
                         <tr>

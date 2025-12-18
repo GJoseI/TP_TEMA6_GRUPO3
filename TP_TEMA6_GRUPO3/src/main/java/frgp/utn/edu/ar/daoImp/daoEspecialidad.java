@@ -17,7 +17,6 @@ public class daoEspecialidad implements IEspecialidad{
 	@Autowired
 	private Conexion conexion;
 	
-	///Agrergar Usuario
 	public boolean AgregarEspecialidad(Especialidad especialidad)
 	{
 		boolean estado = true;
@@ -48,7 +47,6 @@ public class daoEspecialidad implements IEspecialidad{
 	    return estado;
 	}
 	
-	/// Si existe
 	public boolean Exist(int id)
 	{
 		Session session= conexion.abrirConexion();
@@ -61,7 +59,6 @@ public class daoEspecialidad implements IEspecialidad{
         return false;
 	}
 	
-	/// Devuelve por Nombre de usuario
 	public Especialidad ReadOne(int id)
 	{
 		conexion = new Conexion();
@@ -72,7 +69,6 @@ public class daoEspecialidad implements IEspecialidad{
         return especialidad;
 	}
 	
-	/// Modificar 
 	public boolean Update(Especialidad especialidad)
 	{
 		boolean estado = true;
@@ -104,7 +100,6 @@ public class daoEspecialidad implements IEspecialidad{
 	    return estado;
 	}
 	
-	/// Borrar
 	public boolean Delete(Especialidad especialidad) 
 	{	
 		boolean estado = true;
@@ -137,7 +132,6 @@ public class daoEspecialidad implements IEspecialidad{
 		return estado;
 	}
 	
-	/// trae todo
 	public List<Especialidad> ReadAll() {		
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
@@ -155,8 +149,6 @@ public class daoEspecialidad implements IEspecialidad{
         conexion.cerrarSession();
         return (Especialidad) usuarios;
 	}
-
-	//Agrego los gettes y setters para Spring Core
 	
 	public Conexion getConexion() {
 		return conexion;

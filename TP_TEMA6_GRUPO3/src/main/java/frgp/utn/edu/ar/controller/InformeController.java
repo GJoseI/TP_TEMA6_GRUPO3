@@ -25,6 +25,9 @@ public class InformeController extends HttpServlet {
 		ModelAndView MV = new ModelAndView();
 		MV.setViewName("admin_informe");
 		
+		String usuarioLogueado = request.getParameter("usuarioLogueado");
+		MV.addObject("usuarioLogueado", usuarioLogueado);
+		
 		MV.addObject("ausencias",turNeg.informeAusencias(Integer.parseInt(request.getParameter("mes"))));
 		MV.addObject("totalTurnos", turNeg.informeTotalTurnos(Integer.parseInt(request.getParameter("mes"))));
 		MV.addObject("pacientesAtendidos", turNeg.informePacienteAtendidos(Integer.parseInt(request.getParameter("mes"))));

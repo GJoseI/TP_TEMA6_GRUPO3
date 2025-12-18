@@ -177,6 +177,7 @@
 		<div class="report-section">
 			<h3>Resultado de turnos</h3>
 			<form method="get" action="filtroMes_Informe.html">
+			<input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
 				<div class="list-choice">
 	             <div class="list-choice-title">Mes</div>
 	             <div class="list-choice-objects">

@@ -29,9 +29,17 @@
 <body>
 	<c:set var="turno" value="${turnoSeleccionado}" />	
 	<div class="admin-medicos-container">
+		<div class="welcome-header">
+	        <div class="info">
+	            <form method="get" action="redireccionar_adminTurnos.html">
+	                <button type="submit" class="btn-guardar-fila">Volver a menú</button>
+	                <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
+	            </form>
+	        </div>
+	    </div>
     	<h3>Gestionar Turno</h3>
         <form action="modif_turno.html" method="post" class="admin-medicos-form">
-        <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+        <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
         	<table>
             	<thead>
                 	<tr>
@@ -46,6 +54,7 @@
                         <tr>
                             <td>
 	                            <strong>ID Turno: ${turno.id}</strong><br><br>
+	                            <input type="hidden" name="idTurno" value="${turno.id}">
 	                            <strong>DNI Paciente: ${turno.paciente.DNI}</strong><br><br>
 	                            <strong>Legajo Medico: ${turno.medico.legajo}</strong><br><br>
 	                            <strong>Fecha:</strong>
@@ -73,13 +82,13 @@
                             	</select><br><br>
                             </td>
                             <td>
-                                <strong>Activo</strong>
-                                <input type="radio" name="estado" value="activo" ${turno.estado ? 'checked' : ''}><br><br>
-                                <strong>Inactivo</strong>
-                                <input type="radio" name="estado" value="inactivo" ${!turno.estado ? 'checked' : ''}>
+				                <button type="submit" class="btn-guardar-fila"
+				                        name="btneliminar">
+				                    Eliminar
+				                </button>
                             </td>
                             <td>
-                                <button type="submit" value="${turno.id}" class="btn-guardar-fila" name="btnmodificar">Guardar</button>
+                                <button type="submit" class="btn-guardar-fila" name="btnmodificar">Guardar</button>
                             </td>
                         </tr>
                        </c:if>

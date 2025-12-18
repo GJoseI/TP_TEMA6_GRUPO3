@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import frgp.utn.edu.ar.dao.IUsuario;
 import frgp.utn.edu.ar.daoImp.Conexion;
+import frgp.utn.edu.ar.entidad.Medicos;
 import frgp.utn.edu.ar.entidad.Usuario;
 
 @Repository("daoUsuario")
@@ -15,7 +16,6 @@ public class daoUsuario implements IUsuario {
 	@Autowired
 	private Conexion conexion;
 	
-	///Agrergar Usuario
 	public boolean AgregarUsuario(Usuario usuario)
 	{
 		boolean estado = true;
@@ -46,7 +46,6 @@ public class daoUsuario implements IUsuario {
 	    return estado;
 	}
 	
-	/// Si existe
 	public boolean Exist(String nombreUsuario)
 	{
 		conexion = new Conexion();
@@ -60,7 +59,6 @@ public class daoUsuario implements IUsuario {
         return false;
 	}
 	
-	/// Devuelve por Nombre de usuario
 	public Usuario ReadOne(String nombreUsuario)
 	{
 		conexion = new Conexion();
@@ -71,8 +69,7 @@ public class daoUsuario implements IUsuario {
         
         return usuario;
 	}
-	
-	/// Modificar 
+
 	public boolean Update(Usuario usuario)
 	{
 		conexion = new Conexion();
@@ -105,7 +102,6 @@ public class daoUsuario implements IUsuario {
 	    return estado;
 	}
 	
-	/// Borrar
 	public boolean Delete(Usuario usuario) 
 	{	
 		boolean estado = true;
@@ -139,18 +135,16 @@ public class daoUsuario implements IUsuario {
 		return estado;
 	}
 	
-	/// trae todo
+	@SuppressWarnings("unchecked")
 	public List<Usuario> ReadAll() {		
 		conexion = new Conexion();
 	    Session session = conexion.abrirConexion();
         session.beginTransaction();
-        List<Usuario> usuarios = session.createQuery("FROM Usuario").list();
+        List<Usuario> usuarios = session.createQuery("FROM Usuario u WHERE u.estado = true").list();
         conexion.cerrarSession();
         
         return usuarios;
 	}
-
-	//Agrego los gettes y setters para Spring Core
 	
 	public Conexion getConexion() {
 		return conexion;
@@ -159,5 +153,5 @@ public class daoUsuario implements IUsuario {
 	public void setConexion(Conexion conexion) {
 		this.conexion = conexion;
 	}
-	
+
 }

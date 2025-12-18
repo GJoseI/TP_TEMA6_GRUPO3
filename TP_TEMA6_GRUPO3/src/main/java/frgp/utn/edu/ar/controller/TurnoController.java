@@ -52,10 +52,6 @@ public class TurnoController extends HttpServlet {
 	@Autowired
 	Paciente p;
 	
-	@Autowired
-	@Qualifier("servicioUsuario")
-	UsuarioNegocio uNeg;
-	
 	@RequestMapping("alta_turno.html")
 	public ModelAndView eventoAltaTurno (HttpServletRequest request) {
 		ModelAndView MV = new ModelAndView();
@@ -121,10 +117,10 @@ public class TurnoController extends HttpServlet {
 	    
 		String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
+		int id = Integer.parseInt(request.getParameter("idTurno"));
 		
 		if(request.getParameter("btnmodificar") != null) {
 			try {
-				int id = Integer.parseInt(request.getParameter("btnmodificar"));
 				if(turNeg.Exist(id)) {
 					turno = new Turno();
 					turno = this.turNeg.ReadOne(id);
@@ -153,7 +149,24 @@ public class TurnoController extends HttpServlet {
 				request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
 			}
 			
-		}
+		} else if (request.getParameter("btneliminar") != null) {
+        	try {
+                if(turNeg.Exist(id)) {     
+                	turno = new Turno ();
+                	turno = turNeg.ReadOne(id);
+                	turno.setEstado(false);
+                    if(turNeg.Update(turno)) {
+                        request.setAttribute("mensajeExito", "Medico eliminado correctamente");
+                    } else {
+                        request.setAttribute("mensajeError", "Error al eliminar el medico");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensajeError", "Legajo No encontrado");
+            } catch (Exception e) {
+                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        }
 	    MV.addObject("ListaTurnos", this.turNeg.ReadAll());
 		return MV;
 	}
@@ -166,7 +179,6 @@ public class TurnoController extends HttpServlet {
 		this.m = medNeg.ReadOne(Integer.parseInt(request.getParameter("medicoLegajo")));
 		MV.addObject("medicoLogueado", this.m);	
 		
-
 		if(request.getParameter("btnguardar") != null) {
 			try {
 				int id = Integer.parseInt(request.getParameter("btnguardar"));

@@ -87,6 +87,7 @@
         <h3>Gestionar Pacientes</h3>
         
         <form action="alta_paciente.html" method="post" class="admin-pacientes-form">
+        <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
             <table>
                 <thead>
                     <tr>
@@ -130,13 +131,12 @@
                 </tbody>
             </table>
         </form> 
-    </div>   
-    
-    <br> 
-    
+    </div>    
+    <br>    
     <div class="admin-pacientes-container">    
         <h3>Lista de Pacientes</h3>
         <form action="redireccionar_modificarPac_admin.html" method="post" class="admin-pacientes-form">
+        <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
             <table id="tabla" class="display">
                 <thead>
                     <tr>

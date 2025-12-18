@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Modificar Medico</title>
 <style>
 		 body { background-color: #f0f8ff; font-family: Arial, sans-serif; margin: 20px; }
 	.admin-medicos-container { background-color: #ffffff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 2000px; margin: auto; }
@@ -29,9 +29,17 @@
 <body>
 	<c:set var="medico_m" value="${medicoSeleccionado}" />	
 	<div class="admin-medicos-container">
+		<div class="welcome-header">
+	        <div class="info">
+	            <form method="get" action="redireccionar_adminMedico.html">
+	                <button type="submit" class="btn-guardar-fila">Volver a menú</button>
+	                <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
+	            </form>
+	        </div>
+	    </div>
     	<h3>Gestionar Médicos</h3>
         <form action="modif_medico.html" method="post" class="admin-medicos-form">
-        <input type="hidden" value="${usuarioLogeado.Nombre_Usuario}" name="usuarioLogueado">
+        <input type="hidden" value="${usuarioLogueado}" name="usuarioLogueado">
         	<table>
             	<thead>
                 	<tr>
@@ -90,10 +98,10 @@
                             	</select><br><br>
                             </td>
                             <td>
-                                <strong>Activo</strong>
-                                <input type="radio" name="estado" value="activo" ${medico_m.estado ? 'checked' : ''}><br><br>
-                                <strong>Inactivo</strong>
-                                <input type="radio" name="estado" value="inactivo" ${!medico_m.estado ? 'checked' : ''}>
+				                <button type="submit" class="btn-guardar-fila"
+				                        name="btneliminar">
+				                    Eliminar
+				                </button>
                             </td>
                             <td>
                                 <button type="submit" class="btn-guardar-fila" name="btnguardar_Modificar">Guardar</button>

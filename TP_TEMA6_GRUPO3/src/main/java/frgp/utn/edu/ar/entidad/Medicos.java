@@ -72,26 +72,6 @@ public class Medicos implements Serializable {
 		this.estado=true;
 	}
 	
-	/*private static final AtomicInteger contador = new AtomicInteger(0);
-	public Medicos(String nombre, String apellido, String sexo, Date fechaNac, String diasLab, String horarioLab, String direccion,
-			String localidad, String email, String telefono, Usuario usuario, Especialidad especialidad, boolean estado) {
-		super();
-		this.legajo = contador.incrementAndGet();;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.sexo = sexo;
-		this.fechaNac = fechaNac;
-		this.diasLab = diasLab;
-		this.horarioLab = horarioLab;
-		this.direccion = direccion;
-		this.localidad = localidad;
-		this.email = email;
-		this.telefono = telefono;
-		this.usuario = usuario;
-		this.especialidad = especialidad;
-		this.estado=estado;
-	}*/
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}

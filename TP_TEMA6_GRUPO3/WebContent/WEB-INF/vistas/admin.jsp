@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Administrador</title>
+    <title>Panel de Administrador</title>
     <style>
     	body {
             background-color: #f0f8ff; 

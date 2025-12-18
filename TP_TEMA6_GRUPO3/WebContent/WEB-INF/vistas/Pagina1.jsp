@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,6 +71,23 @@
         .login-container .btn-login:hover {
             background-color: #0056b3;
         }
+        .alert {
+		    padding: 10px;
+		    margin: 10px 0;
+		    border-radius: 4px;
+		}
+
+		.alert-error {
+		    background-color: #ffdddd;
+		    border-left: 5px solid #f44336;
+		    color: #d8000c;
+		}
+		
+		.alert-success {
+		    background-color: #ddffdd;
+		    border-left: 5px solid #4CAF50;
+		    color: #4F8A10;
+		}
     </style>
 </head>
 <body>
@@ -85,7 +103,10 @@
                 <label for="contrasena">Contraseña</label>
                 <input type="password" id="contrasena" name="contrasena" required>
             </div>
-            <button type="submit" class="btn-login">Ingresar</button>
+            <button type="submit" class="btn-login">Ingresar</button><br>
+            <c:if test="${not empty mensajeError}">
+				<div class="alert-error">${mensajeError}</div>
+			</c:if>
         </form>
     </div>
 

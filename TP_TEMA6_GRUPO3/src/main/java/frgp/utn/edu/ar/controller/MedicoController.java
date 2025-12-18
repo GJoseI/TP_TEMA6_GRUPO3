@@ -19,6 +19,7 @@ import frgp.utn.edu.ar.NegocioImp.MedicosNegocio;
 import frgp.utn.edu.ar.NegocioImp.UsuarioNegocio;
 import frgp.utn.edu.ar.entidad.Especialidad;
 import frgp.utn.edu.ar.entidad.Medicos;
+import frgp.utn.edu.ar.entidad.Paciente;
 import frgp.utn.edu.ar.entidad.Usuario;
 
 @Controller
@@ -37,7 +38,6 @@ public class MedicoController extends HttpServlet {
 	UsuarioNegocio uNeg;
 	@Autowired
 	Usuario user;
-	
 	
 	@Autowired
 	@Qualifier("servicioEspecialidad")
@@ -111,11 +111,10 @@ public class MedicoController extends HttpServlet {
 		String usuarioLogueado = request.getParameter("usuarioLogueado");
 		MV.addObject("usuarioLogueado", usuarioLogueado);
         
+		int legajo = Integer.parseInt(request.getParameter("legajo"));
         MV.setViewName("admin_medico");
         if (request.getParameter("btnguardar_Modificar") != null) {
-            try {
-                int legajo = Integer.parseInt(request.getParameter("legajo"));
-                
+            try {        
                 if(medNeg.Exist(legajo)) {
                     user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
                     
@@ -147,6 +146,27 @@ public class MedicoController extends HttpServlet {
                         request.setAttribute("mensajeExito", "Medico actualizado correctamente");
                     } else {
                         request.setAttribute("mensajeError", "Error al actualizar el medico");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensajeError", "Legajo No encontrado");
+            } catch (Exception e) {
+                request.setAttribute("mensajeError", "Error en el sistema: " + e.getMessage());
+            }
+        } else if (request.getParameter("btneliminar") != null) {
+        	try {
+                if(medNeg.Exist(legajo)) {     
+                	medico = new Medicos ();
+                	medico = medNeg.ReadOne(legajo);
+                	medico.setEstado(false);
+                	
+                	user = new Usuario();
+                	user = uNeg.ReadOne(medico.getUsuario().getNombre_Usuario());
+                	user.setEstado(false);
+                    if(medNeg.Update(medico) && uNeg.Update(user)) {
+                        request.setAttribute("mensajeExito", "Medico y usuario asociado eliminado correctamente");
+                    } else {
+                        request.setAttribute("mensajeError", "Error al eliminar el medico");
                     }
                 }
             } catch (NumberFormatException e) {
