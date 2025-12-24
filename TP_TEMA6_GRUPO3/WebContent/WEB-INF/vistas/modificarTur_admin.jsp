@@ -82,10 +82,7 @@
                             	</select><br><br>
                             </td>
                             <td>
-				                <button type="submit" class="btn-guardar-fila"
-				                        name="btneliminar">
-				                    Eliminar
-				                </button>
+				                <button type="submit" class="btn-guardar-fila" name="btneliminar">Eliminar</button>
                             </td>
                             <td>
                                 <button type="submit" class="btn-guardar-fila" name="btnmodificar">Guardar</button>

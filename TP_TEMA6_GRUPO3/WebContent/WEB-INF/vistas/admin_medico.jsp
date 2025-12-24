@@ -94,11 +94,11 @@
                         <tr>
                             <td>
                                 <strong>Legajo:</strong>
-                                <input type="text" name="legajo" value="" required><br><br>
+                                <input type="text" name="legajo" value="${medicoInput.legajo}" required><br><br>
                                 <strong>Nombre:</strong>
-                                <input type="text" name="nombre" value="" required><br><br>
+                                <input type="text" name="nombre" value="${medicoInput.nombre}" required><br><br>
                                 <strong>Apellido:</strong>
-                                <input type="text" name="apellido" value="" required><br><br>
+                                <input type="text" name="apellido" value="${medicoInput.apellido}" required><br><br>
                                 <strong>Sexo:</strong>
                                 <select name="Sexo" required>
                                     <option value="M" selected>Masculino</option>
@@ -106,25 +106,37 @@
                                     <option value="X">Otro</option>
                                 </select><br><br>
                                 <strong>Dirección:</strong>
-                                <input type="text" name="direccion" value="" required><br><br>
+                                <input type="text" name="direccion" value="${medicoInput.direccion}" required><br><br>
                                 <strong>Localidad:</strong>
-                                <input type="text" name="localidad" value="" required><br><br>
+                                <input type="text" name="localidad" value="${medicoInput.localidad}" required><br><br>
                                 <strong>Fecha de Nacimiento:</strong>
-                                <input type="date" name="fechaNac" required><br><br>
+                                <input type="date" name="fechaNac" required value="${medicoInput.fechaNac}"><br><br>
                                 <strong>Correo electrónico:</strong>
-                                <input type="email" name="email" value="" required><br><br>
+                                <input type="email" name="email" value="${medicoInput.email}" required><br><br>
                                 <strong>Días de trabajo:</strong>
-                                <input type="text" name="Dias" value="" required><br><br>
+                                <select name="Dias" required>
+                                	<option value="Lu-Vie">Lu-Vie</option>
+                                	<option value="Mar-Sa">Mar-Sa</option>
+                                	<option value="Mie-Do">Mie-Do</option>
+                                	<option value="Jue-Lu">Jue-Lu</option>
+                                	<option value="Vie-Mar">Vie-Mar</option>
+                                </select><br><br>
                                 <strong>Horarios de trabajo:</strong>
-                                <input type="text" name="horarios" value="" required><br><br>
+                                <select name="horarios" required>
+                                	<option value="7hs-16hs">7hs-16hs</option>
+                                	<option value="8hs-17hs">8hs-17hs</option>
+                                	<option value="9hs-18hs">9hs-18hs</option>
+                                	<option value="10hs-19hs">10hs-19hs</option>
+                                	<option value="11hs-20hs">11hs-20hs</option>
+                                </select><br><br>
                                 <strong>Teléfono:</strong>
-                                <input type="tel" name="telefono" value="" required>
+                                <input type="tel" name="telefono" value="${medicoInput.telefono}" required>
                             </td>
                             <td>
                                 <strong>Usuario:</strong>
-                                <input type="text" name="user" value="" required><br><br>
+                                <input type="text" name="user" value="${medicoInput.usuario.nombre_Usuario}" required><br><br>
                                 <strong>Contraseña:</strong>
-                                <input type="password" name="password" value="" required><br><br>
+                                <input type="password" name="password" value="${medicoInput.usuario.contraseña}" required><br><br>
                                 <strong>Especialidad:</strong>
                                 <select name="especialidad" required>
                                 	<c:forEach items="${especialidades }" var="especialidad">

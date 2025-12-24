@@ -86,7 +86,6 @@
                             	<strong>Contraseña:</strong>
                             	<input type="password" name="password" 
                                    	value="${medico_m.usuario != null ? medico_m.usuario.contraseña : ''}"><br><br>
-
                             	<strong>Especialidad:</strong>
                             	<select name="especialidad">
                                 <c:forEach items="${especialidades}" var="especialidad">
@@ -98,10 +97,7 @@
                             	</select><br><br>
                             </td>
                             <td>
-				                <button type="submit" class="btn-guardar-fila"
-				                        name="btneliminar">
-				                    Eliminar
-				                </button>
+				                <button type="submit" class="btn-guardar-fila" name="btneliminar">Eliminar</button>
                             </td>
                             <td>
                                 <button type="submit" class="btn-guardar-fila" name="btnguardar_Modificar">Guardar</button>

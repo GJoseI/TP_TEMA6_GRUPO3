@@ -128,6 +128,7 @@ public class TurnoController extends HttpServlet {
 					turno.setMedico(turno.getMedico());
 					turno.setPaciente(turno.getPaciente());
 					turno.setEspecialidad(turno.getEspecialidad());
+					turno.setEstado(true);
 					turno.setEstadoTurno(request.getParameter("asistencia"));
 					try {
 		                String fechaStr = request.getParameter("fecha");

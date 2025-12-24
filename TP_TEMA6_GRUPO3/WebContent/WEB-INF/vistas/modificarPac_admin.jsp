@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -68,19 +68,13 @@
 			                <strong>Fecha de Nacimiento:</strong>
 			                <input type="text" name="fecha_nacimiento" value="${paciente_p.fecha_nacimiento}"><br><br>
 			                <strong>Correo electrónico:</strong>
-			                <input type="text" name="email" value="${paciente_p.correo_electronico}">
+			                <input type="email" name="email" value="${paciente_p.correo_electronico}">
 			            </td>
 			            <td>
-			                <button type="submit" class="btn-guardar-fila"
-			                        name="btneliminar">
-			                    Eliminar
-			                </button>
+			                <button type="submit" class="btn-guardar-fila" name="btneliminar">Eliminar</button>
 			            </td>
 			            <td>
-			                <button type="submit" class="btn-guardar-fila"
-			                        name="btnguardar_Modificar">
-			                    Guardar
-			                </button>
+			                <button type="submit" class="btn-guardar-fila" name="btnguardar_Modificar">Guardar</button>
 			            </td>
 			        </tr>
 			    </c:if>

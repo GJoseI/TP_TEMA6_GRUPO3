@@ -47,7 +47,7 @@ public class PacienteController extends HttpServlet {
                     p.setLocalidad(request.getParameter("localidad"));
                     p.setProvincia(request.getParameter("provincia"));
                     p.setTelefono(request.getParameter("telefono"));
-                    p.setEstado("activo".equals(request.getParameter("estado")));
+                    p.setEstado(true);
                     try {
                         String fechaNacStr = request.getParameter("fecha_nacimiento");
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

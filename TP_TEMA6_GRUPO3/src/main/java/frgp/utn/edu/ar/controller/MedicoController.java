@@ -57,40 +57,49 @@ public class MedicoController extends HttpServlet {
                 if(!medNeg.Exist(legajo)) {
                 	int espe = Integer.parseInt(request.getParameter("especialidad"));
                 	Especialidad espes = epn.ReadOne(espe);
+                	user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
                 	
-                    user = new Usuario(request.getParameter("user"), request.getParameter("password"), false);
+                	medico = new Medicos();
+                	medico.setUsuario(user);
+                	medico.setEspecialidad(espes);            
+                	medico.setLegajo(legajo);
+                	medico.setNombre(request.getParameter("nombre")); 
+                	medico.setApellido(request.getParameter("apellido"));
+                	medico.setDireccion(request.getParameter("direccion"));
+                	medico.setSexo(request.getParameter("Sexo"));
+                	medico.setLocalidad(request.getParameter("localidad"));
+                	try {
+                		String fechaNacStr = request.getParameter("fechaNac");
+                		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                		Date fechaNac = sdf.parse(fechaNacStr);
+                		medico.setFechaNac(fechaNac);
+                	} catch (ParseException e) {
+                		e.printStackTrace();
+                	}
+                	medico.setEmail(request.getParameter("email"));
+                	medico.setDiasLab(request.getParameter("Dias"));
+                	medico.setHorarioLab(request.getParameter("horarios"));
+                	medico.setTelefono(request.getParameter("telefono"));
+                	medico.setEstado("activo".equals(request.getParameter("estado")));
+                	
+                    if(uNeg.Exist(user.getNombre_Usuario())) {
+                    	request.setAttribute("mensajeError", "Usuario existente");
+                    	MV.addObject("medicoInput", medico);
+                    	MV.addObject("especialidades", this.epn.ReadAll());
+                   	    MV.addObject("medicos", this.medNeg.ReadAll());
+                    	return MV;
+                    }
                     uNeg.AgregarUsuario(user);
                     
-                    medico = new Medicos();
-                    medico.setUsuario(user);
-                    medico.setEspecialidad(espes);            
-                    medico.setLegajo(legajo);
-                    medico.setNombre(request.getParameter("nombre")); 
-                    medico.setApellido(request.getParameter("apellido"));
-                    medico.setDireccion(request.getParameter("direccion"));
-                    medico.setSexo(request.getParameter("Sexo"));
-                    medico.setLocalidad(request.getParameter("localidad"));
-                    try {
-                        String fechaNacStr = request.getParameter("fechaNac");
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        Date fechaNac = sdf.parse(fechaNacStr);
-                        medico.setFechaNac(fechaNac);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    medico.setEmail(request.getParameter("email"));
-                    medico.setDiasLab(request.getParameter("Dias"));
-                    medico.setHorarioLab(request.getParameter("horarios"));
-                    medico.setTelefono(request.getParameter("telefono"));
-                    medico.setEstado("activo".equals(request.getParameter("estado")));
                     
                     if(medNeg.AgregarMedicos(medico)) {
                         request.setAttribute("mensajeExito", "Médico registrado correctamente");
                     } else {
                         request.setAttribute("mensajeError", "Error al registrar el médico");
+                        MV.addObject("medicoInput", medico);
                     }
                 } else {
-                    request.setAttribute("mensajeError", "El legajo ya existe");
+                    request.setAttribute("mensajeError", "El legajo ya existe");        
                 }
             } catch (NumberFormatException e) {
                 request.setAttribute("mensajeError", "Legajo inválido");
@@ -140,7 +149,7 @@ public class MedicoController extends HttpServlet {
                     medico.setDiasLab(request.getParameter("Dias"));
                     medico.setHorarioLab(request.getParameter("horarios"));
                     medico.setTelefono(request.getParameter("telefono"));
-                    medico.setEstado("activo".equals(request.getParameter("estado")));
+                    medico.setEstado(true);
                     
                     if(medNeg.Update(medico)) {
                         request.setAttribute("mensajeExito", "Medico actualizado correctamente");
